@@ -24,6 +24,10 @@
         }
     </script>
     <style>
+        @keyframes fadeText {
+            0%, 100% { opacity: 1; }
+            45%, 55% { opacity: 0; }
+        }
         /* Custom Marquee Animation */
         .marquee-content {
             display: inline-block;
@@ -33,6 +37,24 @@
         @keyframes marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
+        }
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Pulse glow effect */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(224, 26, 34, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(224, 26, 34, 0); }
+        }
+        .btn-pulse {
+            animation: pulseGlow 2s ease-in-out infinite;
         }
         /* Carousel Transitions */
         .slide { transition: opacity 0.5s ease-in-out; }
@@ -85,7 +107,16 @@
                         <button id="clearCartBtn" onclick="clearCart()" class="text-xs text-accent hover:underline font-semibold hidden">Kosongkan</button>
                     </div>
                     <div class="p-4 flex flex-col max-h-64 overflow-y-auto custom-scrollbar">
-                        <p id="emptyCartMsg" class="text-sm text-sectext text-center py-4">Keranjang Anda masih kosong.</p>
+                        <div id="emptyCartMsg" class="flex flex-col items-center py-4 gap-2">
+                            <div class="w-14 h-14 rounded-full bg-cardbg flex items-center justify-center">
+                                 <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-primtext">Keranjang masih kosong</p>
+                            <p class="text-xs text-sectext text-center leading-relaxed">Yuk, temukan sparepart<br>yang kamu butuhkan!</p>
+                            <a href="produk.html" class="mt-1 bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-red-700 transition">Mulai Belanja →</a>
+                        </div>
                         <div id="cartItemsContainer" class="flex flex-col gap-3"></div>
                     </div>
                     <div class="p-4 border-t border-gray-100">
@@ -183,7 +214,9 @@
                     <option value="">Pilih Tahun</option>
                 </select>
             </div>
-            <button id="applyFilterBtn" class="w-full bg-accent text-white font-semibold py-2 rounded mt-4 hover:bg-red-700 transition">Terapkan Filter</button>
+            <button id="applyFilterBtn" class="w-full bg-gray-300 text-gray-500 font-semibold py-2 rounded mt-4 transition cursor-not-allowed"disabled>
+                Terapkan Filter
+            </button>
         </div>
     </div>
     
@@ -198,7 +231,7 @@
                     <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 z-20">Optimalkan Performa Mobil Anda</h1>
                     <p class="text-white text-sm md:text-lg mb-8 max-w-xl z-20">Dapatkan suku cadang berkualitas tinggi untuk setiap model kendaraan.</p>
                     <div class="flex gap-4 z-20">
-                        <a href="produk.html" class="bg-accent text-white px-6 py-3 rounded font-semibold hover:bg-red-700 transition">Lihat Produk</a>
+                        <a href="produk.html" class="bg-accent text-white px-6 py-3 rounded font-semibold hover:bg-red-700 transition btn-pulse">Lihat Produk</a>
                         <a href="promo.html" class="border-2 border-white text-white px-6 py-3 rounded font-semibold hover:bg-white hover:text-primtext transition">Lihat Promo</a>
                     </div>
                 </div>
@@ -219,6 +252,12 @@
             <button id="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 rounded-full z-30 hover:bg-opacity-50 text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </button>
+
+            <div id="carouselDots" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 z-30">
+                <button class="carousel-dot w-5 h-2 rounded-full bg-white transition-all duration-300" data-index="0" aria-label="Slide 1"></button>
+                <button class="carousel-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300" data-index="1" aria-label="Slide 2"></button>
+            </div>
+
         </section>
 
         <section>
@@ -272,14 +311,17 @@
                     ];
                     categories.forEach(cat => {
                         document.write(`
-                            <a href="produk.html" class="block bg-cardbg rounded-lg overflow-hidden border border-gray-100 hover:shadow-lg transition group">
-                                <div class="h-32 bg-gray-300 w-full flex items-center justify-center relative">
-                                    
-                                    <img src="${cat.img}" alt="${cat.name}" class="w-full h-full object-cover">
-                                    
+                           <a href="produk.html" class="block bg-cardbg rounded-lg overflow-hidden border border-gray-100 
+                                hover:shadow-xl hover:border-accent/30 transition-all duration-300 group
+                                hover:-translate-y-1 cursor-pointer">
+                                 <div class="h-32 bg-gray-300 w-full flex items-center justify-center relative overflow-hidden">
+                                    <img src="${cat.img}" alt="${cat.name}" 
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                    <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-all duration-300"></div>
                                 </div>
                                 <div class="p-3 text-center">
-                                    <h4 class="font-semibold text-primtext text-sm group-hover:text-accent transition">${cat.name}</h4>
+                                    <h4 class="font-semibold text-primtext text-sm group-hover:text-accent transition-colors duration-200">${cat.name}</h4>
+                                    <span class="text-[10px] text-gray-400 group-hover:text-accent/70 transition-colors duration-200 mt-0.5 block">Lihat Produk →</span>
                                 </div>
                             </a>
                         `);
@@ -291,7 +333,7 @@
         <section>
             <h2 class="text-2xl font-bold text-primtext mb-6">Promosi Terkini</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="promo.html" class="md:col-span-2 block bg-gray-800 rounded-xl overflow-hidden relative h-64 md:h-80 group">
+                <a href="promo.html" class="md:col-span-2 block bg-gray-800 rounded-xl overflow-hidden relative h-64 md:h-80 group hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
                     <div class="absolute inset-0 bg-gray-400 group-hover:scale-105 transition-transform duration-500"></div>
                     <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex flex-col justify-end p-8">
                         <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded w-max mb-3">WEEKLY DEAL</span>
@@ -299,13 +341,13 @@
                     </div>
                 </a>
                 <div class="flex flex-col gap-6 h-64 md:h-80">
-                    <a href="promo.html" class="flex-1 block bg-accent rounded-xl p-6 flex flex-col justify-center group relative overflow-hidden">
+                    <a href="promo.html" class="flex-1 block bg-accent rounded-xl p-6 flex flex-col justify-center group relative overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div class="relative z-10">
                             <h3 class="text-xl font-bold text-white mb-2">Free Delivery</h3>
                             <p class="text-white/80 text-sm">Se-Jabodetabek.</p>
                         </div>
                     </a>
-                    <a href="promo.html" class="flex-1 block bg-primtext rounded-xl p-6 flex flex-col justify-center group relative overflow-hidden">
+                    <a href="promo.html" class="flex-1 block bg-primtext rounded-xl p-6 flex flex-col justify-center group relative overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div class="relative z-10">
                             <h3 class="text-xl font-bold text-white mb-2">Member Get Member</h3>
                             <p class="text-gray-400 text-sm">Bonus Saldo Rp 50rb.</p>
@@ -369,6 +411,36 @@
         const rightSidebar = document.getElementById('rightSidebar');
         const overlay = document.getElementById('overlay');
 
+        const searchPlaceholders = [
+            "Cari kampas rem Avanza...",
+            "Cari oli mesin 5W-30...",
+            "Cari shockbreaker Fortuner...",
+            "Cari filter udara Yaris...",
+            "Cari aki kering 45Ah..."
+        ];
+        
+        let placeholderIndex = 0;
+        const searchInputEl = document.getElementById('searchInput');
+
+            if (searchInputEl) {
+                setInterval(() => {
+                    searchInputEl.style.transition = 'opacity 0.4s ease';
+                    searchInputEl.style.opacity = '0';
+
+                setTimeout(() => {
+                    placeholderIndex = (placeholderIndex + 1) % searchPlaceholders.length;
+                    searchInputEl.placeholder = searchPlaceholders[placeholderIndex];
+                    searchInputEl.style.opacity = '1';
+                }, 400);
+            }, 2500);
+
+            // Stop animasi saat user fokus ke search bar
+            searchInputEl.addEventListener('focus', () => {
+            searchInputEl.placeholder = 'Cari sparepart atau aksesoris mobil...';
+            searchInputEl.style.opacity = '1';
+            });
+        }
+
         // Sidebar Logic
         const toggleSidebar = (sidebar, show) => {
             if (show) {
@@ -393,13 +465,35 @@
         // Carousel Logic
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const changeSlide = (direction) => {
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        const updateDots = () =>{
+            dots.foreach((dot,i) => {
+                if(i == currentslide){
+                    dot.classList.remove('w-2', 'bg-white/50');
+                    dot.classList.add('w-5', 'bg-white');
+                }else{
+                    dot.classList.remove('w-5', 'bg-white');
+                    dot.classList.add('w-2', 'bg-white/50');
+                }
+            });
+        };
+
+        const changeSlide = (direction) =>{
             slides[currentSlide].classList.remove('opacity-100', 'z-10');
             slides[currentSlide].classList.add('opacity-0', 'z-0');
             currentSlide = (currentSlide + direction + slides.length) % slides.length;
             slides[currentSlide].classList.remove('opacity-0', 'z-0');
             slides[currentSlide].classList.add('opacity-100', 'z-10');
+            updateDots();
         };
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener ('click', () => {
+                const diff = i  - currentSlide;
+                if(diff !== 0) changeSlide(diff);
+            });
+        });
 
         document.getElementById('nextSlide').addEventListener('click', () => changeSlide(1));
         document.getElementById('prevSlide').addEventListener('click', () => changeSlide(-1));
@@ -477,43 +571,46 @@
             }
         }
 
-        if (brandSelect) {
-            brandSelect.addEventListener('change', function() {
-                const selectedBrand = this.value;
+       if (brandSelect) {
+         brandSelect.addEventListener('change', function() {
+        const selectedBrand = this.value;
 
-                // Selalu kembalikan Model dan Tahun ke keadaan semula saat Brand diubah
-                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
-                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+        modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+        yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
 
-                // Jika user memilih brand (bukan "Pilih Brand")
-                if (selectedBrand && carData[selectedBrand]) {
-                    
-                    // 1. Aktifkan / Enable Dropdown Model & Tahun
-                    modelSelect.disabled = false;
-                    yearSelect.disabled = false;
+        if (selectedBrand && carData[selectedBrand]) {
+            modelSelect.disabled = false;
+            yearSelect.disabled = false;
 
-                    // 2. Isi Dropdown Model sesuai Brand
-                    carData[selectedBrand].forEach(model => {
-                        const option = document.createElement('option');
-                        option.value = model;
-                        option.textContent = model;
-                        modelSelect.appendChild(option);
-                    });
-
-                    // 3. Isi Dropdown Tahun dari 2026 turun ke 2000
-                    for (let year = 2026; year >= 2000; year--) {
-                        const option = document.createElement('option');
-                        option.value = year;
-                        option.textContent = year;
-                        yearSelect.appendChild(option);
-                    }
-                } else {
-                    // Jika user mengembalikan ke "Pilih Brand", kunci/disable kembali
-                    modelSelect.disabled = true;
-                    yearSelect.disabled = true;
-                }
+            carData[selectedBrand].forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                modelSelect.appendChild(option);
             });
+
+            for (let year = 2026; year >= 2000; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            }
+
+            // Aktifkan tombol saat brand dipilih
+            applyFilterBtn.disabled = false;
+            applyFilterBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+            applyFilterBtn.classList.add('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
+        } else {
+            modelSelect.disabled = true;
+            yearSelect.disabled = true;
+
+            // Disable kembali tombol kalau brand dikosongkan
+            applyFilterBtn.disabled = true;
+            applyFilterBtn.classList.remove('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
+            applyFilterBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
         }
+    });
+}
 
         // --- LOGIKA TERAPKAN FILTER ---
         const applyFilterBtn = document.getElementById('applyFilterBtn');
@@ -613,16 +710,59 @@
             saveAndRenderCart();
         }
 
+
+        const customDialog = document.getElementById('customDialog');
+        const dialogCancelBtn = document.getElementById('dialogCancelBtn');
+        const dialogConfirmBtn = document.getElementById('dialogConfirmBtn');
+
         function clearCart() {
-            if(confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
-                cartData = [];
-                saveAndRenderCart();
-            }
+            customDialog.classList.remove('hidden');
+            customDialog.classList.add('flex');
         }
+
+        dialogCancelBtn.addEventListener('click', () => {
+            customDialog.classList.add('hidden');
+            customDialog.classList.remove('flex');
+        });
+
+        dialogConfirmBtn.addEventListener('click', () => {
+            cartData = [];
+            saveAndRenderCart();
+            customDialog.classList.add('hidden');
+            customDialog.classList.remove('flex');
+        });
+
+        customDialog.addEventListener('click', (e) => {
+            if (e.target === customDialog) {
+                customDialog.classList.add('hidden');
+                customDialog.classList.remove('flex');
+            }
+        });
 
         // Panggil render dan load filter saat halaman pertama dimuat
         saveAndRenderCart();
         loadSavedFilter(); 
+
+
+        
     </script>
+
+    <div id="customDialog" class="fixed inset-0 bg-black/50 z-[999] hidden items-center justify-center px-4">
+        <div class="bg-mainbg rounded-2xl shadow-2xl w-full max-w-sm p-6 transform transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-base text-primtext">Kosongkan keranjang?</h3>
+            </div>
+            <p class="text-sm text-sectext mb-5 leading-relaxed">Semua item akan dihapus dari keranjang belanja Anda. Tindakan ini tidak dapat dibatalkan.</p>
+            <div class="flex gap-3">
+                <button id="dialogCancelBtn" class="flex-1 border border-gray-200 text-primtext font-semibold py-2 rounded-lg hover:bg-cardbg transition text-sm">Batal</button>
+                <button id="dialogConfirmBtn" class="flex-1 bg-accent text-white font-semibold py-2 rounded-lg hover:bg-red-700 transition text-sm">Ya, Kosongkan</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

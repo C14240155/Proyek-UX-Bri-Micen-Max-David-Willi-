@@ -97,7 +97,16 @@
                         <button id="clearCartBtn" onclick="clearCart()" class="text-xs text-accent hover:underline font-semibold hidden">Kosongkan</button>
                     </div>
                     <div class="p-4 flex flex-col max-h-64 overflow-y-auto custom-scrollbar">
-                        <p id="emptyCartMsg" class="text-sm text-sectext text-center py-4">Keranjang Anda masih kosong.</p>
+                        <div id="emptyCartMsg" class="flex flex-col items-center py-4 gap-2">
+                            <div class="w-14 h-14 rounded-full bg-cardbg flex items-center justify-center">
+                                 <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-primtext">Keranjang masih kosong</p>
+                            <p class="text-xs text-sectext text-center leading-relaxed">Yuk, temukan sparepart<br>yang kamu butuhkan!</p>
+                            <a href="produk.html" class="mt-1 bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-red-700 transition">Mulai Belanja →</a>
+                        </div>
                         <div id="cartItemsContainer" class="flex flex-col gap-3"></div>
                     </div>
                     <div class="p-4 border-t border-gray-100">
@@ -573,12 +582,33 @@
             saveAndRenderCart();
         }
 
+        const customDialog = document.getElementById('customDialog');
+        const dialogCancelBtn = document.getElementById('dialogCancelBtn');
+        const dialogConfirmBtn = document.getElementById('dialogConfirmBtn');
+
         function clearCart() {
-            if(confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
-                cartData = [];
-                saveAndRenderCart();
-            }
+            customDialog.classList.remove('hidden');
+            customDialog.classList.add('flex');
         }
+
+        dialogCancelBtn.addEventListener('click', () => {
+            customDialog.classList.add('hidden');
+            customDialog.classList.remove('flex');
+        });
+
+        dialogConfirmBtn.addEventListener('click', () => {
+            cartData = [];
+            saveAndRenderCart();
+            customDialog.classList.add('hidden');
+            customDialog.classList.remove('flex');
+        });
+
+        customDialog.addEventListener('click', (e) => {
+            if (e.target === customDialog) {
+                customDialog.classList.add('hidden');
+                customDialog.classList.remove('flex');
+            }
+        });
 
         // --- EDUCATIONAL MODAL & CONTEXTUAL COMMERCE LOGIC ---
         const modal = document.getElementById('educationalModal');
@@ -695,5 +725,22 @@
         saveAndRenderCart();
         loadSavedFilter();
     </script>
+    <div id="customDialog" class="fixed inset-0 bg-black/50 z-[999] hidden items-center justify-center px-4">
+        <div class="bg-mainbg rounded-2xl shadow-2xl w-full max-w-sm p-6 transform transition-all">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-base text-primtext">Kosongkan keranjang?</h3>
+            </div>
+            <p class="text-sm text-sectext mb-5 leading-relaxed">Semua item akan dihapus dari keranjang belanja Anda. Tindakan ini tidak dapat dibatalkan.</p>
+            <div class="flex gap-3">
+                <button id="dialogCancelBtn" class="flex-1 border border-gray-200 text-primtext font-semibold py-2 rounded-lg hover:bg-cardbg transition text-sm">Batal</button>
+                <button id="dialogConfirmBtn" class="flex-1 bg-accent text-white font-semibold py-2 rounded-lg hover:bg-red-700 transition text-sm">Ya, Kosongkan</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
