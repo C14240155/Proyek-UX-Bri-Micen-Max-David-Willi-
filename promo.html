@@ -204,6 +204,12 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </button>
             </div>
+
+
+            <div id="promoCarouselDots" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-2 z-30">
+                <button class="promo-dot w-6 h-2 rounded-full bg-white transition-all duration-300" data-index="0" aria-label="Slide 1"></button>
+                <button class="promo-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300" data-index="1" aria-label="Slide 2"></button>
+            </div>
         </section>
 
         <section>
@@ -214,7 +220,15 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex flex-col justify-end p-8">
                         <span class="bg-accent text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider w-max mb-3">Paket Spesial</span>
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-2 leading-tight">Promo Paket Servis Berkala (Oli + Filter Mesin)</h3>
-                        <p class="text-gray-300 text-sm md:text-base">Perlindungan maksimal untuk mesin kendaraan Anda.</p>
+                         
+                        <p class="text-gray-300 text-sm md:text-base mb-4">Perlindungan maksimal untuk mesin kendaraan Anda.</p>
+                         
+                         <div class="flex items-center gap-2 text-accent font-semibold text-sm opacity-80 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
+                            <span>Lihat Detail Promo</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 
@@ -333,376 +347,469 @@
     <script>
 
 
-        const searchPlaceholders = [
-            "Cari kampas rem Avanza...",
-            "Cari oli mesin 5W-30...",
-            "Cari shockbreaker Fortuner...",
-            "Cari filter udara Yaris...",
-            "Cari aki kering 45Ah..."
-        ];
-        
-        let placeholderIndex = 0;
-        const searchInputEl = document.getElementById('searchInput');
+        // GANTI SELURUH ISI DI DALAM TAG <script> PADA FILE promo.html ANDA DENGAN KODE UTUH INI:
 
-            if (searchInputEl) {
-                setInterval(() => {
-                    searchInputEl.style.transition = 'opacity 0.4s ease';
-                    searchInputEl.style.opacity = '0';
+// --- 1. ANIMASI PLACEHOLDER SEARCH BAR ---
+const searchPlaceholders = [
+    "Cari kampas rem Avanza...",
+    "Cari oli mesin 5W-30...",
+    "Cari shockbreaker Fortuner...",
+    "Cari filter udara Yaris...",
+    "Cari aki kering 45Ah..."
+];
 
-                setTimeout(() => {
-                    placeholderIndex = (placeholderIndex + 1) % searchPlaceholders.length;
-                    searchInputEl.placeholder = searchPlaceholders[placeholderIndex];
-                    searchInputEl.style.opacity = '1';
-                }, 400);
-            }, 2500);
+let placeholderIndex = 0;
+const searchInputEl = document.getElementById('searchInput');
 
-            // Stop animasi saat user fokus ke search bar
-            searchInputEl.addEventListener('focus', () => {
-            searchInputEl.placeholder = 'Cari sparepart atau aksesoris mobil...';
+if (searchInputEl) {
+    setInterval(() => {
+        searchInputEl.style.transition = 'opacity 0.4s ease';
+        searchInputEl.style.opacity = '0';
+
+        setTimeout(() => {
+            placeholderIndex = (placeholderIndex + 1) % searchPlaceholders.length;
+            searchInputEl.placeholder = searchPlaceholders[placeholderIndex];
             searchInputEl.style.opacity = '1';
-            });
-        }
-        // --- LOGIKA AUTO-RESET SAAT BUKA DARI VS CODE / TAB BARU ---
-        // Jika session baru dimulai, bersihkan filter lama agar kembali seperti awal
-        if (!sessionStorage.getItem('isSessionActive')) {
-            localStorage.removeItem('vehicleFilter');
-            localStorage.removeItem('searchKeyword');
-            sessionStorage.setItem('isSessionActive', 'true');
-        }
+        }, 400);
+    }, 2500);
 
-        /* ==============================================
-           1. UNIVERSAL SIDEBAR CONTROLLER
-           ============================================== */
-        const overlay = document.getElementById('overlay');
-        let activeSidebar = null;
+    searchInputEl.addEventListener('focus', () => {
+        searchInputEl.placeholder = 'Cari sparepart atau aksesoris mobil...';
+        searchInputEl.style.opacity = '1';
+    });
+}
 
-        function openSidebar(targetId) {
-            const sidebar = document.getElementById(targetId);
-            const position = sidebar.getAttribute('data-position');
-            sidebar.classList.remove(position === 'left' ? '-translate-x-full' : 'translate-x-full');
-            sidebar.classList.add('translate-x-0');
-            overlay.classList.remove('hidden');
-            activeSidebar = sidebar;
-        }
+// --- 2. AUTO-RESET FILTER SAAT SESI BARU ---
+if (!sessionStorage.getItem('isSessionActive')) {
+    localStorage.removeItem('vehicleFilter');
+    localStorage.removeItem('searchKeyword');
+    sessionStorage.setItem('isSessionActive', 'true');
+}
 
-        function closeActiveSidebar() {
-            if (activeSidebar) {
-                const position = activeSidebar.getAttribute('data-position');
-                activeSidebar.classList.remove('translate-x-0');
-                activeSidebar.classList.add(position === 'left' ? '-translate-x-full' : 'translate-x-full');
-                overlay.classList.add('hidden');
-                activeSidebar = null;
-            }
-        }
+// --- 3. KONTROLLER SIDEBAR UNIVERSAL (Kiri & Kanan) ---
+const overlay = document.getElementById('overlay');
+let activeSidebar = null;
 
-        document.getElementById('menuBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
-        document.getElementById('vehicleBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
-        document.querySelectorAll('.close-sidebar-btn').forEach(btn => btn.addEventListener('click', closeActiveSidebar));
-        overlay.addEventListener('click', () => {
-            closeActiveSidebar();
-            closePromoModal(); // Ensure clicking outside closes promo modal too
+function openSidebar(targetId) {
+    const sidebar = document.getElementById(targetId);
+    if (!sidebar) return;
+    const position = sidebar.getAttribute('data-position');
+    sidebar.classList.remove(position === 'left' ? '-translate-x-full' : 'translate-x-full');
+    sidebar.classList.add('translate-x-0');
+    overlay.classList.remove('hidden');
+    activeSidebar = sidebar;
+}
+
+function closeActiveSidebar() {
+    if (activeSidebar) {
+        const position = activeSidebar.getAttribute('data-position');
+        activeSidebar.classList.remove('translate-x-0');
+        activeSidebar.classList.add(position === 'left' ? '-translate-x-full' : 'translate-x-full');
+        overlay.classList.add('hidden');
+        activeSidebar = null;
+    }
+}
+
+document.getElementById('menuBtn').addEventListener('click', (e) => openSidebar('leftSidebar'));
+document.getElementById('vehicleBtn').addEventListener('click', (e) => openSidebar('rightSidebar'));
+document.querySelectorAll('.close-sidebar-btn').forEach(btn => btn.addEventListener('click', closeActiveSidebar));
+
+overlay.addEventListener('click', () => {
+    closeActiveSidebar();
+    closePromoModal(); 
+});
+
+// --- 4. LOGIKA KERANJANG BELANJA (SINKRON LOCALSTORAGE) ---
+const cartBtn = document.getElementById('cartBtn');
+const cartDropdown = document.getElementById('cartDropdown');
+let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
+
+if (cartBtn) {
+    cartBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); 
+        cartDropdown.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function(e) {
+        if (!cartBtn.contains(e.target) && !cartDropdown.contains(e.target)) cartDropdown.classList.add('hidden');
+    });
+}
+
+function saveAndRenderCart() {
+    localStorage.setItem('rayaCart', JSON.stringify(cartData));
+    const cartBadge = document.getElementById('cartBadge');
+    const emptyCartMsg = document.getElementById('emptyCartMsg');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+    const cartTotal = document.getElementById('cartTotal');
+
+    if (!cartItemsContainer) return;
+
+    let totalQty = 0;
+    let totalPrice = 0;
+    cartItemsContainer.innerHTML = '';
+
+    if (cartData.length === 0) {
+        cartBadge.classList.add('hidden');
+        emptyCartMsg.classList.remove('hidden');
+        clearCartBtn.classList.add('hidden');
+        cartTotal.textContent = "Rp 0";
+    } else {
+        emptyCartMsg.classList.add('hidden');
+        clearCartBtn.classList.remove('hidden');
+        
+        cartData.forEach((item, index) => {
+            totalQty += item.qty;
+            totalPrice += (item.numPrice * item.qty);
+
+            cartItemsContainer.innerHTML += `
+                <div class="flex items-center gap-3 bg-mainbg p-2 rounded-lg border border-gray-200">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold text-primtext line-clamp-2">${item.title}</h4>
+                        <span class="text-xs text-accent font-bold">${item.priceStr}</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-cardbg rounded border border-gray-200 px-2 py-1">
+                        <button onclick="updateQty(${index}, -1)" class="text-sectext hover:text-accent font-bold px-1">-</button>
+                        <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                        <button onclick="updateQty(${index}, 1)" class="text-sectext hover:text-accent font-bold px-1">+</button>
+                    </div>
+                </div>
+            `;
         });
 
-        /* ==============================================
-           2. ADVANCED CART LOGIC (LocalStorage + Qty Control)
-           ============================================== */
-        const cartBtn = document.getElementById('cartBtn');
-        const cartDropdown = document.getElementById('cartDropdown');
-        let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
+        cartBadge.textContent = totalQty;
+        cartBadge.classList.remove('hidden');
+        cartTotal.textContent = "Rp " + totalPrice.toLocaleString('id-ID');
+    }
+}
 
-        if(cartBtn) {
-            cartBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); 
-                cartDropdown.classList.toggle('hidden');
-            });
-            document.addEventListener('click', function(e) {
-                if (!cartBtn.contains(e.target) && !cartDropdown.contains(e.target)) cartDropdown.classList.add('hidden');
-            });
-        }
+function addToCart(title, priceStr) {
+    const cartBadge = document.getElementById('cartBadge');
+    if (cartBadge) {
+        cartBadge.classList.add('scale-125');
+        setTimeout(() => { cartBadge.classList.remove('scale-125'); }, 200);
+    }
 
-        function saveAndRenderCart() {
-            localStorage.setItem('rayaCart', JSON.stringify(cartData));
-            const cartBadge = document.getElementById('cartBadge');
-            const emptyCartMsg = document.getElementById('emptyCartMsg');
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
-            const clearCartBtn = document.getElementById('clearCartBtn');
-            const cartTotal = document.getElementById('cartTotal');
+    let numPrice = parseInt(priceStr.replace(/[^0-9]/g, ''));
+    let existingItem = cartData.find(item => item.title === title);
+    if (existingItem) {
+        existingItem.qty++;
+    } else {
+        cartData.push({ title, priceStr, numPrice, qty: 1 });
+    }
+    saveAndRenderCart();
+}
 
-            if(!cartItemsContainer) return;
+function updateQty(index, change) {
+    cartData[index].qty += change;
+    if (cartData[index].qty <= 0) {
+        cartData.splice(index, 1);
+    }
+    saveAndRenderCart();
+}
 
-            let totalQty = 0;
-            let totalPrice = 0;
-            cartItemsContainer.innerHTML = '';
+const customDialog = document.getElementById('customDialog');
+const dialogCancelBtn = document.getElementById('dialogCancelBtn');
+const dialogConfirmBtn = document.getElementById('dialogConfirmBtn');
 
-            if (cartData.length === 0) {
-                cartBadge.classList.add('hidden');
-                emptyCartMsg.classList.remove('hidden');
-                clearCartBtn.classList.add('hidden');
-                cartTotal.textContent = "Rp 0";
-            } else {
-                emptyCartMsg.classList.add('hidden');
-                clearCartBtn.classList.remove('hidden');
-                
-                cartData.forEach((item, index) => {
-                    totalQty += item.qty;
-                    totalPrice += (item.numPrice * item.qty);
+function clearCart() {
+    customDialog.classList.remove('hidden');
+    customDialog.classList.add('flex');
+}
 
-                    cartItemsContainer.innerHTML += `
-                        <div class="flex items-center gap-3 bg-mainbg p-2 rounded-lg border border-gray-200">
-                            <div class="flex-1">
-                                <h4 class="text-xs font-bold text-primtext line-clamp-2">${item.title}</h4>
-                                <span class="text-xs text-accent font-bold">${item.priceStr}</span>
-                            </div>
-                            <div class="flex items-center gap-2 bg-cardbg rounded border border-gray-200 px-2 py-1">
-                                <button onclick="updateQty(${index}, -1)" class="text-sectext hover:text-accent font-bold px-1">-</button>
-                                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
-                                <button onclick="updateQty(${index}, 1)" class="text-sectext hover:text-accent font-bold px-1">+</button>
-                            </div>
-                        </div>
-                    `;
-                });
+if (dialogCancelBtn) {
+    dialogCancelBtn.addEventListener('click', () => {
+        customDialog.classList.add('hidden');
+        customDialog.classList.remove('flex');
+    });
+}
 
-                cartBadge.textContent = totalQty;
-                cartBadge.classList.remove('hidden');
-                cartTotal.textContent = "Rp " + totalPrice.toLocaleString('id-ID');
-            }
-        }
-
-        function addToCart(title, priceStr) {
-            const cartBadge = document.getElementById('cartBadge');
-            cartBadge.classList.add('scale-125');
-            setTimeout(() => { cartBadge.classList.remove('scale-125'); }, 200);
-
-            let numPrice = parseInt(priceStr.replace(/[^0-9]/g, ''));
-            let existingItem = cartData.find(item => item.title === title);
-            if (existingItem) {
-                existingItem.qty++;
-            } else {
-                cartData.push({ title, priceStr, numPrice, qty: 1 });
-            }
-            saveAndRenderCart();
-        }
-
-        function updateQty(index, change) {
-            cartData[index].qty += change;
-            if (cartData[index].qty <= 0) {
-                cartData.splice(index, 1);
-            }
-            saveAndRenderCart();
-        }
-
-        const customDialog = document.getElementById('customDialog');
-        const dialogCancelBtn = document.getElementById('dialogCancelBtn');
-        const dialogConfirmBtn = document.getElementById('dialogConfirmBtn');
-
-        function clearCart() {
-            customDialog.classList.remove('hidden');
-            customDialog.classList.add('flex');
-        }
-
-        dialogCancelBtn.addEventListener('click', () => {
-            customDialog.classList.add('hidden');
-            customDialog.classList.remove('flex');
-        });
-
-        dialogConfirmBtn.addEventListener('click', () => {
-            cartData = [];
-            saveAndRenderCart();
-            customDialog.classList.add('hidden');
-            customDialog.classList.remove('flex');
-        });
-
-        customDialog.addEventListener('click', (e) => {
-            if (e.target === customDialog) {
-                customDialog.classList.add('hidden');
-                customDialog.classList.remove('flex');
-            }
-        });
-
-        // Initialize Cart Data on Load
+if (dialogConfirmBtn) {
+    dialogConfirmBtn.addEventListener('click', () => {
+        cartData = [];
         saveAndRenderCart();
+        customDialog.classList.add('hidden');
+        customDialog.classList.remove('flex');
+    });
+}
 
-        /* ==============================================
-           3. HERO CAROUSEL LOGIC
-           ============================================== */
-        let currentPromoSlide = 0;
-        const promoSlides = document.querySelectorAll('#promoCarousel .slide');
+// Inisialisasi Tampilan Ranjang
+saveAndRenderCart();
+
+// --- 5. LOGIKA HERO CAROUSEL PROMO (DENGAN PAUSE ON HOVER & DOTS) ---
+let currentPromoSlide = 0;
+const promoSlides = document.querySelectorAll('#promoCarousel .slide');
+const promoDots = document.querySelectorAll('.promo-dot');
+const promoCarouselWrapper = document.getElementById('promoCarousel') ? document.getElementById('promoCarousel').parentElement : null; 
+let promoInterval;
+
+if (promoSlides.length > 0) {
+    const updatePromoDots = () => {
+        if (promoDots.length === 0) return;
+        promoDots.forEach((dot, i) => {
+            if (i === currentPromoSlide) {
+                dot.classList.remove('w-2', 'bg-white/50');
+                dot.classList.add('w-6', 'bg-white');
+            } else {
+                dot.classList.remove('w-6', 'bg-white');
+                dot.classList.add('w-2', 'bg-white/50');
+            }
+        });
+    };
+
+    const changePromoSlide = (direction) => {
+        promoSlides[currentPromoSlide].classList.remove('opacity-100', 'z-10');
+        promoSlides[currentPromoSlide].classList.add('opacity-0', 'z-0');
+        currentPromoSlide = (currentPromoSlide + direction + promoSlides.length) % promoSlides.length;
+        promoSlides[currentPromoSlide].classList.remove('opacity-0', 'z-0');
+        promoSlides[currentPromoSlide].classList.add('opacity-100', 'z-10');
+        updatePromoDots();
+    };
+
+    document.getElementById('nextPromoSlide').addEventListener('click', () => changePromoSlide(1));
+    document.getElementById('prevPromoSlide').addEventListener('click', () => changePromoSlide(-1));
+
+    promoDots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            const diff = i - currentPromoSlide;
+            if (diff !== 0) changePromoSlide(diff);
+        });
+    });
+
+    const startPromoCarousel = () => { promoInterval = setInterval(() => changePromoSlide(1), 6000); };
+    const stopPromoCarousel = () => { clearInterval(promoInterval); };
+
+    startPromoCarousel();
+
+    if (promoCarouselWrapper) {
+        promoCarouselWrapper.addEventListener('mouseenter', stopPromoCarousel);
+        promoCarouselWrapper.addEventListener('mouseleave', startPromoCarousel);
+    }
+}
+
+// --- 6. LOGIKA MODAL DETAIL PROMO DAN INTERAKSI (MENGGUNAKAN TOAST & LOADING) ---
+const promoModal = document.getElementById('promoModal');
+let currentBundlePrice = "";
+let currentBundleTitle = "";
+
+function openPromoDetail(type, title, price, description, validity) {
+    document.getElementById('promoModalTitle').textContent = title;
+    document.getElementById('promoModalDesc').textContent = description;
+    document.getElementById('promoValidityLabel').textContent = validity;
+    
+    const actionContainer = document.getElementById('promoActionContainer');
+    if (!actionContainer) return;
+    actionContainer.innerHTML = ''; 
+
+    if (type === 'bundle') {
+        currentBundleTitle = title;
+        currentBundlePrice = price;
         
-        if (promoSlides.length > 0) {
-            const changePromoSlide = (direction) => {
-                promoSlides[currentPromoSlide].classList.remove('opacity-100', 'z-10');
-                promoSlides[currentPromoSlide].classList.add('opacity-0', 'z-0');
-                currentPromoSlide = (currentPromoSlide + direction + promoSlides.length) % promoSlides.length;
-                promoSlides[currentPromoSlide].classList.remove('opacity-0', 'z-0');
-                promoSlides[currentPromoSlide].classList.add('opacity-100', 'z-10');
-            };
-
-            const nextBtn = document.getElementById('nextPromoSlide');
-            const prevBtn = document.getElementById('prevPromoSlide');
-            
-            if(nextBtn) nextBtn.addEventListener('click', () => changePromoSlide(1));
-            if(prevBtn) prevBtn.addEventListener('click', () => changePromoSlide(-1));
-            setInterval(() => changePromoSlide(1), 6000);
-        }
-
-        /* ==============================================
-           4. PROMO DETAIL PREVIEW MODAL LOGIC
-           ============================================== */
-        const promoModal = document.getElementById('promoModal');
-        let currentBundlePrice = "";
-        let currentBundleTitle = "";
-
-        function openPromoDetail(type, title, price, description, validity) {
-            document.getElementById('promoModalTitle').textContent = title;
-            document.getElementById('promoModalDesc').textContent = description;
-            document.getElementById('promoValidityLabel').textContent = validity;
-            
-            const actionContainer = document.getElementById('promoActionContainer');
-            actionContainer.innerHTML = ''; // Reset container
-
-            if (type === 'bundle') {
-                currentBundleTitle = title;
-                currentBundlePrice = price;
-                
-                actionContainer.innerHTML = `
-                    <div class="text-center mb-6">
-                        <span class="text-sm text-sectext block mb-1">Harga Bundling Spesial:</span>
-                        <span class="text-3xl font-extrabold text-accent block">${price}</span>
-                    </div>
-                    <button onclick="purchaseBundle()" class="w-full bg-accent text-white font-bold py-4 rounded-xl hover:bg-red-700 transition-colors shadow-lg flex justify-center items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                        Beli Paket Promo
-                    </button>
-                    <p class="text-[10px] text-sectext text-center mt-4">Seluruh komponen dalam paket ini akan otomatis ditambahkan ke keranjang Anda.</p>
-                `;
-            } else if (type === 'voucher') {
-                actionContainer.innerHTML = `
-                    <div class="text-center mb-6 w-full">
-                        <div class="border-2 border-dashed border-gray-300 bg-white p-4 rounded-xl mb-2">
-                            <span class="text-xl font-bold tracking-widest text-primtext uppercase">RAYAMOTOR26</span>
-                        </div>
-                        <span class="text-xs text-sectext">Kode voucher terbatas</span>
-                    </div>
-                    <button onclick="claimVoucher()" class="w-full border-2 border-accent bg-white text-accent font-bold py-4 rounded-xl hover:bg-accent hover:text-white transition-colors shadow-sm flex justify-center items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Klaim & Terapkan Voucher
-                    </button>
-                    <p class="text-[10px] text-sectext text-center mt-4">Anda akan diarahkan ke halaman katalog untuk menggunakan voucher ini.</p>
-                `;
-            }
-
-            promoModal.classList.remove('hidden');
-            overlay.classList.remove('hidden'); 
-        }
-
-        function closePromoModal() {
-            promoModal.classList.add('hidden');
-            if(!activeSidebar) {
-                overlay.classList.add('hidden');
-            }
-        }
-
-        function purchaseBundle() {
-            addToCart(currentBundleTitle, currentBundlePrice);
-            closePromoModal();
-            cartDropdown.classList.remove('hidden');
-        }
-
-        function claimVoucher() {
-            sessionStorage.setItem('activeVoucher', 'RAYAMOTOR26');
-            closePromoModal();
-            alert("Voucher RAYAMOTOR26 berhasil diklaim! Mengalihkan ke Katalog Produk...");
-            window.location.href = 'produk.html';
-        }
-
-        /* ==============================================
-           5. VEHICLE SELECTION & GLOBAL SEARCH
-           ============================================== */
+        actionContainer.innerHTML = `
+            <div class="text-center mb-6">
+                <span class="text-sm text-sectext block mb-1">Harga Bundling Spesial:</span>
+                <span class="text-3xl font-extrabold text-accent block">${price}</span>
+            </div>
+            <button id="bundleActionBtn" onclick="purchaseBundle()" class="w-full bg-accent text-white font-bold py-4 rounded-xl hover:bg-red-700 transition-colors shadow-lg flex justify-center items-center gap-2">
+                <svg id="bundleBtnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <span id="bundleBtnText">Beli Paket Promo</span>
+            </button>
+            <p class="text-[10px] text-sectext text-center mt-4">Seluruh komponen dalam paket ini akan otomatis ditambahkan ke keranjang Anda.</p>
+        `;
+    } else if (type === 'voucher') {
+        // Cek apakah voucher sudah pernah diklaim sebelumnya di LocalStorage
+        const isClaimed = localStorage.getItem('claimed_RAYAMOTOR26');
         
-        // --- GLOBAL SEARCH LOGIC ---
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-
-        function handleGlobalSearch() {
-            const keyword = searchInput.value.trim();
-            if (keyword !== "") {
-                localStorage.setItem('searchKeyword', keyword);
-                window.location.href = 'produk.html';
-            }
+        let buttonHTML = '';
+        
+        if (isClaimed) {
+            // Tampilan tombol JIKA SUDAH DIKLAIM
+            buttonHTML = `
+                <button disabled class="w-full border-2 border-gray-200 bg-gray-100 text-gray-400 font-bold py-4 rounded-xl cursor-not-allowed shadow-sm flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Voucher Sudah Diklaim
+                </button>
+                <p class="text-[10px] text-accent font-semibold text-center mt-4">Voucher ini sudah Anda klaim dan tersimpan di akun Anda.</p>
+            `;
+        } else {
+            // Tampilan tombol JIKA BELUM DIKLAIM
+            buttonHTML = `
+                <button id="claimVoucherBtn" onclick="claimVoucher()" class="w-full border-2 border-accent bg-white text-accent font-bold py-4 rounded-xl hover:bg-accent hover:text-white transition-colors shadow-sm flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Klaim & Terapkan Voucher
+                </button>
+                <p class="text-[10px] text-sectext text-center mt-4">Anda akan diarahkan ke halaman katalog untuk menggunakan voucher ini.</p>
+            `;
         }
 
-        if(searchInput) {
-            searchInput.addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') handleGlobalSearch();
-            });
-        }
-        if(searchBtn) {
-            searchBtn.addEventListener('click', handleGlobalSearch);
-        }
+        actionContainer.innerHTML = `
+            <div class="text-center mb-6 w-full">
+                <div class="border-2 border-dashed border-gray-300 bg-white p-4 rounded-xl mb-2">
+                    <span class="text-xl font-bold tracking-widest text-primtext uppercase">RAYAMOTOR26</span>
+                </div>
+                <span class="text-xs text-sectext">Kode voucher terbatas</span>
+            </div>
+            ${buttonHTML}
+        `;
+    }
 
-        // --- DATA MOBIL (PILIH KENDARAAN) ---
-        const carData = {
-            "Toyota": ["Innova", "Avanza", "Fortuner", "Rush", "Land Cruiser", "Camry", "Vios", "Yaris", "Agya", "Veloz", "Zenix"],
-            "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla", "Sigra", "Xenia", "Granmax"],
-            "Isuzu": ["Panther", "MU-X Euro 4", "D-Max Euro 4"]
-        };
+    if (promoModal) promoModal.classList.remove('hidden');
+    if (overlay) overlay.classList.remove('hidden');
+}
 
-        const brandSelect = document.getElementById('carBrand');
-        const modelSelect = document.getElementById('carModel');
-        const yearSelect = document.getElementById('carYear');
+function closePromoModal() {
+    if (promoModal) promoModal.classList.add('hidden');
+    if (!activeSidebar && overlay) {
+        overlay.classList.add('hidden');
+    }
+}
 
-        // --- FUNGSI UNTUK MEMUAT FILTER YANG TERSIMPAN ---
-        function loadSavedFilter() {
-            const savedFilterRaw = localStorage.getItem('vehicleFilter');
-            if (savedFilterRaw && brandSelect) {
-                const savedFilter = JSON.parse(savedFilterRaw);
-                
-                // Set Brand
-                brandSelect.value = savedFilter.brand;
-                
-                // Trigger populating model & year secara manual
-                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
-                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
-                
-                if (savedFilter.brand && carData[savedFilter.brand]) {
-                    modelSelect.disabled = false;
-                    yearSelect.disabled = false;
-                    
-                    carData[savedFilter.brand].forEach(model => {
-                        const option = document.createElement('option');
-                        option.value = model;
-                        option.textContent = model;
-                        if(model === savedFilter.model) option.selected = true;
-                        modelSelect.appendChild(option);
-                    });
-                    
-                    for (let year = 2026; year >= 2000; year--) {
-                        const option = document.createElement('option');
-                        option.value = year;
-                        option.textContent = year;
-                        if(year.toString() === savedFilter.year) option.selected = true;
-                        yearSelect.appendChild(option);
-                    }
+function purchaseBundle() {
+    const btn = document.getElementById('bundleActionBtn');
+    const btnText = document.getElementById('bundleBtnText');
+    const btnIcon = document.getElementById('bundleBtnIcon');
+
+    if (!btn) return;
+
+    btn.disabled = true;
+    btn.classList.add('opacity-75', 'cursor-not-allowed');
+    btnIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>'; 
+    btnText.textContent = 'Memproses...';
+
+    setTimeout(() => {
+        addToCart(currentBundleTitle, currentBundlePrice);
+        
+        btnIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>'; 
+        btnText.textContent = 'Ditambahkan!';
+        btn.classList.remove('opacity-75', 'cursor-not-allowed');
+        btn.classList.replace('bg-accent', 'bg-green-600');
+        btn.classList.replace('hover:bg-red-700', 'hover:bg-green-700');
+
+        setTimeout(() => {
+            closePromoModal();
+            if (cartDropdown) cartDropdown.classList.remove('hidden');
+        }, 800);
+    }, 600);
+}
+
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    if (!toast || !toastMsg) return;
+
+    toastMsg.textContent = msg;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    
+    setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+    }, 2500);
+}
+
+function claimVoucher() {
+const btn = document.getElementById('claimVoucherBtn');
+    
+    // Ubah tampilan tombol menjadi status memproses
+    if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-75', 'cursor-not-allowed');
+        btn.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Memproses...
+        `;
+    }
+
+    // Simpan data ke sistem (browser)
+    sessionStorage.setItem('activeVoucher', 'RAYAMOTOR26');
+    localStorage.setItem('claimed_RAYAMOTOR26', 'true'); // Ini adalah "gembok" agar tidak bisa diklaim lagi
+    
+    showToast("Voucher RAYAMOTOR26 berhasil diklaim!");
+    
+    // Redirect setelah jeda
+    setTimeout(() => {
+        window.location.href = 'produk.html';
+    }, 1500);
+}
+
+// --- 7. FILTER KENDARAAN & GLOBAL PENCERIAN ---
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+
+function handleGlobalSearch() {
+    const keyword = searchInput.value.trim();
+    if (keyword !== "") {
+        localStorage.setItem('searchKeyword', keyword);
+        window.location.href = 'produk.html';
+    }
+}
+
+if (searchInput) {
+    searchInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') handleGlobalSearch();
+    });
+}
+if (searchBtn) {
+    searchBtn.addEventListener('click', handleGlobalSearch);
+}
+
+const carData = {
+    "Toyota": ["Innova", "Avanza", "Fortuner", "Rush", "Land Cruiser", "Camry", "Vios", "Yaris", "Agya", "Veloz", "Zenix"],
+    "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla", "Sigra", "Xenia", "Granmax"],
+    "Isuzu": ["Panther", "MU-X Euro 4", "D-Max Euro 4"]
+};
+
+const brandSelect = document.getElementById('carBrand');
+const modelSelect = document.getElementById('carModel');
+const yearSelect = document.getElementById('carYear');
+const applyFilterBtn = document.getElementById('applyFilterBtn');
+
+    function loadSavedFilter() {
+        const savedFilterRaw = localStorage.getItem('vehicleFilter');
+        if (savedFilterRaw && brandSelect) {
+            const savedFilter = JSON.parse(savedFilterRaw);
+            brandSelect.value = savedFilter.brand;
+        
+            modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+            yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+        
+            if (savedFilter.brand && carData[savedFilter.brand]) {
+                modelSelect.disabled = false;
+                yearSelect.disabled = false;
+            
+                carData[savedFilter.brand].forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    if (model === savedFilter.model) option.selected = true;
+                    modelSelect.appendChild(option);
+                });
+            
+                for (let year = 2026; year >= 2000; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    if (year.toString() === savedFilter.year) option.selected = true;
+                    yearSelect.appendChild(option);
                 }
             }
         }
+    }
 
-        if (brandSelect) {
-            brandSelect.addEventListener('change', function() {
-               const selectedBrand = this.value;
-
-                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
-                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+            if (brandSelect) {
+                brandSelect.addEventListener('change', function() {
+                     const selectedBrand = this.value;
+                    modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+                    yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
 
                 if (selectedBrand && carData[selectedBrand]) {
-                    modelSelect.disabled = false;
-                    yearSelect.disabled = false;
+                        modelSelect.disabled = false;
+                        yearSelect.disabled = false;
 
-                    carData[selectedBrand].forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model;
-                     option.textContent = model;
-                    modelSelect.appendChild(option);
+                carData[selectedBrand].forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        modelSelect.appendChild(option);
                 });
 
                 for (let year = 2026; year >= 2000; year--) {
@@ -712,49 +819,47 @@
                     yearSelect.appendChild(option);
                 }
 
-                // Aktifkan tombol saat brand dipilih
-                applyFilterBtn.disabled = false;
-                applyFilterBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
-                applyFilterBtn.classList.add('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
-            } else {
-                modelSelect.disabled = true;
-                yearSelect.disabled = true;
+                if (applyFilterBtn) {
+                    applyFilterBtn.disabled = false;
+                    applyFilterBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                    applyFilterBtn.classList.add('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
+                }
+                } else {
+                    modelSelect.disabled = true;
+                    yearSelect.disabled = true;
 
-                // Disable kembali tombol kalau brand dikosongkan
+                
+                if (applyFilterBtn) {
                 applyFilterBtn.disabled = true;
                 applyFilterBtn.classList.remove('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
                 applyFilterBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
-            }
-            });
+                }
         }
+    });
+}
 
-        // --- LOGIKA TERAPKAN FILTER ---
-        const applyFilterBtn = document.getElementById('applyFilterBtn');
-        
         if (applyFilterBtn) {
             applyFilterBtn.addEventListener('click', function() {
-                const selectedBrand = document.getElementById('carBrand').value;
-                const selectedModel = document.getElementById('carModel').value;
-                const selectedYear = document.getElementById('carYear').value;
+                const selectedBrand = brandSelect.value;
+                const selectedModel = modelSelect.value;
+                const selectedYear = yearSelect.value;
 
                 if (selectedBrand === "") {
                     alert("Silakan pilih Car Brand terlebih dahulu!");
                     return; 
                 }
 
-                // Simpan filter ke Local Storage
                 const savedFilter = {
                     brand: selectedBrand,
                     model: selectedModel,
                     year: selectedYear
                 };
-                
+        
                 localStorage.setItem('vehicleFilter', JSON.stringify(savedFilter));
                 window.location.href = 'produk.html';
             });
         }
 
-        // Panggil fungsi muat filter saat halaman promo selesai dimuat
         loadSavedFilter();
 
     </script>
@@ -775,5 +880,17 @@
             </div>
         </div>
     </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-[9999] transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-primtext text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3">
+        <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+            </svg>
+        </div>
+        <span id="toastMsg" class="text-sm font-medium">Promo diklaim!</span>
+    </div>
+    </div>
+
 </body>
 </html>
