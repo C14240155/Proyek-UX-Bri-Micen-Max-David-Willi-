@@ -155,7 +155,11 @@
                     <option value="">Pilih Tahun</option>
                 </select>
             </div>
-            <button id="applyFilterBtn" class="w-full bg-accent text-white font-semibold py-2 rounded mt-4 hover:bg-red-700 transition">Terapkan Filter</button>
+            <button id="applyFilterBtn" 
+             class="w-full bg-gray-300 text-gray-500 font-semibold py-2 rounded mt-4 transition cursor-not-allowed"
+            disabled>
+                Terapkan Filter
+            </button>
         </div>
     </div>
 
@@ -650,29 +654,42 @@
 
         if (brandSelect) {
             brandSelect.addEventListener('change', function() {
-                const selectedBrand = this.value;
+               const selectedBrand = this.value;
+
                 modelSelect.innerHTML = '<option value="">Pilih Model</option>';
                 yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
-                
+
                 if (selectedBrand && carData[selectedBrand]) {
                     modelSelect.disabled = false;
                     yearSelect.disabled = false;
+
                     carData[selectedBrand].forEach(model => {
-                        const option = document.createElement('option');
-                        option.value = model;
-                        option.textContent = model;
-                        modelSelect.appendChild(option);
-                    });
-                    for (let year = 2026; year >= 2000; year--) {
-                        const option = document.createElement('option');
-                        option.value = year;
-                        option.textContent = year;
-                        yearSelect.appendChild(option);
-                    }
-                } else {
-                    modelSelect.disabled = true;
-                    yearSelect.disabled = true;
+                    const option = document.createElement('option');
+                    option.value = model;
+                     option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+
+                for (let year = 2026; year >= 2000; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
                 }
+
+                // Aktifkan tombol saat brand dipilih
+                applyFilterBtn.disabled = false;
+                applyFilterBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                applyFilterBtn.classList.add('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
+            } else {
+                modelSelect.disabled = true;
+                yearSelect.disabled = true;
+
+                // Disable kembali tombol kalau brand dikosongkan
+                applyFilterBtn.disabled = true;
+                applyFilterBtn.classList.remove('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
+                applyFilterBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+            }
             });
         }
 
