@@ -58,34 +58,35 @@
         </div>
     </div>
 
-    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 py-3 px-6 flex items-center justify-between h-[80px]">
+    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 h-[80px] px-4 sm:px-6 lg:px-8 w-full flex items-center">
+    <div class="max-w-6xl mx-auto flex items-center justify-between w-full">
+        
         <div class="flex items-center gap-4">
-            <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none" data-target="leftSidebar">
+                <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
-            
-            <a href="index.html" class="block flex items-center">
-                <img src="path/to/logo-kamu.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;" onerror="this.outerHTML='<span class=\\'font-bold text-xl text-primtext\\'>New Raya <span class=\\'text-accent\\'>Motor</span></span>'">
+            <a href="index.html" class="flex items-center">
+                <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
             </a>
         </div>
 
-        <div class="hidden md:flex flex-1 max-w-xl mx-6">
+        <div class="hidden md:flex flex-1 max-w-md mx-6">
             <div class="relative w-full">
-                <input type="text" placeholder="Cari suku cadang atau aksesoris mobil Anda..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent border border-transparent placeholder-sectext">
-                <button class="absolute right-4 top-3 text-sectext hover:text-accent transition">
+                <input type="text" id="searchInput" placeholder="Cari sparepart atau aksesoris mobil..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent text-sm placeholder-[#242526]">
+                <button id="searchBtn" class="absolute right-4 top-2.5 text-sectext">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </button>
             </div>
         </div>
 
         <div class="flex items-center gap-4">
-            <button id="vehicleBtn" class="hidden md:flex items-center gap-2 border border-accent text-accent px-4 py-2 rounded-full hover:bg-accent hover:text-white transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                <span class="text-sm font-semibold">Pilih Kendaraan</span>
+            <button id="vehicleBtn" class="hidden md:flex items-center gap-2 border border-accent text-accent px-4 py-2 rounded-full hover:bg-accent hover:text-white transition" data-target="rightSidebar">
+                <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                <span class="text-sm font-semibold pointer-events-none">Pilih Kendaraan</span>
             </button>
             
             <div class="relative">
-                <button id="cartBtn" class="relative text-primtext hover:text-accent focus:outline-none flex items-center">
+                <button id="cartBtn" class="relative text-primtext hover:text-accent focus:outline-none flex items-center z-50">
                     <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span id="cartBadge" class="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden transition-transform">0</span>
                 </button>
@@ -109,7 +110,8 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div id="leftSidebar" class="fixed inset-y-0 left-0 w-64 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
         <div class="p-6 border-b border-gray-100 flex justify-between items-center">
@@ -341,7 +343,15 @@
     </footer>
 
     <script>
-        // --- SIDEBAR LOGIC (Identical to index.html) ---
+        // --- LOGIKA AUTO-RESET SAAT BUKA DARI VS CODE / TAB BARU ---
+        // Jika session baru dimulai, bersihkan filter lama agar kembali seperti awal
+        if (!sessionStorage.getItem('isSessionActive')) {
+            localStorage.removeItem('vehicleFilter');
+            localStorage.removeItem('searchKeyword');
+            sessionStorage.setItem('isSessionActive', 'true');
+        }
+
+        // --- SIDEBAR LOGIC ---
         const menuBtn = document.getElementById('menuBtn');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
         const leftSidebar = document.getElementById('leftSidebar');
@@ -370,8 +380,29 @@
         closeVehicleBtn.addEventListener('click', () => toggleSidebar(rightSidebar, false));
         overlay.addEventListener('click', () => { toggleSidebar(leftSidebar, false); toggleSidebar(rightSidebar, false); });
 
-        // --- VEHICLE FILTER LOGIC (Identical to index.html) ---
-        const carData = {
+        // --- GLOBAL SEARCH LOGIC ---
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        function handleGlobalSearch() {
+            const keyword = searchInput.value.trim();
+            if (keyword !== "") {
+                localStorage.setItem('searchKeyword', keyword);
+                window.location.href = 'produk.html'; // Pindah ke halaman produk
+            }
+        }
+
+        if(searchInput) {
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') handleGlobalSearch();
+            });
+        }
+        if(searchBtn) {
+            searchBtn.addEventListener('click', handleGlobalSearch);
+        }
+
+        // --- DATA MOBIL (PILIH KENDARAAN) ---
+        const carDataFilter = {
             "Toyota": ["Innova", "Avanza", "Fortuner", "Rush", "Land Cruiser", "Camry", "Vios", "Yaris", "Agya", "Veloz", "Zenix"],
             "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla", "Sigra", "Xenia", "Granmax"],
             "Isuzu": ["Panther", "MU-X Euro 4", "D-Max Euro 4"]
@@ -381,47 +412,101 @@
         const modelSelect = document.getElementById('carModel');
         const yearSelect = document.getElementById('carYear');
 
-        brandSelect.addEventListener('change', function() {
-            const selectedBrand = this.value;
-            modelSelect.innerHTML = '<option value="">Pilih Model</option>';
-            yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
-
-            if (selectedBrand && carData[selectedBrand]) {
-                modelSelect.disabled = false;
-                yearSelect.disabled = false;
-                carData[selectedBrand].forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model;
-                    option.textContent = model;
-                    modelSelect.appendChild(option);
-                });
-                for (let year = 2026; year >= 2000; year--) {
-                    const option = document.createElement('option');
-                    option.value = year;
-                    option.textContent = year;
-                    yearSelect.appendChild(option);
+        // --- FUNGSI UNTUK MEMUAT FILTER YANG TERSIMPAN ---
+        function loadSavedFilter() {
+            const savedFilterRaw = localStorage.getItem('vehicleFilter');
+            if (savedFilterRaw && brandSelect) {
+                const savedFilter = JSON.parse(savedFilterRaw);
+                
+                // Set Brand
+                brandSelect.value = savedFilter.brand;
+                
+                // Trigger populating model & year secara manual
+                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+                
+                if (savedFilter.brand && carDataFilter[savedFilter.brand]) {
+                    modelSelect.disabled = false;
+                    yearSelect.disabled = false;
+                    
+                    carDataFilter[savedFilter.brand].forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        // Pilih model jika tersimpan
+                        if(model === savedFilter.model) option.selected = true;
+                        modelSelect.appendChild(option);
+                    });
+                    
+                    for (let year = 2026; year >= 2000; year--) {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        // Pilih tahun jika tersimpan
+                        if(year.toString() === savedFilter.year) option.selected = true;
+                        yearSelect.appendChild(option);
+                    }
                 }
-            } else {
-                modelSelect.disabled = true;
-                yearSelect.disabled = true;
             }
-        });
+        }
 
-        document.getElementById('applyFilterBtn').addEventListener('click', function() {
-            const selectedBrand = document.getElementById('carBrand').value;
-            const selectedModel = document.getElementById('carModel').value;
-            const selectedYear = document.getElementById('carYear').value;
+        if (brandSelect) {
+            brandSelect.addEventListener('change', function() {
+                const selectedBrand = this.value;
+                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+                
+                if (selectedBrand && carDataFilter[selectedBrand]) {
+                    modelSelect.disabled = false;
+                    yearSelect.disabled = false;
+                    carDataFilter[selectedBrand].forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        modelSelect.appendChild(option);
+                    });
+                    for (let year = 2026; year >= 2000; year--) {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        yearSelect.appendChild(option);
+                    }
+                } else {
+                    modelSelect.disabled = true;
+                    yearSelect.disabled = true;
+                }
+            });
+        }
 
-            if (selectedBrand === "") {
-                alert("Silakan pilih Car Brand terlebih dahulu!");
-                return;
-            }
-            const savedFilter = { brand: selectedBrand, model: selectedModel, year: selectedYear };
-            localStorage.setItem('vehicleFilter', JSON.stringify(savedFilter));
-            toggleSidebar(rightSidebar, false);
-        });
+        // --- LOGIKA TERAPKAN FILTER ---
+        const applyFilterBtn = document.getElementById('applyFilterBtn');
+        
+        if (applyFilterBtn) {
+            applyFilterBtn.addEventListener('click', function() {
+                const selectedBrand = document.getElementById('carBrand').value;
+                const selectedModel = document.getElementById('carModel').value;
+                const selectedYear = document.getElementById('carYear').value;
 
-        // --- CART LOGIC SINKRONISASI INDEX ---
+                if (selectedBrand === "") {
+                    alert("Silakan pilih Car Brand terlebih dahulu!");
+                    return; 
+                }
+
+                // Simpan filter ke Local Storage
+                const savedFilter = {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear
+                };
+                
+                localStorage.setItem('vehicleFilter', JSON.stringify(savedFilter));
+                
+                // Redirect ke halaman produk
+                window.location.href = 'produk.html';
+            });
+        }
+        
+        // --- CART LOGIC SINKRONISASI ---
         const cartBtn = document.getElementById('cartBtn');
         const cartDropdown = document.getElementById('cartDropdown');
         let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
@@ -494,8 +579,6 @@
                 saveAndRenderCart();
             }
         }
-
-        saveAndRenderCart();
 
         // --- EDUCATIONAL MODAL & CONTEXTUAL COMMERCE LOGIC ---
         const modal = document.getElementById('educationalModal');
@@ -607,6 +690,10 @@
         modal.addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
+
+        // Panggil render saat halaman pertama dimuat
+        saveAndRenderCart();
+        loadSavedFilter();
     </script>
 </body>
 </html>

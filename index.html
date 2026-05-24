@@ -40,30 +40,32 @@
 </head>
 <body class="bg-mainbg text-primtext font-sans overflow-x-hidden">
 
-    <div class="bg-accent text-white text-sm py-2 overflow-hidden relative z-50">
+    <div class="bg-accent text-white text-sm py-2 overflow-hidden relative z-50 h-[40px] flex items-center">
         <div class="marquee-content">
             🔥 Website ini merupakan media digital yang dapat Anda gunakan untuk lebih mengenal beberapa produk yang ditawarkan oleh New Raya Motor Surabaya. 🔥
         </div>
     </div>
 
-    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 py-3 px-6 flex items-center justify-between">
+    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 h-[80px] px-4 sm:px-6 lg:px-8 w-full flex items-center">
+    <div class="max-w-6xl mx-auto flex items-center justify-between w-full">
+        
         <div class="flex items-center gap-4">
             <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
             
             <a href="index.html" class="block flex items-center">
-                <img src="path/to/logo-kamu.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
-                </a>
+                <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
+            </a>
         </div>
 
-        <div class="hidden md:flex flex-1 max-w-lg mx-6">
+        <div class="hidden md:flex flex-1 max-w-md mx-6">
             <div class="relative w-full">
-                <input type="text" placeholder="Cari suku cadang... (e.g., Kampas Rem, Filter Oli)" class="w-full bg-cardbg text-primtext px-4 py-2 rounded-full focus:outline-none focus:ring-1 focus:ring-accent">
-                <button class="absolute right-3 top-2.5 text-sectext">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </button>
-            </div>
+                    <input type="text" id="searchInput" placeholder="Cari sparepart atau aksesoris mobil..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent text-sm placeholder-[#242526]">
+                    <button id="searchBtn" class="absolute right-4 top-2.5 text-sectext">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
         </div>
 
         <div class="flex items-center gap-4">
@@ -96,7 +98,9 @@
                 </div>
             </div>
         </div>
-    </nav>
+        
+    </div>
+</nav>
 
     <div id="leftSidebar" class="fixed inset-y-0 left-0 w-64 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
         <div class="p-6 border-b border-gray-100 flex justify-between items-center">
@@ -190,15 +194,17 @@
         <section class="relative w-full h-[400px] md:h-[500px] bg-gray-800 rounded-2xl overflow-hidden group">
             <div id="carousel" class="w-full h-full relative">
                 <div class="slide absolute inset-0 w-full h-full opacity-100 z-10 flex flex-col justify-center px-10 md:px-20 bg-gray-700">
+                    <img src="carousel2index.png" alt="Dapatkan Suku Cadang" class="absolute inset-0 w-full h-full object-cover z-0">
                     <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 z-20">Optimalkan Performa Mobil Anda</h1>
-                    <p class="text-white text-sm md:text-lg mb-8 max-w-xl z-20">Dapatkan suku cadang berkualitas tinggi dengan akurasi fitment 100% untuk setiap model kendaraan.</p>
+                    <p class="text-white text-sm md:text-lg mb-8 max-w-xl z-20">Dapatkan suku cadang berkualitas tinggi untuk setiap model kendaraan.</p>
                     <div class="flex gap-4 z-20">
                         <a href="produk.html" class="bg-accent text-white px-6 py-3 rounded font-semibold hover:bg-red-700 transition">Lihat Produk</a>
                         <a href="promo.html" class="border-2 border-white text-white px-6 py-3 rounded font-semibold hover:bg-white hover:text-primtext transition">Lihat Promo</a>
                     </div>
                 </div>
                 <div class="slide absolute inset-0 w-full h-full opacity-0 z-0 flex flex-col justify-center px-10 md:px-20 bg-gray-600">
-                    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 z-20">Koleksi Velg Premium</h1>
+                    <img src="carousel1index.jpg" alt="Koleksi Sparepart Premium" class="absolute inset-0 w-full h-full object-cover z-0">
+                    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 z-20">Koleksi Sparepart Premium</h1>
                     <p class="text-white text-sm md:text-lg mb-8 max-w-xl z-20">Tingkatkan estetika berkendara Anda dengan koleksi terbaru kami.</p>
                     <div class="flex gap-4 z-20">
                         <a href="produk.html" class="bg-accent text-white px-6 py-3 rounded font-semibold hover:bg-red-700 transition">Lihat Produk</a>
@@ -216,35 +222,39 @@
         </section>
 
         <section>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-cardbg rounded-xl p-6 text-center border border-gray-100 flex flex-col items-center">
-                    <div class="w-24 h-24 bg-gray-200 rounded-full mb-4 flex items-center justify-center overflow-hidden">
-                        <span class="text-gray-400 text-sm">Image 1</span>
-                    </div>
-                    <h3 class="font-bold text-lg text-primtext mb-2">Pilih Kendaraan</h3>
-                    <p class="text-sectext text-sm">Masukkan detail mobil Anda untuk memfilter suku cadang yang akurat.</p>
-                </div>
-                <div class="bg-cardbg rounded-xl p-6 text-center border border-gray-100 flex flex-col items-center">
-                    <div class="w-24 h-24 bg-gray-200 rounded-full mb-4 flex items-center justify-center overflow-hidden">
-                         <span class="text-gray-400 text-sm">Image 2</span>
-                    </div>
-                    <h3 class="font-bold text-lg text-primtext mb-2">Cari Suku Cadang</h3>
-                    <p class="text-sectext text-sm">Temukan ribuan komponen dengan harga kompetitif.</p>
-                </div>
-                <div class="bg-cardbg rounded-xl p-6 text-center border border-gray-100 flex flex-col items-center">
-                    <div class="w-24 h-24 bg-gray-200 rounded-full mb-4 flex items-center justify-center overflow-hidden">
-                         <span class="text-gray-400 text-sm">Image 3</span>
-                    </div>
-                    <h3 class="font-bold text-lg text-primtext mb-2">Terima & Pasang</h3>
-                    <p class="text-sectext text-sm">Pesanan diantar langsung ke pintu Anda.</p>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-cardbg rounded-xl p-6 text-center border border-gray-100 flex flex-col items-center">
+            <div class="w-40 h-28 bg-gray-200 rounded-2xl mb-4 flex items-center justify-center overflow-hidden">
+                <img src="pilihkendaraan.png" alt="Pilih Kendaraan" class="w-full h-full object-cover">
             </div>
-        </section>
+            <h3 class="font-bold text-lg text-primtext mb-2">Pilih Kendaraan</h3>
+            <p class="text-sectext text-sm">Sebuah fitur filter memudahkan pencarian sparepart sesuai kendaraan Anda</p>
+        </div>
+        
+        <div class="bg-cardbg rounded-xl p-6 text-center border border-gray-100 flex flex-col items-center">
+            <div class="w-40 h-28 bg-gray-200 rounded-2xl mb-4 flex items-center justify-center overflow-hidden">
+                 <img src="pilihbrand.png" alt="Cari Suku Cadang" class="w-full h-full object-cover">
+            </div>
+            <h3 class="font-bold text-lg text-primtext mb-2">Pilih Brand</h3>
+            <p class="text-sectext text-sm">Pilih brand atau merk kendaraan Anda</p>
+        </div>
+        
+        <div class="bg-cardbg rounded-xl p-6 text-center border border-gray-100 flex flex-col items-center">
+            <div class="w-40 h-28 bg-gray-200 rounded-2xl mb-4 flex items-center justify-center overflow-hidden">
+                 <img src="pilihmodel.png" alt="Terima & Pasang" class="w-full h-full object-cover">
+            </div>
+            <h3 class="font-bold text-lg text-primtext mb-2">Pilih Model</h3>
+            <p class="text-sectext text-sm">Pilih tipe atau model kendaraan Anda</p>
+        </div>
+        
+    </div>
+</section>
 
         <section>
             <div class="flex justify-between items-end mb-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-primtext">Kategori Pilihan</h2>
+                    <h2 class="text-2xl font-bold text-primtext">Kategori Unggulan</h2>
                 </div>
                 <a href="produk.html" class="text-accent text-sm font-semibold hover:underline flex items-center gap-1">
                     Semua Kategori <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -254,17 +264,19 @@
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <script>
                     const categories = [
-                        { name: "Sistem Pengereman", img: "Rem" },
-                        { name: "Komponen Mesin", img: "Mesin" },
-                        { name: "Oli & Pelumas", img: "Oli" },
-                        { name: "Lampu & Kelistrikan", img: "Lampu" },
-                        { name: "Suspensi & Kaki", img: "Suspensi" }
+                        { name: "Sistem Rem", img: "Sistem Rem.png" },
+                        { name: "Kursi & Jok", img: "Jokmobil.png" },
+                        { name: "Aki, Sekring, & Kabel", img: "akimobil.png" },
+                        { name: "Oli & Cairan Kimia", img: "olimobil.png" },
+                        { name: "Suspensi & Shockbreaker", img: "suspensimobil.png" }
                     ];
                     categories.forEach(cat => {
                         document.write(`
                             <a href="produk.html" class="block bg-cardbg rounded-lg overflow-hidden border border-gray-100 hover:shadow-lg transition group">
                                 <div class="h-32 bg-gray-300 w-full flex items-center justify-center relative">
-                                    <span class="text-gray-500 text-xs z-10">Img: ${cat.img}</span>
+                                    
+                                    <img src="${cat.img}" alt="${cat.name}" class="w-full h-full object-cover">
+                                    
                                 </div>
                                 <div class="p-3 text-center">
                                     <h4 class="font-semibold text-primtext text-sm group-hover:text-accent transition">${cat.name}</h4>
@@ -277,7 +289,7 @@
         </section>
 
         <section>
-            <h2 class="text-2xl font-bold text-primtext mb-6">Current Promotions</h2>
+            <h2 class="text-2xl font-bold text-primtext mb-6">Promosi Terkini</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="promo.html" class="md:col-span-2 block bg-gray-800 rounded-xl overflow-hidden relative h-64 md:h-80 group">
                     <div class="absolute inset-0 bg-gray-400 group-hover:scale-105 transition-transform duration-500"></div>
@@ -341,6 +353,14 @@
     </footer>
 
     <script>
+        // --- LOGIKA AUTO-RESET SAAT BUKA DARI VS CODE / TAB BARU ---
+        // Jika session baru dimulai, bersihkan filter lama agar kembali seperti awal
+        if (!sessionStorage.getItem('isSessionActive')) {
+            localStorage.removeItem('vehicleFilter');
+            localStorage.removeItem('searchKeyword');
+            sessionStorage.setItem('isSessionActive', 'true');
+        }
+
         const menuBtn = document.getElementById('menuBtn');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
         const leftSidebar = document.getElementById('leftSidebar');
@@ -385,6 +405,27 @@
         document.getElementById('prevSlide').addEventListener('click', () => changeSlide(-1));
         setInterval(() => changeSlide(1), 5000);
 
+        // --- GLOBAL SEARCH LOGIC ---
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        function handleGlobalSearch() {
+            const keyword = searchInput.value.trim();
+            if (keyword !== "") {
+                localStorage.setItem('searchKeyword', keyword);
+                window.location.href = 'produk.html';
+            }
+        }
+
+        if(searchInput) {
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') handleGlobalSearch();
+            });
+        }
+        if(searchBtn) {
+            searchBtn.addEventListener('click', handleGlobalSearch);
+        }
+
         // --- LOGIKA FORM PILIH KENDARAAN ---
         
         // Data Base Model Kendaraan
@@ -398,74 +439,112 @@
         const modelSelect = document.getElementById('carModel');
         const yearSelect = document.getElementById('carYear');
 
-        brandSelect.addEventListener('change', function() {
-            const selectedBrand = this.value;
-
-            // Selalu kembalikan Model dan Tahun ke keadaan semula saat Brand diubah
-            modelSelect.innerHTML = '<option value="">Pilih Model</option>';
-            yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
-
-            // Jika user memilih brand (bukan "Pilih Brand")
-            if (selectedBrand && carData[selectedBrand]) {
+        // --- FUNGSI UNTUK MEMUAT FILTER YANG TERSIMPAN ---
+        function loadSavedFilter() {
+            const savedFilterRaw = localStorage.getItem('vehicleFilter');
+            if (savedFilterRaw && brandSelect) {
+                const savedFilter = JSON.parse(savedFilterRaw);
                 
-                // 1. Aktifkan / Enable Dropdown Model & Tahun
-                modelSelect.disabled = false;
-                yearSelect.disabled = false;
-
-                // 2. Isi Dropdown Model sesuai Brand
-                carData[selectedBrand].forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model;
-                    option.textContent = model;
-                    modelSelect.appendChild(option);
-                });
-
-                // 3. Isi Dropdown Tahun dari 2026 turun ke 2000
-                for (let year = 2026; year >= 2000; year--) {
-                    const option = document.createElement('option');
-                    option.value = year;
-                    option.textContent = year;
-                    yearSelect.appendChild(option);
+                // Set Brand
+                brandSelect.value = savedFilter.brand;
+                
+                // Trigger populating model & year secara manual
+                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+                
+                if (savedFilter.brand && carData[savedFilter.brand]) {
+                    modelSelect.disabled = false;
+                    yearSelect.disabled = false;
+                    
+                    carData[savedFilter.brand].forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        // Pilih model jika tersimpan
+                        if(model === savedFilter.model) option.selected = true;
+                        modelSelect.appendChild(option);
+                    });
+                    
+                    for (let year = 2026; year >= 2000; year--) {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        // Pilih tahun jika tersimpan
+                        if(year.toString() === savedFilter.year) option.selected = true;
+                        yearSelect.appendChild(option);
+                    }
                 }
-            } else {
-                // Jika user mengembalikan ke "Pilih Brand", kunci/disable kembali
-                modelSelect.disabled = true;
-                yearSelect.disabled = true;
             }
-        });
+        }
+
+        if (brandSelect) {
+            brandSelect.addEventListener('change', function() {
+                const selectedBrand = this.value;
+
+                // Selalu kembalikan Model dan Tahun ke keadaan semula saat Brand diubah
+                modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+                yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+
+                // Jika user memilih brand (bukan "Pilih Brand")
+                if (selectedBrand && carData[selectedBrand]) {
+                    
+                    // 1. Aktifkan / Enable Dropdown Model & Tahun
+                    modelSelect.disabled = false;
+                    yearSelect.disabled = false;
+
+                    // 2. Isi Dropdown Model sesuai Brand
+                    carData[selectedBrand].forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        modelSelect.appendChild(option);
+                    });
+
+                    // 3. Isi Dropdown Tahun dari 2026 turun ke 2000
+                    for (let year = 2026; year >= 2000; year--) {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        yearSelect.appendChild(option);
+                    }
+                } else {
+                    // Jika user mengembalikan ke "Pilih Brand", kunci/disable kembali
+                    modelSelect.disabled = true;
+                    yearSelect.disabled = true;
+                }
+            });
+        }
 
         // --- LOGIKA TERAPKAN FILTER ---
         const applyFilterBtn = document.getElementById('applyFilterBtn');
 
-        applyFilterBtn.addEventListener('click', function() {
-            // 1. Ambil nilai (value) dari dropdown
-            const selectedBrand = document.getElementById('carBrand').value;
-            const selectedModel = document.getElementById('carModel').value;
-            const selectedYear = document.getElementById('carYear').value;
+        if (applyFilterBtn) {
+            applyFilterBtn.addEventListener('click', function() {
+                // 1. Ambil nilai (value) dari dropdown
+                const selectedBrand = document.getElementById('carBrand').value;
+                const selectedModel = document.getElementById('carModel').value;
+                const selectedYear = document.getElementById('carYear').value;
 
-            // Pastikan user minimal memilih Brand sebelum menyimpan
-            if (selectedBrand === "") {
-                alert("Silakan pilih Car Brand terlebih dahulu!");
-                return; // Batalkan proses jika brand kosong
-            }
+                // Pastikan user minimal memilih Brand sebelum menyimpan
+                if (selectedBrand === "") {
+                    alert("Silakan pilih Car Brand terlebih dahulu!");
+                    return; // Batalkan proses jika brand kosong
+                }
 
-            // 2. Simpan filter ke objek dan Local Storage
-            const savedFilter = {
-                brand: selectedBrand,
-                model: selectedModel,
-                year: selectedYear
-            };
-            
-            // Data filter disimpan di Local Storage agar tidak hilang saat halaman di-refresh
-            localStorage.setItem('vehicleFilter', JSON.stringify(savedFilter));
-            console.log("Data Filter Berhasil Disimpan:", savedFilter);
+                // 2. Simpan filter ke objek dan Local Storage
+                const savedFilter = {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear
+                };
+                
+                // Data filter disimpan di Local Storage agar tidak hilang saat halaman di-refresh
+                localStorage.setItem('vehicleFilter', JSON.stringify(savedFilter));
 
-            // Opsional: Anda bisa mengganti teks tombol di navbar sebagai indikator
-            // document.querySelector('#vehicleBtn span').textContent = `${selectedBrand} ${selectedModel}`.trim();
-
-            // 3. Tutup sidebar kanan secara otomatis
-            toggleSidebar(rightSidebar, false);
-        });
+                // 3. Pindah ke halaman produk (REDIRECT)
+                window.location.href = 'produk.html';
+            });
+        }
 
         /* --- CART LOGIC SINKRONISASI INDEX --- */
         const cartBtn = document.getElementById('cartBtn');
@@ -541,8 +620,9 @@
             }
         }
 
-        // Panggil render saat halaman pertama dimuat
+        // Panggil render dan load filter saat halaman pertama dimuat
         saveAndRenderCart();
+        loadSavedFilter(); 
     </script>
 </body>
 </html>

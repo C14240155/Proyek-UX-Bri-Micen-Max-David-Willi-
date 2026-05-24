@@ -47,52 +47,55 @@
         </div>
     </div>
 
-    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 py-3 px-6 h-[80px] flex items-center justify-between">
-        <div class="flex items-center gap-4">
-            <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none" data-target="leftSidebar">
-                <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-            <a href="index.html" class="flex items-center">
-                <img src="path/to/logo-kamu.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
-            </a>
-        </div>
-
-        <div class="hidden md:flex flex-1 max-w-lg mx-6">
-            <div class="relative w-full">
-                <input type="text" placeholder="Cari suku cadang atau aksesoris mobil Anda..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent text-sm placeholder-[#242526]">
-                <button class="absolute right-4 top-2.5 text-sectext">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </button>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <button id="vehicleBtn" class="hidden md:flex items-center gap-2 border border-accent text-accent px-4 py-2 rounded-full hover:bg-accent hover:text-white transition" data-target="rightSidebar">
-                <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                <span class="text-sm font-semibold pointer-events-none">Pilih Kendaraan</span>
-            </button>
+    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 h-[80px] px-4 sm:px-6 lg:px-8 w-full flex items-center">
+        <div class="max-w-6xl mx-auto flex items-center justify-between w-full">
             
-            <div class="relative">
-                <button id="cartBtn" class="relative text-primtext hover:text-accent focus:outline-none flex items-center z-50">
-                    <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden transition-transform">0</span>
+            <div class="flex items-center gap-4">
+                <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none" data-target="leftSidebar">
+                    <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <a href="index.html" class="flex items-center">
+                    <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
+                </a>
+            </div>
+
+            <div class="hidden md:flex flex-1 max-w-md mx-6">
+                <div class="relative w-full">
+                    <input type="text" id="searchInput" placeholder="Cari sparepart atau aksesoris mobil..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent text-sm placeholder-[#242526]">
+                    <button id="searchBtn" class="absolute right-4 top-2.5 text-sectext">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button id="vehicleBtn" class="hidden md:flex items-center gap-2 border border-accent text-accent px-4 py-2 rounded-full hover:bg-accent hover:text-white transition" data-target="rightSidebar">
+                    <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                    <span class="text-sm font-semibold pointer-events-none">Pilih Kendaraan</span>
                 </button>
                 
-                <div id="cartDropdown" class="absolute right-0 top-10 w-80 bg-mainbg shadow-2xl border border-gray-100 rounded-xl hidden z-50 flex flex-col transform transition-all">
-                    <div class="p-4 border-b border-gray-100 flex justify-between items-center">
-                        <span class="font-bold text-primtext">Keranjang Belanja</span>
-                        <button id="clearCartBtn" onclick="clearCart()" class="text-xs text-accent hover:underline font-semibold hidden">Kosongkan</button>
-                    </div>
-                    <div class="p-4 flex flex-col max-h-64 overflow-y-auto custom-scrollbar">
-                        <p id="emptyCartMsg" class="text-sm text-sectext text-center py-4">Keranjang Anda masih kosong.</p>
-                        <div id="cartItemsContainer" class="flex flex-col gap-3"></div>
-                    </div>
-                    <div class="p-4 border-t border-gray-100">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-sm font-bold text-primtext">Total:</span>
-                            <span id="cartTotal" class="text-sm font-bold text-accent">Rp 0</span>
+                <div class="relative">
+                    <button id="cartBtn" class="relative text-primtext hover:text-accent focus:outline-none flex items-center z-50">
+                        <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span id="cartBadge" class="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden transition-transform">0</span>
+                    </button>
+                    
+                    <div id="cartDropdown" class="absolute right-0 top-10 w-80 bg-mainbg shadow-2xl border border-gray-100 rounded-xl hidden z-50 flex flex-col transform transition-all">
+                        <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+                            <span class="font-bold text-primtext">Keranjang Belanja</span>
+                            <button id="clearCartBtn" onclick="clearCart()" class="text-xs text-accent hover:underline font-semibold hidden">Kosongkan</button>
                         </div>
-                        <button class="w-full bg-accent text-white font-bold py-2 rounded-lg hover:bg-red-700 transition">Checkout Sekarang</button>
+                        <div class="p-4 flex flex-col max-h-64 overflow-y-auto custom-scrollbar">
+                            <p id="emptyCartMsg" class="text-sm text-sectext text-center py-4">Keranjang Anda masih kosong.</p>
+                            <div id="cartItemsContainer" class="flex flex-col gap-3"></div>
+                        </div>
+                        <div class="p-4 border-t border-gray-100">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm font-bold text-primtext">Total:</span>
+                                <span id="cartTotal" class="text-sm font-bold text-accent">Rp 0</span>
+                            </div>
+                            <button class="w-full bg-accent text-white font-bold py-2 rounded-lg hover:bg-red-700 transition">Checkout Sekarang</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,10 +172,10 @@
                             <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="accordion-content hidden mt-4 pl-1 space-y-3">
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Lampu</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Spion & Aksesoris Spion</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Grille, Bumper, & Guard</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Karet Pintu & Wiper</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Lampu" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Lampu</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Spion & Aksesoris Spion" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Spion & Aksesoris Spion</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Grille, Bumper, & Guard" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Grille, Bumper, & Guard</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Karet Pintu & Wiper" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Karet Pintu & Wiper</span></label>
                         </div>
                     </div>
 
@@ -182,23 +185,23 @@
                             <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="accordion-content hidden mt-4 pl-1 space-y-3">
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Console Box & Kompartemen</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Kursi & Jok</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Panel & Ornamen Dashboard</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Karpet & Peredam</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Console Box & Kompartemen" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Console Box & Kompartemen</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Kursi & Jok" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Kursi & Jok</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Panel & Ornamen Dashboard" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Panel & Ornamen Dashboard</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Karpet & Peredam" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Karpet & Peredam</span></label>
                         </div>
                     </div>
 
                     <div class="border-b border-gray-100 py-3">
                         <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
-                            <span class="text-xs font-bold text-accent tracking-wide">03 KELISTRIKAN & SENSOR</span>
-                            <svg class="w-4 h-4 text-accent transform rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-primtext transition-colors tracking-wide">03 KELISTRIKAN & SENSOR</span>
+                            <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div class="accordion-content block mt-4 pl-1 space-y-3">
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" checked class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sensor Parkir & Kamera</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Keamanan & Safety</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Modul & Motor Otomatis</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Aki, Sekring, & Kabel</span></label>
+                        <div class="accordion-content hidden mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Sensor Parkir & Kamera" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sensor Parkir & Kamera</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Sistem Keamanan & Safety" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Keamanan & Safety</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Modul & Motor Otomatis" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Modul & Motor Otomatis</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Aki, Sekring, & Kabel" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Aki, Sekring, & Kabel</span></label>
                         </div>
                     </div>
 
@@ -208,10 +211,10 @@
                             <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="accordion-content hidden mt-4 pl-1 space-y-3">
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Filter-Filter</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Busi & Sistem Pengapian</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Pendingin</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Gasket & Seal Mesin</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Filter-Filter" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Filter-Filter</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Busi & Sistem Pengapian" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Busi & Sistem Pengapian</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Sistem Pendingin" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Pendingin</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Gasket & Seal Mesin" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Gasket & Seal Mesin</span></label>
                         </div>
                     </div>
 
@@ -221,10 +224,10 @@
                             <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="accordion-content hidden mt-4 pl-1 space-y-3">
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Rem</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Suspensi & Shockbreaker</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Kemudi</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Kopling & Transmisi</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Sistem Rem" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Rem</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Suspensi & Shockbreaker" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Suspensi & Shockbreaker</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Sistem Kemudi" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Kemudi</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Kopling & Transmisi" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Kopling & Transmisi</span></label>
                         </div>
                     </div>
 
@@ -234,9 +237,8 @@
                             <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="accordion-content hidden mt-4 pl-1 space-y-3">
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Oli & Cairan Kimia</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Peralatan & Toolkit</span></label>
-                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Produk Promo / Diskon</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Oli & Cairan Kimia" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Oli & Cairan Kimia</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" value="Peralatan & Toolkit" class="filter-checkbox form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Peralatan & Toolkit</span></label>
                         </div>
                     </div>
 
@@ -255,73 +257,33 @@
             </nav>
             
             <div class="lg:hidden w-full flex justify-between items-center bg-cardbg p-3 rounded-lg border border-gray-200 mb-4 cursor-pointer" id="mobileFilterToggleBtn" data-target="filterSidebar">
-                <span class="font-bold text-primtext text-sm">Filter Kategori Produk</span>
+                <span class="font-bold text-primtext text-sm pointer-events-none">Filter Kategori Produk</span>
                 <svg class="w-5 h-5 text-accent pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
             </div>
 
             <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
                 <h1 class="text-4xl font-extrabold text-primtext tracking-tight">PRODUK</h1>
-                
-                <div class="relative">
-                    <select class="appearance-none bg-cardbg border border-gray-200 text-primtext py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-accent cursor-pointer text-sm font-medium">
-                        <option>Urutkan: Rekomendasi</option>
-                        <option>Harga: Rendah ke Tinggi</option>
-                        <option>Harga: Tinggi ke Rendah</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-sectext">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                </div>
             </div>
 
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" id="productGrid">
                 </div>
+            
+            <div id="noProductMsg" class="hidden text-center py-10 w-full">
+                <p class="text-lg text-sectext font-bold">Produk tidak ditemukan.</p>
+                <p class="text-sm text-gray-500 mt-2">Coba sesuaikan kata kunci atau filter Anda.</p>
+            </div>
 
         </section>
-
     </main>
 
-    <footer class="bg-cardbg border-t border-gray-200 pt-12 pb-6 mt-12 w-full">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-lg font-bold text-accent mb-4">New Raya Motor</h3>
-                    <p class="text-sectext leading-relaxed">Penyedia suku cadang otomotif terpercaya.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-primtext mb-4">QUICK LINKS</h4>
-                    <ul class="space-y-2 text-sectext">
-                        <li><a href="index.html" class="hover:text-accent transition">Beranda</a></li>
-                        <li><a href="produk.html" class="hover:text-accent transition">Produk</a></li>
-                        <li><a href="promo.html" class="hover:text-accent transition">Promo</a></li>
-                        <li><a href="tipsTrik.html" class="hover:text-accent transition">Tips & Trik</a></li>
-                        <li><a href="tentangKami.html" class="hover:text-accent transition">Tentang Kami</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-primtext mb-4">STORE INFO</h4>
-                    <ul class="space-y-3 text-sectext">
-                        <li class="flex items-start gap-2">Jl. Raya Sparepart No. 88, Jaksel</li>
-                        <li class="flex items-start gap-2">Senin - Sabtu: 08:00 - 17:00</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-[#242526] border-opacity-20 pt-6 text-center text-xs text-sectext">
-                <p>Copyright &copy; 2026 New Raya Motor. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 z-[60] hidden flex items-center justify-center p-4 transition-opacity">
-        <div class="bg-mainbg w-full max-w-4xl rounded-2xl flex flex-col md:flex-row overflow-hidden relative max-h-[90vh]">
+    <div id="productModal" class="fixed inset-0 bg-black bg-opacity-70 z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-mainbg w-full max-w-4xl rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden relative max-h-[90vh]">
             <button onclick="closeModal()" class="absolute top-4 right-4 bg-gray-100 p-2 rounded-full text-primtext hover:text-accent hover:bg-gray-200 transition z-10 focus:outline-none">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-
             <div class="w-full md:w-1/2 bg-gray-900 min-h-[300px] flex items-center justify-center p-8 relative">
                 <span class="text-white text-sm">Image Placeholder</span>
             </div>
-
             <div class="w-full md:w-1/2 p-8 overflow-y-auto flex flex-col">
                 <span id="modalStock" class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded w-max mb-4">Stok Tersedia</span>
                 <h2 id="modalTitle" class="text-2xl font-bold text-primtext mb-2">-</h2>
@@ -329,16 +291,16 @@
                 
                 <div class="border-t border-b border-gray-100 py-4 my-2">
                     <h3 class="font-bold text-primtext text-sm mb-2">Deskripsi Produk:</h3>
-                    <p class="text-sm text-sectext leading-relaxed">
-                        Kampas rem berkualitas tinggi dengan daya cengkram maksimal. Pastikan suku cadang sesuai dengan kendaraan Anda.
-                    </p>
+                    <p class="text-sm text-sectext leading-relaxed" id="modalDesc">-</p>
+                    <h3 class="font-bold text-primtext text-sm mb-2 mt-4">Kompatibel:</h3>
+                    <p class="text-sm text-sectext leading-relaxed" id="modalCompat">-</p>
                 </div>
-
+                
                 <div class="mt-auto pt-6">
                     <div class="text-3xl font-bold text-accent mb-4" id="modalPrice">-</div>
                     <button onclick="addModalToCart()" class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-red-700 transition flex justify-center items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        Add to Cart
+                        Tambah ke Keranjang
                     </button>
                 </div>
             </div>
@@ -346,80 +308,87 @@
     </div>
 
     <script>
-        const overlay = document.getElementById('overlay');
-        let activeSidebar = null;
+        // === PASTE DATA PRODUK MILIK ANDA SEPENUHNYA DI DALAM VARIABEL INI ===
+        const products = [
+            { id: "PRD-001", title: "Headlamp Reflektor Kanan", specs: "Part No: 81110-BZ000", price: 650000, isHot: true, tags: ["lampu depan", "headlamp", "reflektor"], mainCategory: "01 Eksterior & Bodi", subCategory: "Lampu", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2011 }, { brand: "Daihatsu", model: "Xenia", yearStart: 2004, yearEnd: 2011 }] },
+            { id: "PRD-002", title: "Stoplamp LED Assy Kiri", specs: "Part No: 81560-0K100", price: 1200000, isHot: false, tags: ["lampu belakang", "stoplamp", "led"], mainCategory: "01 Eksterior & Bodi", subCategory: "Lampu", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }] },
+            { id: "PRD-003", title: "Spion Retract Assembly Set", specs: "Part No: 87910-BZ000", price: 1500000, isHot: true, tags: ["spion", "retract", "kaca spion"], mainCategory: "01 Eksterior & Bodi", subCategory: "Spion & Aksesoris Spion", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Yaris", yearStart: 2014, yearEnd: 2020 }] },
+            { id: "PRD-004", title: "Cover Spion Chrome", specs: "Part No: CV-SP-004", price: 150000, isHot: false, tags: ["cover spion", "chrome", "aksesoris eksterior"], mainCategory: "01 Eksterior & Bodi", subCategory: "Spion & Aksesoris Spion", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Terios", yearStart: 2018, yearEnd: 2026 }, { brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
+            { id: "PRD-005", title: "Grille Depan TRD Sportivo", specs: "Part No: GR-TRD-01", price: 850000, isHot: true, tags: ["grille", "trd", "gril depan"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
+            { id: "PRD-006", title: "Front Bumper Guard Besi", specs: "Part No: BUM-ISZ-01", price: 2100000, isHot: false, tags: ["bumper", "guard", "tanduk depan"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "MU-X Euro 4", yearStart: 2022, yearEnd: 2026 }] },
+            { id: "PRD-007", title: "Rear Bumper Step Cover", specs: "Part No: RBS-IN-01", price: 350000, isHot: false, tags: ["bumper belakang", "step cover", "pelindung"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2016, yearEnd: 2022 }] },
+            { id: "PRD-008", title: "Karet Pintu Bagian Depan (Set)", specs: "Part No: KP-TY-01", price: 250000, isHot: false, tags: ["karet pintu", "weatherstrip", "peredam bocor"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2012, yearEnd: 2021 }] },
+            { id: "PRD-009", title: "Wiper Blade Frameless 24/16 Inch", specs: "Part No: WB-FRM-2416", price: 120000, isHot: true, tags: ["wiper", "kaca depan", "frameless"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: true, compatibility: [] },
+            { id: "PRD-010", title: "Karet Kaca Belakang", specs: "Part No: KKB-PT-01", price: 180000, isHot: false, tags: ["karet kaca", "seal kaca", "panther"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
+            { id: "PRD-011", title: "Center Console Box Armrest", specs: "Part No: CC-AR-01", price: 450000, isHot: true, tags: ["console box", "armrest", "sandaran tangan"], mainCategory: "02 Interior & Aksesoris", subCategory: "Console Box & Kompartemen", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Agya", yearStart: 2013, yearEnd: 2023 }, { brand: "Daihatsu", model: "Ayla", yearStart: 2013, yearEnd: 2023 }] },
+            { id: "PRD-012", title: "Laci Dashboard (Glove Box)", specs: "Part No: GB-TY-02", price: 320000, isHot: false, tags: ["laci", "glove box", "dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Console Box & Kompartemen", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Vios", yearStart: 2007, yearEnd: 2013 }] },
+            { id: "PRD-013", title: "Sarung Jok Kulit Sintetis (Set)", specs: "Part No: SJ-KS-01", price: 1200000, isHot: true, tags: ["sarung jok", "cover jok", "kulit"], mainCategory: "02 Interior & Aksesoris", subCategory: "Kursi & Jok", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Sigra", yearStart: 2016, yearEnd: 2026 }] },
+            { id: "PRD-014", title: "Busa Jok Depan Original", specs: "Part No: BJ-OR-01", price: 600000, isHot: false, tags: ["busa jok", "kursi depan", "jok ori"], mainCategory: "02 Interior & Aksesoris", subCategory: "Kursi & Jok", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2004, yearEnd: 2015 }] },
+            { id: "PRD-015", title: "Panel Dashboard Wood Grain", specs: "Part No: PD-WD-01", price: 850000, isHot: false, tags: ["panel kayu", "wood panel", "dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Camry", yearStart: 2006, yearEnd: 2012 }] },
+            { id: "PRD-016", title: "Ring AC Kisi-Kisi AC Chrome", specs: "Part No: RAC-CH-01", price: 85000, isHot: false, tags: ["kisi ac", "ring ac", "aksesoris dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2012, yearEnd: 2021 }] },
+            { id: "PRD-017", title: "Karpet Mie Bihun Presisi 3 Baris", specs: "Part No: KRT-MB-01", price: 550000, isHot: true, tags: ["karpet mobil", "karpet mie", "karpet lantai"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Zenix", yearStart: 2023, yearEnd: 2026 }] },
+            { id: "PRD-018", title: "Karpet Karet Lembaran Standar", specs: "Part No: KRT-KR-02", price: 250000, isHot: false, tags: ["karpet karet", "alas kaki", "karpet dasar"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: true, compatibility: [] },
+            { id: "PRD-019", title: "Peredam Suara Pintu Aspal (Per Lembar)", specs: "Part No: PRD-AS-01", price: 85000, isHot: true, tags: ["peredam suara", "peredam aspal", "audio"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: true, compatibility: [] },
+            { id: "PRD-020", title: "Plafon Atap Original", specs: "Part No: PLF-ISZ-01", price: 950000, isHot: false, tags: ["plafon", "atap dalam", "interior atas"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
+            { id: "PRD-021", title: "Sensor Parkir 4 Titik Bunyi Cerdas", specs: "Part No: SP-4T-01", price: 150000, isHot: true, tags: ["sensor parkir", "mundur", "sensor alarm"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sensor Parkir & Kamera", isUniversal: true, compatibility: [] },
+            { id: "PRD-022", title: "Kamera Mundur Night Vision AHD", specs: "Part No: KM-AHD-01", price: 250000, isHot: true, tags: ["kamera mundur", "rear camera", "parkir"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sensor Parkir & Kamera", isUniversal: true, compatibility: [] },
+            { id: "PRD-023", title: "Alarm System Keyless Entry", specs: "Part No: ALM-KL-01", price: 850000, isHot: false, tags: ["alarm mobil", "keyless", "keamanan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sistem Keamanan & Safety", isUniversal: true, compatibility: [] },
+            { id: "PRD-024", title: "Modul Immobilizer", specs: "Part No: IMMO-TY-01", price: 1500000, isHot: false, tags: ["immobilizer", "modul kunci", "keamanan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sistem Keamanan & Safety", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }] },
+            { id: "PRD-025", title: "Motor Power Window Kanan Depan", specs: "Part No: MPW-RH-01", price: 450000, isHot: true, tags: ["power window", "motor kaca", "dinamo kaca"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Modul & Motor Otomatis", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2011 }] },
+            { id: "PRD-026", title: "Dinamo Extra Fan Radiator", specs: "Part No: DEF-DH-01", price: 350000, isHot: false, tags: ["extra fan", "dinamo kipas", "kipas radiator"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Modul & Motor Otomatis", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Sirion", yearStart: 2007, yearEnd: 2026 }] },
+            { id: "PRD-027", title: "Aki Kering MF 45Ah 12V", specs: "Part No: AKI-MF-45", price: 850000, isHot: true, tags: ["aki mobil", "accu", "baterai kering"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Aki, Sekring, & Kabel", isUniversal: true, compatibility: [] },
+            { id: "PRD-028", title: "Kabel Busi Racing Set", specs: "Part No: KBS-RC-01", price: 300000, isHot: false, tags: ["kabel busi", "pengapian", "kabel racing"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Aki, Sekring, & Kabel", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Vios", yearStart: 2003, yearEnd: 2006 }] },
+            { id: "PRD-029", title: "Sekring Tancap (Fuse) Set 120 Pcs", specs: "Part No: FUS-120P", price: 75000, isHot: false, tags: ["sekring", "fuse", "kelistrikan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Aki, Sekring, & Kabel", isUniversal: true, compatibility: [] },
+            { id: "PRD-030", title: "Relay Klakson 12V 4 Kaki", specs: "Part No: RLY-12V-4K", price: 45000, isHot: true, tags: ["relay", "klakson", "lampu"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Aki, Sekring, & Kabel", isUniversal: true, compatibility: [] },
+            { id: "PRD-031", title: "Filter Oli Mesin Original", specs: "Part No: 15601-BZ010", price: 35000, isHot: true, tags: ["filter oli", "saringan oli", "perawatan"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Filter-Filter", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2026 }, { brand: "Daihatsu", model: "Xenia", yearStart: 2004, yearEnd: 2026 }] },
+            { id: "PRD-032", title: "Filter Udara Mesin", specs: "Part No: 17801-0Y040", price: 125000, isHot: true, tags: ["filter udara", "saringan hawa", "mesin"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Filter-Filter", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Yaris", yearStart: 2014, yearEnd: 2026 }] },
+            { id: "PRD-033", title: "Filter Solar Common Rail", specs: "Part No: FS-CR-01", price: 185000, isHot: false, tags: ["filter solar", "saringan bahan bakar", "diesel"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Filter-Filter", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }, { brand: "Isuzu", model: "MU-X Euro 4", yearStart: 2022, yearEnd: 2026 }] },
+            { id: "PRD-034", title: "Busi Iridium Tough (Set isi 4)", specs: "Part No: IKH20TT", price: 400000, isHot: true, tags: ["busi", "iridium", "pengapian"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Busi & Sistem Pengapian", isUniversal: true, compatibility: [] },
+            { id: "PRD-035", title: "Coil Ignition Assy", specs: "Part No: COIL-TY-01", price: 650000, isHot: false, tags: ["koil", "ignition coil", "pengapian"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Busi & Sistem Pengapian", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2004, yearEnd: 2015 }] },
+            { id: "PRD-036", title: "Radiator Assy Aluminium", specs: "Part No: RAD-TY-01", price: 1100000, isHot: false, tags: ["radiator", "pendingin mesin", "aluminium"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Sistem Pendingin", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Land Cruiser", yearStart: 2007, yearEnd: 2021 }] },
+            { id: "PRD-037", title: "Thermostat Mesin 82C", specs: "Part No: THM-82C-01", price: 150000, isHot: false, tags: ["thermostat", "suhu mesin", "pendingin"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Sistem Pendingin", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Granmax", yearStart: 2008, yearEnd: 2026 }] },
+            { id: "PRD-038", title: "Water Pump Assy", specs: "Part No: WP-ISZ-01", price: 850000, isHot: false, tags: ["water pump", "pompa air", "pendingin"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Sistem Pendingin", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
+            { id: "PRD-039", title: "Packing Cylinder Head (Gasket)", specs: "Part No: GASKET-DH-01", price: 250000, isHot: false, tags: ["packing kop", "gasket head", "seal mesin"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Gasket & Seal Mesin", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Rocky", yearStart: 2021, yearEnd: 2026 }] },
+            { id: "PRD-040", title: "Seal Kruk As Belakang (Crankshaft)", specs: "Part No: SEAL-CR-01", price: 120000, isHot: false, tags: ["seal kruk as", "seal oli", "bocor oli"], mainCategory: "04 Mesin & Sistem Bahan Bakar", subCategory: "Gasket & Seal Mesin", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Camry", yearStart: 2012, yearEnd: 2018 }] },
+            { id: "PRD-041", title: "Kampas Rem Depan (Brake Pad)", specs: "Part No: 04465-YZZE1", price: 350000, isHot: true, tags: ["kampas rem", "brake pad", "rem depan"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Sistem Rem", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Veloz", yearStart: 2021, yearEnd: 2026 }] },
+            { id: "PRD-042", title: "Kampas Rem Belakang (Brake Shoe)", specs: "Part No: 04495-BZ010", price: 280000, isHot: true, tags: ["kampas rem", "brake shoe", "rem tromol"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Sistem Rem", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Xenia", yearStart: 2004, yearEnd: 2021 }] },
+            { id: "PRD-043", title: "Piringan Cakram Depan (Rotor Disc)", specs: "Part No: ROT-TY-01", price: 650000, isHot: false, tags: ["piringan cakram", "rotor", "rem"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Sistem Rem", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2004, yearEnd: 2015 }] },
+            { id: "PRD-044", title: "Shockbreaker Depan Gas (Kiri-Kanan)", specs: "Part No: SHK-FR-GAS", price: 1200000, isHot: true, tags: ["shockbreaker", "skok depan", "suspensi"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Suspensi & Shockbreaker", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Terios", yearStart: 2007, yearEnd: 2017 }] },
+            { id: "PRD-045", title: "Per Keong Belakang (Coil Spring)", specs: "Part No: SPR-RR-01", price: 850000, isHot: false, tags: ["per keong", "per spiral", "suspensi"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Suspensi & Shockbreaker", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
+            { id: "PRD-046", title: "Link Stabilizer Depan", specs: "Part No: LNK-ST-01", price: 180000, isHot: false, tags: ["link stabilizer", "tierod", "kaki-kaki"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Sistem Kemudi", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Ayla", yearStart: 2013, yearEnd: 2026 }] },
+            { id: "PRD-047", title: "Rack End / Long Tie Rod", specs: "Part No: RE-TR-01", price: 250000, isHot: false, tags: ["rack end", "long tierod", "stir"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Sistem Kemudi", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "D-Max Euro 4", yearStart: 2022, yearEnd: 2026 }] },
+            { id: "PRD-048", title: "Plat Kopling (Clutch Disc)", specs: "Part No: 31250-BZ100", price: 650000, isHot: true, tags: ["plat kopling", "clutch disc", "transmisi"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Kopling & Transmisi", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2021 }, { brand: "Daihatsu", model: "Granmax", yearStart: 2008, yearEnd: 2026 }] },
+            { id: "PRD-049", title: "Dekrup Matahari (Clutch Cover)", specs: "Part No: 31210-BZ100", price: 550000, isHot: false, tags: ["dekrup", "matahari kopling", "transmisi"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Kopling & Transmisi", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2021 }] },
+            { id: "PRD-050", title: "Bearing Roda Depan (Wheel Bearing)", specs: "Part No: BRG-FR-01", price: 350000, isHot: false, tags: ["bearing roda", "laher roda", "kaki-kaki"], mainCategory: "05 Kaki-Kaki & Rem", subCategory: "Sistem Rem", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Vios", yearStart: 2007, yearEnd: 2013 }] },
+            { id: "PRD-051", title: "Oli Mesin Bensin Full Synthetic 5W-30 4L", specs: "Part No: OIL-SYN-5W30", price: 450000, isHot: true, tags: ["oli mesin", "pelumas", "5w-30"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Oli & Cairan Kimia", isUniversal: true, compatibility: [] },
+            { id: "PRD-052", title: "Oli Mesin Diesel 15W-40 5L", specs: "Part No: OIL-DSL-15W40", price: 380000, isHot: true, tags: ["oli diesel", "pelumas mesin", "15w-40"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Oli & Cairan Kimia", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2005, yearEnd: 2015 }, { brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
+            { id: "PRD-053", title: "Cairan Pendingin Radiator (Coolant) 4L Merah", specs: "Part No: CLNT-RED-4L", price: 120000, isHot: true, tags: ["air radiator", "coolant", "pendingin"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Oli & Cairan Kimia", isUniversal: true, compatibility: [] },
+            { id: "PRD-054", title: "Minyak Rem DOT 3 300ml", specs: "Part No: BF-DOT3-300", price: 35000, isHot: false, tags: ["minyak rem", "brake fluid", "dot3"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Oli & Cairan Kimia", isUniversal: true, compatibility: [] },
+            { id: "PRD-055", title: "Cairan Pembersih Kaca Mobil (Wiper Fluid)", specs: "Part No: WF-01-1L", price: 25000, isHot: false, tags: ["air wiper", "sabun kaca", "pembersih"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Oli & Cairan Kimia", isUniversal: true, compatibility: [] },
+            { id: "PRD-056", title: "Kunci Roda Palang 4 Universal", specs: "Part No: TL-KR-04", price: 150000, isHot: false, tags: ["kunci roda", "alat buka ban", "dongkrak"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Peralatan & Toolkit", isUniversal: true, compatibility: [] },
+            { id: "PRD-057", title: "Dongkrak Buaya 2 Ton", specs: "Part No: TL-DK-2T", price: 280000, isHot: true, tags: ["dongkrak", "alat angkat mobil", "toolkit"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Peralatan & Toolkit", isUniversal: true, compatibility: [] },
+            { id: "PRD-058", title: "Kabel Jumper Aki 500 Ampere", specs: "Part No: TL-JP-500A", price: 120000, isHot: false, tags: ["kabel jumper", "cas aki", "darurat"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Peralatan & Toolkit", isUniversal: true, compatibility: [] },
+            { id: "PRD-059", title: "Set Kunci Pas Ring (8-24mm) Chrome Vanadium", specs: "Part No: TL-KPR-11PCS", price: 350000, isHot: false, tags: ["kunci pas", "kunci ring", "toolkit"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Peralatan & Toolkit", isUniversal: true, compatibility: [] },
+            { id: "PRD-060", title: "Segitiga Pengaman Reflektif (Set 2 Pcs)", specs: "Part No: TL-SP-02", price: 65000, isHot: false, tags: ["segitiga pengaman", "darurat", "safety"], mainCategory: "06 Produk Umum & Perawatan", subCategory: "Peralatan & Toolkit", isUniversal: true, compatibility: [] }
+        ];
 
-        function openSidebar(targetId) {
-            const sidebar = document.getElementById(targetId);
-            const position = sidebar.getAttribute('data-position');
-            sidebar.classList.remove(position === 'left' ? '-translate-x-full' : 'translate-x-full');
-            sidebar.classList.add('translate-x-0');
-            overlay.classList.remove('hidden');
-            activeSidebar = sidebar;
-        }
-
-        function closeActiveSidebar() {
-            if (activeSidebar) {
-                const position = activeSidebar.getAttribute('data-position');
-                activeSidebar.classList.remove('translate-x-0');
-                activeSidebar.classList.add(position === 'left' ? '-translate-x-full' : 'translate-x-full');
-                overlay.classList.add('hidden');
-                activeSidebar = null;
-            }
-        }
-
-        document.getElementById('menuBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
-        document.getElementById('vehicleBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
-        document.getElementById('mobileFilterToggleBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
-        document.querySelectorAll('.close-sidebar-btn').forEach(btn => btn.addEventListener('click', closeActiveSidebar));
-        overlay.addEventListener('click', closeActiveSidebar);
-
-        // Accordion Filter
-        document.querySelectorAll('.accordion-btn').forEach(acc => {
-            acc.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const icon = this.querySelector('svg');
-                const titleText = this.querySelector('span');
-                content.classList.toggle('hidden');
-                content.classList.toggle('block');
-                
-                if (content.classList.contains('hidden')) {
-                    icon.classList.remove('rotate-180', 'text-accent');
-                    titleText.classList.remove('text-accent');
-                    titleText.classList.add('text-gray-500');
-                } else {
-                    icon.classList.add('rotate-180', 'text-accent');
-                    titleText.classList.add('text-accent');
-                    titleText.classList.remove('text-gray-500');
-                }
-            });
-        });
-
-        // Keranjang (LocalStorage)
-        const cartBtn = document.getElementById('cartBtn');
-        const cartDropdown = document.getElementById('cartDropdown');
+       // --- SINKRONISASI KERANJANG (LOCAL STORAGE) ---
         let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
-
-        cartBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); 
-            cartDropdown.classList.toggle('hidden');
-        });
-        document.addEventListener('click', function(e) {
-            if (!cartBtn.contains(e.target) && !cartDropdown.contains(e.target)) cartDropdown.classList.add('hidden');
-        });
 
         function saveAndRenderCart() {
             localStorage.setItem('rayaCart', JSON.stringify(cartData));
             const cartBadge = document.getElementById('cartBadge');
-            const emptyCartMsg = document.getElementById('emptyCartMsg');
             const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const emptyCartMsg = document.getElementById('emptyCartMsg');
             const clearCartBtn = document.getElementById('clearCartBtn');
             const cartTotal = document.getElementById('cartTotal');
-
+            
+            if(!cartItemsContainer) return;
+            
             let totalQty = 0;
             let totalPrice = 0;
             cartItemsContainer.innerHTML = '';
-
+            
             if (cartData.length === 0) {
                 cartBadge.classList.add('hidden');
                 emptyCartMsg.classList.remove('hidden');
@@ -428,26 +397,22 @@
             } else {
                 emptyCartMsg.classList.add('hidden');
                 clearCartBtn.classList.remove('hidden');
-                
                 cartData.forEach((item, index) => {
                     totalQty += item.qty;
                     totalPrice += (item.numPrice * item.qty);
-
                     cartItemsContainer.innerHTML += `
-                        <div class="flex items-center gap-3 bg-cardbg p-2 rounded-lg border border-gray-100">
-                            <div class="flex-1">
-                                <h4 class="text-xs font-bold text-primtext line-clamp-1">${item.title}</h4>
-                                <span class="text-xs text-accent font-bold">${item.priceStr}</span>
-                            </div>
-                            <div class="flex items-center gap-2 bg-white rounded border border-gray-200 px-2 py-1">
-                                <button onclick="updateQty(${index}, -1)" class="text-sectext hover:text-accent font-bold px-1">-</button>
-                                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
-                                <button onclick="updateQty(${index}, 1)" class="text-sectext hover:text-accent font-bold px-1">+</button>
-                            </div>
+                    <div class="flex items-center gap-3 bg-cardbg p-2 rounded-lg border border-gray-100">
+                        <div class="flex-1">
+                            <h4 class="text-xs font-bold text-primtext line-clamp-1">${item.title}</h4>
+                            <span class="text-xs text-accent font-bold">${item.priceStr}</span>
                         </div>
-                    `;
+                        <div class="flex items-center gap-2 bg-white rounded border border-gray-200 px-2 py-1">
+                            <button onclick="updateQty(${index}, -1)" class="text-sectext hover:text-accent font-bold px-1">-</button>
+                            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${index}, 1)" class="text-sectext hover:text-accent font-bold px-1">+</button>
+                        </div>
+                    </div>`;
                 });
-
                 cartBadge.textContent = totalQty;
                 cartBadge.classList.remove('hidden');
                 cartTotal.textContent = "Rp " + totalPrice.toLocaleString('id-ID');
@@ -458,98 +423,119 @@
             const cartBadge = document.getElementById('cartBadge');
             cartBadge.classList.add('scale-125');
             setTimeout(() => { cartBadge.classList.remove('scale-125'); }, 200);
-
+            
             let numPrice = parseInt(priceStr.replace(/[^0-9]/g, ''));
-            let existingItem = cartData.find(item => item.title === title);
-            if (existingItem) {
-                existingItem.qty++;
-            } else {
-                cartData.push({ title, priceStr, numPrice, qty: 1 });
-            }
+            const existingItem = cartData.find(i => i.title === title);
+            if (existingItem) existingItem.qty += 1;
+            else cartData.push({ title: title, priceStr: priceStr, numPrice: numPrice, qty: 1 });
             saveAndRenderCart();
         }
 
         function updateQty(index, change) {
             cartData[index].qty += change;
-            if (cartData[index].qty <= 0) {
-                cartData.splice(index, 1);
-            }
+            if (cartData[index].qty <= 0) cartData.splice(index, 1);
             saveAndRenderCart();
         }
 
         function clearCart() {
-            if(confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
+            if(confirm("Kosongkan keranjang?")) {
                 cartData = [];
                 saveAndRenderCart();
             }
         }
 
-        const productGrid = document.getElementById('productGrid');
-        const products = [
-            { title: "High Performance Front Brake Pad Kit Gen-4", compat: "Toyota Fortuner", specs: "Part No: NRM-BK-2024-X", price: "Rp 1.250.000", isHot: true },
-            { title: "Premium Cabin Air Filter with Activated Carbon", compat: "Honda CR-V", specs: "Part No: NRM-AF-9912-P", price: "Rp 450.000", isHot: false },
-            { title: "Forged Engine Piston Set High Comp Series", compat: "Mitsubishi Pajero", specs: "Part No: NRM-PS-4430-H", price: "Rp 8.900.000", isHot: false },
-            { title: "LED Headlight Bulbs 6000K Ultra Bright", compat: "Universal", specs: "Part No: NRM-LED-H4", price: "Rp 650.000", isHot: true },
-            { title: "Heavy Duty Shock Absorber Rear Set", compat: "Toyota Hilux", specs: "Part No: NRM-SA-7762", price: "Rp 2.100.000", isHot: false },
-            { title: "Synthetic Motor Oil 5W-30 4L", compat: "Semua Bensin", specs: "Part No: NRM-OL-5W30", price: "Rp 550.000", isHot: false },
-        ];
-
-        products.forEach(prod => {
-            const hotBadge = prod.isHot ? `<span class="absolute top-3 left-3 bg-accent text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Hot Item</span>` : '';
-            const encodedTitle = prod.title.replace(/'/g, "\\'"); 
-            const encodedPrice = prod.price.replace(/'/g, "\\'");
-            const encodedSpecs = prod.specs.replace(/'/g, "\\'");
-            
-            const cardHTML = `
-                <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition cursor-pointer flex flex-col bg-white" onclick="openModal('${encodedTitle}', '${encodedPrice}', '${encodedSpecs}')">
-                    <div class="w-full h-48 bg-[#1a1a1a] flex items-center justify-center relative">
-                        ${hotBadge}
-                        <span class="text-gray-400 text-xs">Image Placeholder</span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-1 rounded w-max mb-3 uppercase tracking-wider">KOMPATIBEL: ${prod.compat}</span>
-                        <h3 class="text-base font-bold text-primtext mb-1 leading-snug">${prod.title}</h3>
-                        <p class="text-xs text-gray-400 mb-5">${prod.specs}</p>
-                        
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-lg font-bold text-accent">${prod.price}</span>
-                            <button class="w-10 h-10 rounded-full border-2 border-accent text-accent flex items-center justify-center hover:bg-accent hover:text-white transition focus:outline-none" onclick="event.stopPropagation(); addToCart('${encodedTitle}', '${encodedPrice}')">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            productGrid.innerHTML += cardHTML;
-        });
-
-        let currentModalProduct = null;
-        const productModal = document.getElementById('productModal');
-
-        function openModal(title, price, specs) {
-            currentModalProduct = { title, price }; 
+        // --- MODAL PRODUK ---
+        function openModal(title, price, specs, compat) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalPrice').textContent = price;
             document.getElementById('modalSpecs').textContent = specs;
-            productModal.classList.remove('hidden');
+            document.getElementById('modalDesc').textContent = `Suku cadang ${title} ini berkualitas tinggi dengan durabilitas maksimal. Pastikan suku cadang dengan spesifikasi ${specs} ini sesuai dengan kebutuhan kendaraan Anda.`;
+            document.getElementById('modalCompat').textContent = compat || "Universal";
+            document.getElementById('productModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() { productModal.classList.add('hidden'); }
-        productModal.addEventListener('click', function(e) { if (e.target === productModal) closeModal(); });
+        function closeModal() {
+            document.getElementById('productModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
 
         function addModalToCart() {
-            if(currentModalProduct) {
-                addToCart(currentModalProduct.title, currentModalProduct.price);
-                closeModal();
-            }
+            const title = document.getElementById('modalTitle').textContent;
+            const price = document.getElementById('modalPrice').textContent;
+            addToCart(title, price);
+            closeModal();
+            document.getElementById('cartDropdown').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
+            document.getElementById('overlay').classList.add('block');
         }
 
-        saveAndRenderCart();
+        // --- SIDEBAR & ACCORDION ---
+        const overlay = document.getElementById('overlay');
+        const sidebars = document.querySelectorAll('.sidebar-panel');
+        const cartDropdown = document.getElementById('cartDropdown');
+        const cartBtn = document.getElementById('cartBtn');
 
-        // Vehicle Filter 
+        function closeActiveSidebar() {
+            sidebars.forEach(sidebar => {
+                const pos = sidebar.getAttribute('data-position');
+                if (pos === 'left') sidebar.classList.add('-translate-x-full');
+                if (pos === 'right') sidebar.classList.add('translate-x-full');
+            });
+            overlay.classList.add('hidden');
+            overlay.classList.remove('block');
+            cartDropdown.classList.add('hidden');
+        }
+
+        document.querySelectorAll('[data-target]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const targetId = this.getAttribute('data-target');
+                const targetEl = document.getElementById(targetId);
+                const pos = targetEl.getAttribute('data-position');
+                closeActiveSidebar();
+                cartDropdown.classList.add('hidden');
+                
+                if (pos === 'left') targetEl.classList.remove('-translate-x-full');
+                if (pos === 'right') targetEl.classList.remove('translate-x-full');
+                
+                overlay.classList.remove('hidden');
+                overlay.classList.add('block');
+            });
+        });
+
+        overlay.addEventListener('click', closeActiveSidebar);
+        cartBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeActiveSidebar();
+            cartDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+            if (!cartDropdown.contains(e.target) && !cartBtn.contains(e.target)) {
+                cartDropdown.classList.add('hidden');
+            }
+        });
+
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('svg');
+                content.classList.toggle('hidden');
+                content.classList.toggle('block');
+                if(content.classList.contains('block')) {
+                    icon.classList.add('rotate-180');
+                    this.querySelector('span').classList.add('text-accent');
+                } else {
+                    icon.classList.remove('rotate-180');
+                    this.querySelector('span').classList.remove('text-accent');
+                }
+            });
+        });
+
+        // --- DATA MOBIL (PILIH KENDARAAN) ---
         const carDataFilter = {
-            "Toyota": ["Innova", "Avanza", "Fortuner", "Rush"],
-            "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla"],
+            "Toyota": ["Avanza", "Innova", "Fortuner", "Rush", "Agya", "Calya", "Vios", "Yaris", "Land Cruiser", "Hilux", "Zenix", "Camry", "Veloz"],
+            "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla", "Sigra", "Xenia", "Granmax"],
             "Isuzu": ["Panther", "MU-X Euro 4", "D-Max Euro 4"]
         };
         const brandSelect = document.getElementById('carBrand');
@@ -575,10 +561,147 @@
             }
         });
 
+        // --- SISTEM RENDER & FILTER PRODUK ---
+        const productGrid = document.getElementById('productGrid');
+        const noProductMsg = document.getElementById('noProductMsg');
+
+        function renderProducts(dataToRender) {
+            productGrid.innerHTML = '';
+            if (dataToRender.length === 0) {
+                noProductMsg.classList.remove('hidden');
+            } else {
+                noProductMsg.classList.add('hidden');
+                dataToRender.forEach(prod => {
+                    const hotBadge = prod.isHot ? `<span class="absolute top-3 left-3 bg-accent text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Hot Item</span>` : '';
+                    const priceStr = "Rp " + prod.price.toLocaleString('id-ID');
+                    
+                    let compatText = prod.isUniversal ? "Universal" : prod.compatibility.map(c => c.brand + ' ' + c.model).join(', ');
+                    const fullCompat = compatText; 
+                    if (compatText.length > 30) compatText = compatText.substring(0, 27) + '...';
+                    if (compatText === "") compatText = "Spesifik";
+                    
+                    const encodedTitle = prod.title.replace(/'/g, "\\'");
+                    const encodedPrice = priceStr.replace(/'/g, "\\'");
+                    const encodedSpecs = prod.specs.replace(/'/g, "\\'");
+                    const encodedCompat = fullCompat.replace(/'/g, "\\'"); 
+
+                    const cardHTML = `
+                    <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition cursor-pointer flex flex-col bg-white" onclick="openModal('${encodedTitle}', '${encodedPrice}', '${encodedSpecs}', '${encodedCompat}')">
+                        <div class="w-full h-48 bg-[#1a1a1a] flex items-center justify-center relative">
+                            ${hotBadge}
+                            <span class="text-gray-600 text-xs">Image</span>
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">${prod.mainCategory}</span>
+                            <h3 class="font-bold text-primtext text-sm mb-1 line-clamp-2 leading-tight">${prod.title}</h3>
+                            <div class="text-xs text-sectext mb-2 font-medium bg-gray-50 px-2 py-1 rounded inline-block w-max">${prod.specs}</div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="text-[10px] text-gray-500 truncate" title="${fullCompat}">${compatText}</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <span class="font-bold text-accent text-lg">${priceStr}</span>
+                                <button onclick="event.stopPropagation(); addToCart('${encodedTitle}', '${encodedPrice}')" class="bg-cardbg hover:bg-accent hover:text-white text-primtext p-2 rounded-full transition focus:outline-none">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+                    productGrid.innerHTML += cardHTML;
+                });
+            }
+        }
+
+        function applyAllFilters() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const checkedCategories = Array.from(document.querySelectorAll('.filter-checkbox:checked')).map(cb => cb.value);
+            const sBrand = brandSelect.value;
+            const sModel = modelSelect.value;
+            const sYear = parseInt(yearSelect.value);
+
+            const filteredData = products.filter(prod => {
+                const matchSearch = prod.title.toLowerCase().includes(searchInput) || prod.tags.some(t => t.toLowerCase().includes(searchInput));
+                if (!matchSearch) return false;
+
+                if (checkedCategories.length > 0 && !checkedCategories.includes(prod.subCategory)) return false;
+
+                if (sBrand !== "") {
+                    if (prod.isUniversal) {
+                        return true; 
+                    } else {
+                        const matchVehicle = prod.compatibility.some(c => {
+                            let match = (c.brand === sBrand);
+                            if (match && sModel !== "") match = (c.model === sModel);
+                            if (match && !isNaN(sYear)) match = (sYear >= c.yearStart && sYear <= c.yearEnd);
+                            return match;
+                        });
+                        if (!matchVehicle) return false;
+                    }
+                }
+                return true;
+            });
+
+            renderProducts(filteredData);
+        }
+
+        // --- FITUR MENANGKAP FILTER DARI HALAMAN LAIN (INDEX.HTML DLL) ---
+        function initGlobalFilter() {
+            let shouldApplyFilter = false;
+
+            // 1. Tangkap Search Keyword
+            const savedKeyword = localStorage.getItem('searchKeyword');
+            if (savedKeyword) {
+                document.getElementById('searchInput').value = savedKeyword;
+                shouldApplyFilter = true;
+                localStorage.removeItem('searchKeyword'); 
+            }
+
+            // 2. Tangkap Filter Mobil
+            const savedVehicle = localStorage.getItem('vehicleFilter');
+            if (savedVehicle) {
+                const parsedVehicle = JSON.parse(savedVehicle);
+                
+                if (parsedVehicle.brand) {
+                    brandSelect.value = parsedVehicle.brand;
+                    // Paksa dropdown model untuk dimuat sesuai brand yang baru saja masuk
+                    brandSelect.dispatchEvent(new Event('change')); 
+                    
+                    if (parsedVehicle.model) modelSelect.value = parsedVehicle.model;
+                    if (parsedVehicle.year) yearSelect.value = parsedVehicle.year;
+                    
+                    shouldApplyFilter = true;
+                }
+                localStorage.removeItem('vehicleFilter'); 
+            }
+
+            // 3. Render
+            if (shouldApplyFilter) {
+                applyAllFilters();
+            } else {
+                renderProducts(products); // Render normal jika tidak ada filter
+            }
+        }
+
+        // --- EVENT LISTENER UTAMA ---
+        document.querySelectorAll('.filter-checkbox').forEach(cb => {
+            cb.addEventListener('change', applyAllFilters);
+        });
+
         document.getElementById('applyFilterBtn').addEventListener('click', function() {
             if (brandSelect.value === "") { alert("Silakan pilih Car Brand terlebih dahulu!"); return; }
             closeActiveSidebar();
+            applyAllFilters();
         });
+
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') applyAllFilters();
+        });
+        
+        document.getElementById('searchBtn').addEventListener('click', applyAllFilters);
+
+        // --- INISIALISASI AWAL ---
+        saveAndRenderCart();
+        initGlobalFilter();
 
     </script>
 </body>
