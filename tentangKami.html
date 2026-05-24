@@ -34,6 +34,10 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        @keyframes fadeText {
+            0%, 100% { opacity: 1; }
+            45%, 55% { opacity: 0; }
+        }
         /* Custom Scrollbar for Cart & Scrolling rows */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -469,6 +473,36 @@
                 }
             }
         };
+
+        const searchPlaceholders = [
+            "Cari kampas rem Avanza...",
+            "Cari oli mesin 5W-30...",
+            "Cari shockbreaker Fortuner...",
+            "Cari filter udara Yaris...",
+            "Cari aki kering 45Ah..."
+        ];
+        
+        let placeholderIndex = 0;
+        const searchInputEl = document.getElementById('searchInput');
+
+            if (searchInputEl) {
+                setInterval(() => {
+                    searchInputEl.style.transition = 'opacity 0.4s ease';
+                    searchInputEl.style.opacity = '0';
+
+                setTimeout(() => {
+                    placeholderIndex = (placeholderIndex + 1) % searchPlaceholders.length;
+                    searchInputEl.placeholder = searchPlaceholders[placeholderIndex];
+                    searchInputEl.style.opacity = '1';
+                }, 400);
+            }, 2500);
+
+            // Stop animasi saat user fokus ke search bar
+            searchInputEl.addEventListener('focus', () => {
+            searchInputEl.placeholder = 'Cari sparepart atau aksesoris mobil...';
+            searchInputEl.style.opacity = '1';
+            });
+        }
 
         menuBtn.addEventListener('click', () => toggleSidebar(leftSidebar, true));
         closeMenuBtn.addEventListener('click', () => toggleSidebar(leftSidebar, false));
