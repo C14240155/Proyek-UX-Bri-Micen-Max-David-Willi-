@@ -40,13 +40,7 @@
         }
         /* Scroll Reveal */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
         /* Pulse glow effect */
         @keyframes pulseGlow {
@@ -468,8 +462,8 @@
         const dots = document.querySelectorAll('.carousel-dot');
 
         const updateDots = () =>{
-            dots.foreach((dot,i) => {
-                if(i == currentslide){
+            dots.forEach((dot,i) => {
+                if(i == currentSlide){
                     dot.classList.remove('w-2', 'bg-white/50');
                     dot.classList.add('w-5', 'bg-white');
                 }else{
@@ -532,7 +526,7 @@
         const brandSelect = document.getElementById('carBrand');
         const modelSelect = document.getElementById('carModel');
         const yearSelect = document.getElementById('carYear');
-
+        
         // --- FUNGSI UNTUK MEMUAT FILTER YANG TERSIMPAN ---
         function loadSavedFilter() {
             const savedFilterRaw = localStorage.getItem('vehicleFilter');
@@ -570,6 +564,9 @@
                 }
             }
         }
+
+
+        const applyFilterBtn = document.getElementById('applyFilterBtn');
 
        if (brandSelect) {
          brandSelect.addEventListener('change', function() {
@@ -613,8 +610,7 @@
 }
 
         // --- LOGIKA TERAPKAN FILTER ---
-        const applyFilterBtn = document.getElementById('applyFilterBtn');
-
+       
         if (applyFilterBtn) {
             applyFilterBtn.addEventListener('click', function() {
                 // 1. Ambil nilai (value) dari dropdown

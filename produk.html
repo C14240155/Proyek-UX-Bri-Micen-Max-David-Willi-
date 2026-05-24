@@ -154,7 +154,11 @@
                     <option value="">Pilih Tahun</option>
                 </select>
             </div>
-            <button id="applyFilterBtn" class="w-full bg-accent text-white font-semibold py-2 rounded mt-4 hover:bg-red-700 transition">Terapkan Filter</button>
+            <button id="applyFilterBtn" 
+             class="w-full bg-gray-300 text-gray-500 font-semibold py-2 rounded mt-4 transition cursor-not-allowed"
+            disabled>
+                Terapkan Filter
+            </button>
         </div>
     </div>
 
@@ -277,10 +281,20 @@
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" id="productGrid">
                 </div>
             
-            <div id="noProductMsg" class="hidden text-center py-10 w-full">
-                <p class="text-lg text-sectext font-bold">Produk tidak ditemukan.</p>
-                <p class="text-sm text-gray-500 mt-2">Coba sesuaikan kata kunci atau filter Anda.</p>
-            </div>
+            <div id="noProductMsg" class="hidden text-center py-16 w-full flex flex-col items-center gap-4">
+                 <div class="w-20 h-20 rounded-full bg-cardbg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-lg font-bold text-primtext">Produk tidak ditemukan</p>
+                    <p class="text-sm text-gray-400 mt-1">Coba ubah kata kunci atau reset filter kendaraan</p>
+                </div>
+                <button onclick="resetAllFilters()" class="mt-2 bg-accent text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-red-700 transition">
+                    Reset Filter
+                </button>
+        </div>
 
         </section>
     </main>
@@ -307,9 +321,11 @@
                 
                 <div class="mt-auto pt-6">
                     <div class="text-3xl font-bold text-accent mb-4" id="modalPrice">-</div>
-                    <button onclick="addModalToCart()" class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-red-700 transition flex justify-center items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        Tambah ke Keranjang
+                    <button id="modalAddBtn" onclick="addModalToCart()" class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-red-700 transition flex justify-center items-center gap-2">
+                        <svg id="modalBtnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span id="modalBtnText">Tambah ke Keranjang</span>
                     </button>
                 </div>
             </div>
@@ -457,6 +473,7 @@
             if (existingItem) existingItem.qty += 1;
             else cartData.push({ title: title, priceStr: priceStr, numPrice: numPrice, qty: 1 });
             saveAndRenderCart();
+            showToast('✓ ' + title.substring(0, 30) + (title.length > 30 ? '...' : '') + ' ditambahkan!');
         }
 
         function updateQty(index, change) {
@@ -510,13 +527,36 @@
         }
 
         function addModalToCart() {
-            const title = document.getElementById('modalTitle').textContent;
-            const price = document.getElementById('modalPrice').textContent;
-            addToCart(title, price);
-            closeModal();
-            document.getElementById('cartDropdown').classList.remove('hidden');
-            document.getElementById('overlay').classList.remove('hidden');
-            document.getElementById('overlay').classList.add('block');
+            const btn = document.getElementById('modalAddBtn');
+            const btnText = document.getElementById('modalBtnText');
+            const btnIcon = document.getElementById('modalBtnIcon');
+
+            // Loading state
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            btnIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>';
+            btnText.textContent = 'Menambahkan...';
+
+            setTimeout(() => {
+                const title = document.getElementById('modalTitle').textContent;
+                const price = document.getElementById('modalPrice').textContent;
+                addToCart(title, price);
+
+                // Success state
+                btnIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>';
+                btnText.textContent = 'Ditambahkan!';
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                btn.classList.add('bg-green-600');
+
+                setTimeout(() => {
+                    closeModal();
+                    // Reset tombol
+                    btn.disabled = false;
+                    btn.classList.remove('bg-green-600');
+                    btnIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>';
+                    btnText.textContent = 'Tambah ke Keranjang';
+                }, 800);
+            }, 600);
         }
 
         // --- SIDEBAR & ACCORDION ---
@@ -591,6 +631,7 @@
         const modelSelect = document.getElementById('carModel');
         const yearSelect = document.getElementById('carYear');
 
+        const applyFilterBtn = document.getElementById('applyFilterBtn');
         brandSelect.addEventListener('change', function() {
             const selectedBrand = this.value;
             modelSelect.innerHTML = '<option value="">Pilih Model</option>';
@@ -604,9 +645,18 @@
                 for (let year = 2026; year >= 2000; year--) {
                     yearSelect.appendChild(new Option(year, year));
                 }
+
+                applyFilterBtn.disabled = false;
+                applyFilterBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                applyFilterBtn.classList.add('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
             } else {
                 modelSelect.disabled = true;
                 yearSelect.disabled = true;
+
+
+                applyFilterBtn.disabled = true;
+                applyFilterBtn.classList.remove('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
+                applyFilterBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
             }
         });
 
@@ -748,10 +798,49 @@
         
         document.getElementById('searchBtn').addEventListener('click', applyAllFilters);
 
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+
+        function resetAllFilters() {
+            // Reset search
+            document.getElementById('searchInput').value = '';
+            // Reset checkboxes
+            document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+            // Reset accordion label colors
+            document.querySelectorAll('.accordion-btn span').forEach(span => span.classList.remove('text-accent'));
+            // Reset vehicle dropdowns
+            brandSelect.value = '';
+            modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+            yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+            modelSelect.disabled = true;
+            yearSelect.disabled = true;
+            // Render ulang semua produk
+            renderProducts(products);
+        }
+
         // --- INISIALISASI AWAL ---
         saveAndRenderCart();
         initGlobalFilter();
 
     </script>
+    <div id="toast" class="fixed bottom-6 right-6 z-[9999] transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-primtext text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3">
+            <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+            <span id="toastMsg" class="text-sm font-medium">Produk ditambahkan!</span>
+        </div>
+    </div>
 </body>
 </html>
