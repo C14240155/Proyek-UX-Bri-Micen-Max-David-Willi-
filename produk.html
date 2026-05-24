@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Raya Motor - Produk Suku Cadang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mainbg: '#FFFFFF',
+                        cardbg: '#F5F6F8',
+                        primtext: '#121212',
+                        sectext: '#242526',
+                        accent: '#E01A22',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #FFFFFF; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: #d1d5db; }
+    </style>
+</head>
+<body class="bg-mainbg text-primtext font-sans overflow-x-hidden">
+
+    <div class="bg-accent text-white text-sm py-2 overflow-hidden relative z-50 h-[40px] flex items-center">
+        <div class="marquee-content">
+            🔥 Website ini merupakan media digital yang dapat Anda gunakan untuk lebih mengenal beberapa produk yang ditawarkan oleh New Raya Motor Surabaya. 🔥
+        </div>
+    </div>
+
+    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 py-3 px-6 h-[80px] flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none" data-target="leftSidebar">
+                <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <a href="index.html" class="flex items-center">
+                <img src="path/to/logo-kamu.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
+            </a>
+        </div>
+
+        <div class="hidden md:flex flex-1 max-w-lg mx-6">
+            <div class="relative w-full">
+                <input type="text" placeholder="Cari suku cadang atau aksesoris mobil Anda..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent text-sm placeholder-[#242526]">
+                <button class="absolute right-4 top-2.5 text-sectext">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="vehicleBtn" class="hidden md:flex items-center gap-2 border border-accent text-accent px-4 py-2 rounded-full hover:bg-accent hover:text-white transition" data-target="rightSidebar">
+                <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                <span class="text-sm font-semibold pointer-events-none">Pilih Kendaraan</span>
+            </button>
+            
+            <div class="relative">
+                <button id="cartBtn" class="relative text-primtext hover:text-accent focus:outline-none flex items-center z-50">
+                    <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden transition-transform">0</span>
+                </button>
+                
+                <div id="cartDropdown" class="absolute right-0 top-10 w-80 bg-mainbg shadow-2xl border border-gray-100 rounded-xl hidden z-50 flex flex-col transform transition-all">
+                    <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+                        <span class="font-bold text-primtext">Keranjang Belanja</span>
+                        <button id="clearCartBtn" onclick="clearCart()" class="text-xs text-accent hover:underline font-semibold hidden">Kosongkan</button>
+                    </div>
+                    <div class="p-4 flex flex-col max-h-64 overflow-y-auto custom-scrollbar">
+                        <p id="emptyCartMsg" class="text-sm text-sectext text-center py-4">Keranjang Anda masih kosong.</p>
+                        <div id="cartItemsContainer" class="flex flex-col gap-3"></div>
+                    </div>
+                    <div class="p-4 border-t border-gray-100">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-bold text-primtext">Total:</span>
+                            <span id="cartTotal" class="text-sm font-bold text-accent">Rp 0</span>
+                        </div>
+                        <button class="w-full bg-accent text-white font-bold py-2 rounded-lg hover:bg-red-700 transition">Checkout Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity"></div>
+
+    <div id="leftSidebar" class="sidebar-panel fixed inset-y-0 left-0 w-64 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out" data-position="left">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <span class="font-bold text-2xl text-accent">Menu</span>
+            <button class="close-sidebar-btn text-sectext hover:text-accent focus:outline-none" data-target="leftSidebar"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        </div>
+        <ul class="flex flex-col p-4 space-y-2 text-primtext font-medium">
+            <li><a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>Beranda</a></li>
+            <li><a href="produk.html" class="flex items-center p-3 rounded-lg bg-red-50 text-accent font-bold transition"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>Produk</a></li>
+            <li><a href="promo.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>Promo</a></li>
+            <li><a href="tipsTrik.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>Tips & Trik</a></li>
+            <li><a href="tentangKami.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Tentang Kami</a></li>
+        </ul>
+    </div>
+
+    <div id="rightSidebar" class="sidebar-panel fixed inset-y-0 right-0 w-80 bg-mainbg shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out" data-position="right">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <span class="font-bold text-lg text-primtext">Pilih Kendaraan</span>
+            <button class="close-sidebar-btn text-sectext hover:text-accent transition focus:outline-none" data-target="rightSidebar"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        </div>
+        <div class="p-6 flex flex-col space-y-4">
+            <div>
+                <label class="block text-sm font-semibold mb-2 text-primtext">Car Brand (Wajib)</label>
+                <select id="carBrand" class="w-full bg-cardbg border border-gray-200 rounded p-2 text-sectext focus:outline-none focus:border-accent cursor-pointer">
+                    <option value="">Pilih Brand</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Daihatsu">Daihatsu</option>
+                    <option value="Isuzu">Isuzu</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold mb-2 text-primtext">Car Model (Opsional)</label>
+                <select id="carModel" disabled class="w-full bg-cardbg border border-gray-200 rounded p-2 text-sectext focus:outline-none focus:border-accent disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option value="">Pilih Model</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold mb-2 text-primtext">Car Year (Opsional)</label>
+                <select id="carYear" disabled class="w-full bg-cardbg border border-gray-200 rounded p-2 text-sectext focus:outline-none focus:border-accent disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option value="">Pilih Tahun</option>
+                </select>
+            </div>
+            <button id="applyFilterBtn" class="w-full bg-accent text-white font-semibold py-2 rounded mt-4 hover:bg-red-700 transition">Terapkan Filter</button>
+        </div>
+    </div>
+
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 items-start relative z-10">
+        
+        <aside id="filterSidebar" class="sidebar-panel fixed inset-y-0 left-0 w-80 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:shadow-none lg:z-0 lg:w-[280px] lg:flex-shrink-0 lg:block lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] custom-scrollbar overflow-y-auto" data-position="left">
+            <div class="p-6 lg:p-0 pr-4 pb-10">
+                <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path></svg>
+                        <span class="font-bold text-lg text-primtext">Kategori</span>
+                    </div>
+                    <button class="close-sidebar-btn text-sectext hover:text-accent focus:outline-none lg:hidden" data-target="filterSidebar">
+                        <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+                <div class="space-y-1">
+                    
+                    <div class="border-b border-gray-100 py-3">
+                        <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-primtext transition-colors tracking-wide">01 EKSTERIOR & BODI</span>
+                            <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Lampu</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Spion & Aksesoris Spion</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Grille, Bumper, & Guard</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Karet Pintu & Wiper</span></label>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-100 py-3">
+                        <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-primtext transition-colors tracking-wide">02 INTERIOR & AKSESORIS</span>
+                            <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Console Box & Kompartemen</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Kursi & Jok</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Panel & Ornamen Dashboard</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Karpet & Peredam</span></label>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-100 py-3">
+                        <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
+                            <span class="text-xs font-bold text-accent tracking-wide">03 KELISTRIKAN & SENSOR</span>
+                            <svg class="w-4 h-4 text-accent transform rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content block mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" checked class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sensor Parkir & Kamera</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Keamanan & Safety</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Modul & Motor Otomatis</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Aki, Sekring, & Kabel</span></label>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-100 py-3">
+                        <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-primtext transition-colors tracking-wide">04 MESIN & BAHAN BAKAR</span>
+                            <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Filter-Filter</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Busi & Sistem Pengapian</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Pendingin</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Gasket & Seal Mesin</span></label>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-100 py-3">
+                        <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-primtext transition-colors tracking-wide">05 KAKI-KAKI & REM</span>
+                            <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Rem</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Suspensi & Shockbreaker</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Sistem Kemudi</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Kopling & Transmisi</span></label>
+                        </div>
+                    </div>
+
+                    <div class="py-3">
+                        <button class="accordion-btn flex justify-between items-center w-full text-left focus:outline-none group">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-primtext transition-colors tracking-wide">06 PERAWATAN & UMUM</span>
+                            <svg class="w-4 h-4 text-gray-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content hidden mt-4 pl-1 space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Oli & Cairan Kimia</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Peralatan & Toolkit</span></label>
+                            <label class="flex items-center space-x-3 cursor-pointer group"><input type="checkbox" class="form-checkbox h-4 w-4 accent-[#E01A22] border-gray-300 rounded cursor-pointer peer"><span class="text-sm text-sectext group-hover:text-accent peer-checked:text-accent peer-checked:font-medium transition-colors">Produk Promo / Diskon</span></label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
+        <section class="flex-1 w-full">
+            
+            <nav aria-label="Breadcrumb" class="mb-4">
+                <ol class="flex items-center space-x-2 text-sm text-sectext font-medium">
+                    <li><a href="index.html" class="hover:text-accent transition duration-200 cursor-pointer">Home</a></li>
+                    <li><span class="mx-1">/</span></li>
+                    <li><a href="produk.html" class="hover:text-accent transition duration-200 cursor-pointer">Produk</a></li>
+                </ol>
+            </nav>
+            
+            <div class="lg:hidden w-full flex justify-between items-center bg-cardbg p-3 rounded-lg border border-gray-200 mb-4 cursor-pointer" id="mobileFilterToggleBtn" data-target="filterSidebar">
+                <span class="font-bold text-primtext text-sm">Filter Kategori Produk</span>
+                <svg class="w-5 h-5 text-accent pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            </div>
+
+            <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                <h1 class="text-4xl font-extrabold text-primtext tracking-tight">PRODUK</h1>
+                
+                <div class="relative">
+                    <select class="appearance-none bg-cardbg border border-gray-200 text-primtext py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-accent cursor-pointer text-sm font-medium">
+                        <option>Urutkan: Rekomendasi</option>
+                        <option>Harga: Rendah ke Tinggi</option>
+                        <option>Harga: Tinggi ke Rendah</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-sectext">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-cardbg border-t border-gray-200 pt-12 pb-6 mt-12 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-bold text-accent mb-4">New Raya Motor</h3>
+                    <p class="text-sectext leading-relaxed">Penyedia suku cadang otomotif terpercaya.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-primtext mb-4">QUICK LINKS</h4>
+                    <ul class="space-y-2 text-sectext">
+                        <li><a href="index.html" class="hover:text-accent transition">Beranda</a></li>
+                        <li><a href="produk.html" class="hover:text-accent transition">Produk</a></li>
+                        <li><a href="promo.html" class="hover:text-accent transition">Promo</a></li>
+                        <li><a href="tipsTrik.html" class="hover:text-accent transition">Tips & Trik</a></li>
+                        <li><a href="tentangKami.html" class="hover:text-accent transition">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-primtext mb-4">STORE INFO</h4>
+                    <ul class="space-y-3 text-sectext">
+                        <li class="flex items-start gap-2">Jl. Raya Sparepart No. 88, Jaksel</li>
+                        <li class="flex items-start gap-2">Senin - Sabtu: 08:00 - 17:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-[#242526] border-opacity-20 pt-6 text-center text-xs text-sectext">
+                <p>Copyright &copy; 2026 New Raya Motor. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 z-[60] hidden flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-mainbg w-full max-w-4xl rounded-2xl flex flex-col md:flex-row overflow-hidden relative max-h-[90vh]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-gray-100 p-2 rounded-full text-primtext hover:text-accent hover:bg-gray-200 transition z-10 focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <div class="w-full md:w-1/2 bg-gray-900 min-h-[300px] flex items-center justify-center p-8 relative">
+                <span class="text-white text-sm">Image Placeholder</span>
+            </div>
+
+            <div class="w-full md:w-1/2 p-8 overflow-y-auto flex flex-col">
+                <span id="modalStock" class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded w-max mb-4">Stok Tersedia</span>
+                <h2 id="modalTitle" class="text-2xl font-bold text-primtext mb-2">-</h2>
+                <p id="modalSpecs" class="text-sm text-sectext mb-4">-</p>
+                
+                <div class="border-t border-b border-gray-100 py-4 my-2">
+                    <h3 class="font-bold text-primtext text-sm mb-2">Deskripsi Produk:</h3>
+                    <p class="text-sm text-sectext leading-relaxed">
+                        Kampas rem berkualitas tinggi dengan daya cengkram maksimal. Pastikan suku cadang sesuai dengan kendaraan Anda.
+                    </p>
+                </div>
+
+                <div class="mt-auto pt-6">
+                    <div class="text-3xl font-bold text-accent mb-4" id="modalPrice">-</div>
+                    <button onclick="addModalToCart()" class="w-full bg-accent text-white font-bold py-3.5 rounded-lg hover:bg-red-700 transition flex justify-center items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        let activeSidebar = null;
+
+        function openSidebar(targetId) {
+            const sidebar = document.getElementById(targetId);
+            const position = sidebar.getAttribute('data-position');
+            sidebar.classList.remove(position === 'left' ? '-translate-x-full' : 'translate-x-full');
+            sidebar.classList.add('translate-x-0');
+            overlay.classList.remove('hidden');
+            activeSidebar = sidebar;
+        }
+
+        function closeActiveSidebar() {
+            if (activeSidebar) {
+                const position = activeSidebar.getAttribute('data-position');
+                activeSidebar.classList.remove('translate-x-0');
+                activeSidebar.classList.add(position === 'left' ? '-translate-x-full' : 'translate-x-full');
+                overlay.classList.add('hidden');
+                activeSidebar = null;
+            }
+        }
+
+        document.getElementById('menuBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
+        document.getElementById('vehicleBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
+        document.getElementById('mobileFilterToggleBtn').addEventListener('click', (e) => openSidebar(e.target.dataset.target));
+        document.querySelectorAll('.close-sidebar-btn').forEach(btn => btn.addEventListener('click', closeActiveSidebar));
+        overlay.addEventListener('click', closeActiveSidebar);
+
+        // Accordion Filter
+        document.querySelectorAll('.accordion-btn').forEach(acc => {
+            acc.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('svg');
+                const titleText = this.querySelector('span');
+                content.classList.toggle('hidden');
+                content.classList.toggle('block');
+                
+                if (content.classList.contains('hidden')) {
+                    icon.classList.remove('rotate-180', 'text-accent');
+                    titleText.classList.remove('text-accent');
+                    titleText.classList.add('text-gray-500');
+                } else {
+                    icon.classList.add('rotate-180', 'text-accent');
+                    titleText.classList.add('text-accent');
+                    titleText.classList.remove('text-gray-500');
+                }
+            });
+        });
+
+        // Keranjang (LocalStorage)
+        const cartBtn = document.getElementById('cartBtn');
+        const cartDropdown = document.getElementById('cartDropdown');
+        let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
+
+        cartBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); 
+            cartDropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+            if (!cartBtn.contains(e.target) && !cartDropdown.contains(e.target)) cartDropdown.classList.add('hidden');
+        });
+
+        function saveAndRenderCart() {
+            localStorage.setItem('rayaCart', JSON.stringify(cartData));
+            const cartBadge = document.getElementById('cartBadge');
+            const emptyCartMsg = document.getElementById('emptyCartMsg');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const clearCartBtn = document.getElementById('clearCartBtn');
+            const cartTotal = document.getElementById('cartTotal');
+
+            let totalQty = 0;
+            let totalPrice = 0;
+            cartItemsContainer.innerHTML = '';
+
+            if (cartData.length === 0) {
+                cartBadge.classList.add('hidden');
+                emptyCartMsg.classList.remove('hidden');
+                clearCartBtn.classList.add('hidden');
+                cartTotal.textContent = "Rp 0";
+            } else {
+                emptyCartMsg.classList.add('hidden');
+                clearCartBtn.classList.remove('hidden');
+                
+                cartData.forEach((item, index) => {
+                    totalQty += item.qty;
+                    totalPrice += (item.numPrice * item.qty);
+
+                    cartItemsContainer.innerHTML += `
+                        <div class="flex items-center gap-3 bg-cardbg p-2 rounded-lg border border-gray-100">
+                            <div class="flex-1">
+                                <h4 class="text-xs font-bold text-primtext line-clamp-1">${item.title}</h4>
+                                <span class="text-xs text-accent font-bold">${item.priceStr}</span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-white rounded border border-gray-200 px-2 py-1">
+                                <button onclick="updateQty(${index}, -1)" class="text-sectext hover:text-accent font-bold px-1">-</button>
+                                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                                <button onclick="updateQty(${index}, 1)" class="text-sectext hover:text-accent font-bold px-1">+</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                cartBadge.textContent = totalQty;
+                cartBadge.classList.remove('hidden');
+                cartTotal.textContent = "Rp " + totalPrice.toLocaleString('id-ID');
+            }
+        }
+
+        function addToCart(title, priceStr) {
+            const cartBadge = document.getElementById('cartBadge');
+            cartBadge.classList.add('scale-125');
+            setTimeout(() => { cartBadge.classList.remove('scale-125'); }, 200);
+
+            let numPrice = parseInt(priceStr.replace(/[^0-9]/g, ''));
+            let existingItem = cartData.find(item => item.title === title);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cartData.push({ title, priceStr, numPrice, qty: 1 });
+            }
+            saveAndRenderCart();
+        }
+
+        function updateQty(index, change) {
+            cartData[index].qty += change;
+            if (cartData[index].qty <= 0) {
+                cartData.splice(index, 1);
+            }
+            saveAndRenderCart();
+        }
+
+        function clearCart() {
+            if(confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
+                cartData = [];
+                saveAndRenderCart();
+            }
+        }
+
+        const productGrid = document.getElementById('productGrid');
+        const products = [
+            { title: "High Performance Front Brake Pad Kit Gen-4", compat: "Toyota Fortuner", specs: "Part No: NRM-BK-2024-X", price: "Rp 1.250.000", isHot: true },
+            { title: "Premium Cabin Air Filter with Activated Carbon", compat: "Honda CR-V", specs: "Part No: NRM-AF-9912-P", price: "Rp 450.000", isHot: false },
+            { title: "Forged Engine Piston Set High Comp Series", compat: "Mitsubishi Pajero", specs: "Part No: NRM-PS-4430-H", price: "Rp 8.900.000", isHot: false },
+            { title: "LED Headlight Bulbs 6000K Ultra Bright", compat: "Universal", specs: "Part No: NRM-LED-H4", price: "Rp 650.000", isHot: true },
+            { title: "Heavy Duty Shock Absorber Rear Set", compat: "Toyota Hilux", specs: "Part No: NRM-SA-7762", price: "Rp 2.100.000", isHot: false },
+            { title: "Synthetic Motor Oil 5W-30 4L", compat: "Semua Bensin", specs: "Part No: NRM-OL-5W30", price: "Rp 550.000", isHot: false },
+        ];
+
+        products.forEach(prod => {
+            const hotBadge = prod.isHot ? `<span class="absolute top-3 left-3 bg-accent text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Hot Item</span>` : '';
+            const encodedTitle = prod.title.replace(/'/g, "\\'"); 
+            const encodedPrice = prod.price.replace(/'/g, "\\'");
+            const encodedSpecs = prod.specs.replace(/'/g, "\\'");
+            
+            const cardHTML = `
+                <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition cursor-pointer flex flex-col bg-white" onclick="openModal('${encodedTitle}', '${encodedPrice}', '${encodedSpecs}')">
+                    <div class="w-full h-48 bg-[#1a1a1a] flex items-center justify-center relative">
+                        ${hotBadge}
+                        <span class="text-gray-400 text-xs">Image Placeholder</span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-1 rounded w-max mb-3 uppercase tracking-wider">KOMPATIBEL: ${prod.compat}</span>
+                        <h3 class="text-base font-bold text-primtext mb-1 leading-snug">${prod.title}</h3>
+                        <p class="text-xs text-gray-400 mb-5">${prod.specs}</p>
+                        
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-lg font-bold text-accent">${prod.price}</span>
+                            <button class="w-10 h-10 rounded-full border-2 border-accent text-accent flex items-center justify-center hover:bg-accent hover:text-white transition focus:outline-none" onclick="event.stopPropagation(); addToCart('${encodedTitle}', '${encodedPrice}')">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            productGrid.innerHTML += cardHTML;
+        });
+
+        let currentModalProduct = null;
+        const productModal = document.getElementById('productModal');
+
+        function openModal(title, price, specs) {
+            currentModalProduct = { title, price }; 
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalSpecs').textContent = specs;
+            productModal.classList.remove('hidden');
+        }
+
+        function closeModal() { productModal.classList.add('hidden'); }
+        productModal.addEventListener('click', function(e) { if (e.target === productModal) closeModal(); });
+
+        function addModalToCart() {
+            if(currentModalProduct) {
+                addToCart(currentModalProduct.title, currentModalProduct.price);
+                closeModal();
+            }
+        }
+
+        saveAndRenderCart();
+
+        // Vehicle Filter 
+        const carDataFilter = {
+            "Toyota": ["Innova", "Avanza", "Fortuner", "Rush"],
+            "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla"],
+            "Isuzu": ["Panther", "MU-X Euro 4", "D-Max Euro 4"]
+        };
+        const brandSelect = document.getElementById('carBrand');
+        const modelSelect = document.getElementById('carModel');
+        const yearSelect = document.getElementById('carYear');
+
+        brandSelect.addEventListener('change', function() {
+            const selectedBrand = this.value;
+            modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+            yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+            if (selectedBrand && carDataFilter[selectedBrand]) {
+                modelSelect.disabled = false;
+                yearSelect.disabled = false;
+                carDataFilter[selectedBrand].forEach(model => {
+                    modelSelect.appendChild(new Option(model, model));
+                });
+                for (let year = 2026; year >= 2000; year--) {
+                    yearSelect.appendChild(new Option(year, year));
+                }
+            } else {
+                modelSelect.disabled = true;
+                yearSelect.disabled = true;
+            }
+        });
+
+        document.getElementById('applyFilterBtn').addEventListener('click', function() {
+            if (brandSelect.value === "") { alert("Silakan pilih Car Brand terlebih dahulu!"); return; }
+            closeActiveSidebar();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Raya Motor - Tentang Kami</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mainbg: '#FFFFFF',
+                        cardbg: '#F5F6F8',
+                        primtext: '#121212',
+                        sectext: '#242526',
+                        accent: '#E01A22',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Marquee Animation */
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        /* Custom Scrollbar for Cart & Scrolling rows */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F5F6F8;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Map Pulse Animation for pin */
+        @keyframes pulse-pin {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 26, 34, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(224, 26, 34, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 26, 34, 0); }
+        }
+        .pin-pulse {
+            animation: pulse-pin 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-mainbg text-primtext font-sans overflow-x-hidden">
+
+    <div class="bg-accent text-white text-sm py-2 overflow-hidden relative z-50">
+        <div class="marquee-content font-medium">
+            🔥 Website ini merupakan media digital yang dapat Anda gunakan untuk lebih mengenal beberapa produk yang ditawarkan oleh New Raya Motor Surabaya. 🔥
+        </div>
+    </div>
+
+    <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 py-3 px-6 flex items-center justify-between h-[80px]">
+        <div class="flex items-center gap-4">
+            <button id="menuBtn" class="text-primtext hover:text-accent focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            
+            <a href="index.html" class="block flex items-center">
+                <img src="path/to/logo-kamu.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;" onerror="this.outerHTML='<span class=\\'font-bold text-xl text-primtext\\'>New Raya <span class=\\'text-accent\\'>Motor</span></span>'">
+            </a>
+        </div>
+
+        <div class="hidden md:flex flex-1 max-w-xl mx-6">
+            <div class="relative w-full">
+                <input type="text" placeholder="Cari suku cadang atau aksesoris mobil Anda..." class="w-full bg-cardbg text-primtext px-5 py-2.5 rounded-[24px] focus:outline-none focus:ring-1 focus:ring-accent border border-transparent placeholder-sectext">
+                <button class="absolute right-4 top-3 text-sectext hover:text-accent transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="vehicleBtn" class="hidden md:flex items-center gap-2 border border-accent text-accent px-4 py-2 rounded-full hover:bg-accent hover:text-white transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                <span class="text-sm font-semibold">Pilih Kendaraan</span>
+            </button>
+            
+            <div class="relative">
+                <button id="cartBtn" class="relative text-primtext hover:text-accent focus:outline-none flex items-center">
+                    <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden transition-transform">0</span>
+                </button>
+                
+                <div id="cartDropdown" class="absolute right-0 top-10 w-80 bg-mainbg shadow-2xl border border-gray-100 rounded-xl hidden z-50 flex flex-col transform transition-all">
+                    <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+                        <span class="font-bold text-primtext">Keranjang Belanja</span>
+                        <button id="clearCartBtn" onclick="clearCart()" class="text-xs text-accent hover:underline font-semibold hidden">Kosongkan</button>
+                    </div>
+                    <div class="p-4 flex flex-col max-h-64 overflow-y-auto custom-scrollbar">
+                        <p id="emptyCartMsg" class="text-sm text-sectext text-center py-4">Keranjang Anda masih kosong.</p>
+                        <div id="cartItemsContainer" class="flex flex-col gap-3"></div>
+                    </div>
+                    <div class="p-4 border-t border-gray-100">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-bold text-primtext">Total:</span>
+                            <span id="cartTotal" class="text-sm font-bold text-accent">Rp 0</span>
+                        </div>
+                        <button class="w-full bg-accent text-white font-bold py-2 rounded-lg hover:bg-red-700 transition">Checkout Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="leftSidebar" class="fixed inset-y-0 left-0 w-64 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <span class="font-bold text-2xl text-accent">Menu</span>
+            <button id="closeMenuBtn" class="text-sectext hover:text-accent focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        
+        <ul class="flex flex-col p-4 space-y-2 text-primtext font-medium">
+            <li>
+                <a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Beranda
+                </a>
+            </li>
+            <li>
+                <a href="produk.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    Produk
+                </a>
+            </li>
+            <li>
+                <a href="promo.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                    Promo
+                </a>
+            </li>
+            <li>
+                <a href="tipsTrik.html" class="flex items-center p-3 rounded-lg hover:bg-red-50 hover:text-accent transition">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    Tips & Trik
+                </a>
+            </li>
+            <li>
+                <a href="tentangKami.html" class="flex items-center p-3 rounded-lg bg-red-50 text-accent font-bold transition">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Tentang Kami
+                </a>
+            </li>
+        </ul>
+    </div>
+
+   <div id="rightSidebar" class="fixed inset-y-0 right-0 w-80 bg-mainbg shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <span class="font-bold text-lg text-primtext">Pilih Kendaraan</span>
+            <button id="closeVehicleBtn" class="text-sectext hover:text-accent transition focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        
+        <div class="p-6 flex flex-col space-y-4">
+            <div>
+                <label class="block text-sm font-semibold mb-2 text-primtext">Car Brand (Wajib)</label>
+                <select id="carBrand" class="w-full bg-cardbg border border-gray-200 rounded p-2 text-sectext focus:outline-none focus:border-accent cursor-pointer">
+                    <option value="">Pilih Brand</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Daihatsu">Daihatsu</option>
+                    <option value="Isuzu">Isuzu</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold mb-2 text-primtext">Car Model (Opsional)</label>
+                <select id="carModel" disabled class="w-full bg-cardbg border border-gray-200 rounded p-2 text-sectext focus:outline-none focus:border-accent disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option value="">Pilih Model</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold mb-2 text-primtext">Car Year (Opsional)</label>
+                <select id="carYear" disabled class="w-full bg-cardbg border border-gray-200 rounded p-2 text-sectext focus:outline-none focus:border-accent disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option value="">Pilih Tahun</option>
+                </select>
+            </div>
+            <button id="applyFilterBtn" class="w-full bg-accent text-white font-semibold py-2 rounded mt-4 hover:bg-red-700 transition">Terapkan Filter</button>
+        </div>
+    </div>
+    
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity"></div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+        
+        <div class="mb-4">
+            <div class="text-[14px] text-sectext mb-2">
+                <a href="index.html" class="hover:text-accent hover:underline transition">Home</a> / 
+                <span class="font-medium text-primtext">Tentang Kami</span>
+            </div>
+            <h1 class="text-[32px] font-bold text-primtext">TENTANG KAMI</h1>
+        </div>
+
+        <section class="flex flex-col md:flex-row w-full gap-8 items-center">
+            <div class="w-full md:w-1/2 flex flex-col">
+                <h2 class="text-[40px] font-bold text-primtext leading-tight mb-6">Menjadi Mitra Terpercaya Perjalanan Anda Sejak 1998</h2>
+                <p class="text-sectext text-lg leading-relaxed">
+                    New Raya Motor memiliki komitmen teguh terhadap industri otomotif dengan menyediakan solusi komponen terlengkap yang mengedepankan kualitas dan keaslian. Selama lebih dari dua dekade, kami telah berkembang dari toko lokal menjadi pusat distribusi nasional yang melayani setiap kebutuhan kendaraan pelanggan kami dengan integritas dan keahlian tinggi.
+                </p>
+            </div>
+            <div class="w-full md:w-1/2 h-80 md:h-[450px] bg-cardbg rounded-2xl flex items-center justify-center overflow-hidden border border-gray-200">
+                <span class="text-sectext font-semibold">Image Placeholder: Main Physical Storefront / Central Distribution Warehouse</span>
+            </div>
+        </section>
+
+        <section class="w-full">
+            <h3 class="text-2xl font-bold text-primtext mb-8">Perjalanan Sejarah Kami</h3>
+            <div class="border-l-4 border-cardbg ml-4 md:ml-6 relative space-y-12 pb-4">
+                
+                <div class="relative pl-8 md:pl-12">
+                    <div class="absolute left-[-10px] top-1 w-4 h-4 bg-accent rounded-full border-4 border-white shadow"></div>
+                    <h4 class="text-xl font-bold text-primtext mb-2">Tahun 1998</h4>
+                    <p class="text-sectext leading-relaxed">Berdiri sebagai toko retail suku cadang konvensional kecil di Jakarta Barat.</p>
+                </div>
+
+                <div class="relative pl-8 md:pl-12">
+                    <div class="absolute left-[-10px] top-1 w-4 h-4 bg-accent rounded-full border-4 border-white shadow"></div>
+                    <h4 class="text-xl font-bold text-primtext mb-2">Tahun 2012</h4>
+                    <p class="text-sectext leading-relaxed">Menjadi distributor resmi resmi untuk berbagai komponen brand suku cadang lokal dan internasional.</p>
+                </div>
+
+                <div class="relative pl-8 md:pl-12">
+                    <div class="absolute left-[-10px] top-1 w-4 h-4 bg-accent rounded-full border-4 border-white shadow"></div>
+                    <h4 class="text-xl font-bold text-primtext mb-2">Tahun 2020</h4>
+                    <p class="text-sectext leading-relaxed">Melakukan ekspansi digital pertama dengan melayani pemesanan skala grosir nasional secara online.</p>
+                </div>
+
+                <div class="relative pl-8 md:pl-12">
+                    <div class="absolute left-[-10px] top-1 w-4 h-4 bg-accent rounded-full border-4 border-white shadow"></div>
+                    <h4 class="text-xl font-bold text-primtext mb-2">Tahun 2026</h4>
+                    <p class="text-sectext leading-relaxed">Meluncurkan platform e-commerce katalog modern interaktif terintegrasi sistem manajemen kendaraan pelanggan.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-cardbg p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-accent mb-6 shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="text-xl font-bold text-primtext mb-4">Visi & Misi</h4>
+                <p class="text-sectext leading-relaxed flex-1">Menjadi platform penyedia solusi suku cadang otomotif digital nomor satu di Indonesia yang mengedepankan kemudahan transaksi dan akurasi kompatibilitas.</p>
+            </div>
+
+            <div class="bg-cardbg p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-accent mb-6 shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h4 class="text-xl font-bold text-primtext mb-4">Nilai Jaminan Keaslian</h4>
+                <p class="text-sectext leading-relaxed flex-1">Komitmen absolut 100% menyediakan suku cadang original pabrikan untuk menjamin keselamatan berkendara.</p>
+            </div>
+
+            <div class="bg-cardbg p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-accent mb-6 shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                </div>
+                <h4 class="text-xl font-bold text-primtext mb-4">Nilai Ketersediaan Stok</h4>
+                <p class="text-sectext leading-relaxed flex-1">Memastikan ketersediaan katalog komponen yang masif mulai dari sektor mesin, kelistrikan, hingga bodi luar untuk berbagai tipe kendaraan.</p>
+            </div>
+        </section>
+
+        <section class="flex flex-col md:flex-row w-full gap-8 bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+            <div class="w-full md:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-primtext mb-8">Informasi Kontak Kami</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 text-sectext">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-primtext text-sm mb-1">Alamat Fisik Toko</h5>
+                            <p class="text-sectext leading-relaxed">Jl. Raya Motor No. 88, Blok A1-A2, Kawasan Industri Otomotif, Jakarta Barat, 11730.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 text-sectext">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-primtext text-sm mb-2">WhatsApp Customer Service</h5>
+                            <a href="#" class="inline-flex items-center gap-2 border border-gray-400 bg-white px-4 py-2 rounded-full hover:bg-gray-50 transition">
+                                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                <span class="font-bold text-primtext">+62 812-3456-7890</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 text-sectext">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-primtext text-sm mb-1">Hotline Telepon</h5>
+                            <p class="text-sectext">(021) 555-4321</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 text-sectext">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-primtext text-sm mb-1">Email Resmi Support</h5>
+                            <p class="text-sectext">support@newrayamotor.co.id</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-cardbg flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gray-200 border-l border-gray-300 grid place-items-center">
+                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#242526 2px, transparent 2px); background-size: 30px 30px;"></div>
+                    
+                    <div class="text-center z-10">
+                        <div class="flex justify-center mb-4">
+                            <div class="text-accent pin-pulse rounded-full">
+                                <svg class="w-12 h-12 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </div>
+                        </div>
+                        <span class="text-sectext font-bold bg-white px-4 py-2 rounded shadow-sm">Interactive Map View Centered Here</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full">
+            <h3 class="text-2xl font-bold text-primtext mb-8 text-center md:text-left">Mitra Resmi Kami</h3>
+            <div class="flex overflow-x-auto gap-6 custom-scrollbar pb-4 items-center snap-x">
+                
+                <div class="min-w-[200px] h-24 bg-cardbg rounded-xl border border-gray-100 flex items-center justify-center text-sectext font-bold text-lg grayscale hover:grayscale-0 transition duration-300 snap-center">
+                    Toyota Genuine Parts
+                </div>
+                
+                <div class="min-w-[200px] h-24 bg-cardbg rounded-xl border border-gray-100 flex items-center justify-center text-sectext font-bold text-lg grayscale hover:grayscale-0 transition duration-300 snap-center">
+                    Honda Genuine Parts
+                </div>
+                
+                <div class="min-w-[200px] h-24 bg-cardbg rounded-xl border border-gray-100 flex items-center justify-center text-sectext font-bold text-lg grayscale hover:grayscale-0 transition duration-300 snap-center">
+                    Denso
+                </div>
+                
+                <div class="min-w-[200px] h-24 bg-cardbg rounded-xl border border-gray-100 flex items-center justify-center text-sectext font-bold text-lg grayscale hover:grayscale-0 transition duration-300 snap-center">
+                    Pertamina Lubricants
+                </div>
+                
+                <div class="min-w-[200px] h-24 bg-cardbg rounded-xl border border-gray-100 flex items-center justify-center text-sectext font-bold text-lg grayscale hover:grayscale-0 transition duration-300 snap-center">
+                    NGK Spark Plugs
+                </div>
+                
+                <div class="min-w-[200px] h-24 bg-cardbg rounded-xl border border-gray-100 flex items-center justify-center text-sectext font-bold text-lg grayscale hover:grayscale-0 transition duration-300 snap-center">
+                    Bosch Automotive
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bg-cardbg rounded-2xl py-16 px-6 border border-gray-200 text-center flex flex-col items-center justify-center">
+            <h2 class="text-3xl font-bold text-primtext mb-8">Siap Menemukan Suku Cadang Tepat Untuk Mobil Anda?</h2>
+            <a href="produk.html" class="bg-accent text-white font-bold text-lg px-10 py-4 rounded-lg shadow-md hover:bg-red-700 hover:shadow-lg transition transform hover:-translate-y-1">
+                Mulai Cari Suku Cadang Asli
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="bg-cardbg border-t border-gray-200 pt-12 pb-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                
+                <div>
+                    <h3 class="text-lg font-bold text-accent mb-4">New Raya Motor</h3>
+                    <p class="text-sectext leading-relaxed">Penyedia suku cadang otomotif terpercaya.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-primtext mb-4">QUICK LINKS</h4>
+                    <ul class="space-y-2 text-sectext">
+                        <li><a href="index.html" class="hover:text-accent transition">Beranda</a></li>
+                        <li><a href="produk.html" class="hover:text-accent transition">Produk</a></li>
+                        <li><a href="promo.html" class="hover:text-accent transition">Promo</a></li>
+                        <li><a href="tipsTrik.html" class="hover:text-accent transition">Tips & Trik</a></li>
+                        <li><a href="tentangKami.html" class="hover:text-accent transition">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-primtext mb-4">STORE INFO</h4>
+                    <ul class="space-y-3 text-sectext">
+                        <li class="flex items-start gap-2">Jl. Raya Motor No. 88, Blok A1-A2, Jakarta Barat</li>
+                        <li class="flex items-start gap-2">Senin - Sabtu: 08:00 - 17:00 WIB</li>
+                        <li class="flex items-start gap-2 mt-2">
+                            <a href="#" class="text-accent hover:underline font-semibold underline">Lihat Peta Lokasi Toko (Google Maps)</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="border-t border-gray-300 pt-6 text-center text-xs text-sectext">
+                <p>Copyright &copy; 2026 New Raya Motor. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- SIDEBAR LOGIC (Identical to index.html) ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const leftSidebar = document.getElementById('leftSidebar');
+        const vehicleBtn = document.getElementById('vehicleBtn');
+        const closeVehicleBtn = document.getElementById('closeVehicleBtn');
+        const rightSidebar = document.getElementById('rightSidebar');
+        const overlay = document.getElementById('overlay');
+
+        const toggleSidebar = (sidebar, show) => {
+            if (show) {
+                sidebar.classList.remove(sidebar === leftSidebar ? '-translate-x-full' : 'translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.remove('translate-x-0');
+                sidebar.classList.add(sidebar === leftSidebar ? '-translate-x-full' : 'translate-x-full');
+                if (leftSidebar.classList.contains('-translate-x-full') && rightSidebar.classList.contains('translate-x-full')) {
+                    overlay.classList.add('hidden');
+                }
+            }
+        };
+
+        menuBtn.addEventListener('click', () => toggleSidebar(leftSidebar, true));
+        closeMenuBtn.addEventListener('click', () => toggleSidebar(leftSidebar, false));
+        vehicleBtn.addEventListener('click', () => toggleSidebar(rightSidebar, true));
+        closeVehicleBtn.addEventListener('click', () => toggleSidebar(rightSidebar, false));
+        overlay.addEventListener('click', () => { toggleSidebar(leftSidebar, false); toggleSidebar(rightSidebar, false); });
+
+        // --- VEHICLE FILTER LOGIC (Identical to index.html) ---
+        const carData = {
+            "Toyota": ["Innova", "Avanza", "Fortuner", "Rush", "Land Cruiser", "Camry", "Vios", "Yaris", "Agya", "Veloz", "Zenix"],
+            "Daihatsu": ["Rocky", "Terios", "Sirion", "Ayla", "Sigra", "Xenia", "Granmax"],
+            "Isuzu": ["Panther", "MU-X Euro 4", "D-Max Euro 4"]
+        };
+
+        const brandSelect = document.getElementById('carBrand');
+        const modelSelect = document.getElementById('carModel');
+        const yearSelect = document.getElementById('carYear');
+
+        brandSelect.addEventListener('change', function() {
+            const selectedBrand = this.value;
+            modelSelect.innerHTML = '<option value="">Pilih Model</option>';
+            yearSelect.innerHTML = '<option value="">Pilih Tahun</option>';
+
+            if (selectedBrand && carData[selectedBrand]) {
+                modelSelect.disabled = false;
+                yearSelect.disabled = false;
+                carData[selectedBrand].forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+                for (let year = 2026; year >= 2000; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                }
+            } else {
+                modelSelect.disabled = true;
+                yearSelect.disabled = true;
+            }
+        });
+
+        document.getElementById('applyFilterBtn').addEventListener('click', function() {
+            const selectedBrand = document.getElementById('carBrand').value;
+            const selectedModel = document.getElementById('carModel').value;
+            const selectedYear = document.getElementById('carYear').value;
+
+            if (selectedBrand === "") {
+                alert("Silakan pilih Car Brand terlebih dahulu!");
+                return;
+            }
+            const savedFilter = { brand: selectedBrand, model: selectedModel, year: selectedYear };
+            localStorage.setItem('vehicleFilter', JSON.stringify(savedFilter));
+            toggleSidebar(rightSidebar, false);
+        });
+
+        // --- CART LOGIC SINKRONISASI INDEX ---
+        const cartBtn = document.getElementById('cartBtn');
+        const cartDropdown = document.getElementById('cartDropdown');
+        let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
+
+        if(cartBtn) {
+            cartBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                cartDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', function(e) {
+                if (!cartBtn.contains(e.target) && !cartDropdown.contains(e.target)) cartDropdown.classList.add('hidden');
+            });
+        }
+
+        function saveAndRenderCart() {
+            localStorage.setItem('rayaCart', JSON.stringify(cartData));
+            const cartBadge = document.getElementById('cartBadge');
+            const emptyCartMsg = document.getElementById('emptyCartMsg');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const clearCartBtn = document.getElementById('clearCartBtn');
+            const cartTotal = document.getElementById('cartTotal');
+
+            if(!cartItemsContainer) return;
+
+            let totalQty = 0;
+            let totalPrice = 0;
+            cartItemsContainer.innerHTML = '';
+
+            if (cartData.length === 0) {
+                cartBadge.classList.add('hidden');
+                emptyCartMsg.classList.remove('hidden');
+                clearCartBtn.classList.add('hidden');
+                cartTotal.textContent = "Rp 0";
+            } else {
+                emptyCartMsg.classList.add('hidden');
+                clearCartBtn.classList.remove('hidden');
+                
+                cartData.forEach((item, index) => {
+                    totalQty += item.qty;
+                    totalPrice += (item.numPrice * item.qty);
+                    cartItemsContainer.innerHTML += `
+                        <div class="flex items-center gap-3 bg-cardbg p-2 rounded-lg border border-gray-100">
+                            <div class="flex-1">
+                                <h4 class="text-xs font-bold text-primtext line-clamp-1">${item.title}</h4>
+                                <span class="text-xs text-accent font-bold">${item.priceStr}</span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-white rounded border border-gray-200 px-2 py-1">
+                                <button onclick="updateQty(${index}, -1)" class="text-sectext hover:text-accent font-bold px-1">-</button>
+                                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                                <button onclick="updateQty(${index}, 1)" class="text-sectext hover:text-accent font-bold px-1">+</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                cartBadge.textContent = totalQty;
+                cartBadge.classList.remove('hidden');
+                cartTotal.textContent = "Rp " + totalPrice.toLocaleString('id-ID');
+            }
+        }
+
+        function updateQty(index, change) {
+            cartData[index].qty += change;
+            if (cartData[index].qty <= 0) cartData.splice(index, 1);
+            saveAndRenderCart();
+        }
+
+        function clearCart() {
+            if(confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
+                cartData = [];
+                saveAndRenderCart();
+            }
+        }
+
+        saveAndRenderCart();
+    </script>
+</body>
+</html>
