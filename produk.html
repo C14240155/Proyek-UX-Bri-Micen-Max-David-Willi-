@@ -59,7 +59,7 @@
                     <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
                 <a href="index.html" class="flex items-center">
-                    <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
+                    <img src="GambarIndex/LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;">
                 </a>
             </div>
 
@@ -177,17 +177,20 @@
     </div>
 
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 items-start relative z-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 items-start">
         
-        <aside id="filterSidebar" class="sidebar-panel fixed inset-y-0 left-0 w-80 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 lg:shadow-none lg:z-0 lg:w-[280px] lg:flex-shrink-0 lg:block lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] custom-scrollbar overflow-y-auto" data-position="left">
+        <aside id="filterSidebar" class="sidebar-panel fixed inset-x-0 bottom-0 w-full max-h-[85vh] pb-10 rounded-t-3xl bg-mainbg shadow-[0_-10px_40px_rgba(0,0,0,0.15)] z-50 transform translate-y-full transition-transform duration-300 ease-in-out lg:relative lg:translate-y-0 lg:shadow-none lg:z-0 lg:w-[280px] lg:rounded-none lg:max-h-none lg:pb-0 lg:flex-shrink-0 lg:block lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] custom-scrollbar overflow-y-auto" data-position="bottom">
             <div class="p-6 lg:p-0 pr-4 pb-10">
-                <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
+                <!-- Handle geser khas mobile UI (hanya muncul di mobile) -->
+                <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 lg:hidden mt-2"></div>
+                
+                <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path></svg>
                         <span class="font-bold text-lg text-primtext">Filter Kategori Produk</span>
                     </div>
-                    <button class="close-sidebar-btn text-sectext hover:text-accent focus:outline-none lg:hidden" data-target="filterSidebar">
-                        <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <button class="close-sidebar-btn bg-gray-100 p-1.5 rounded-full text-sectext hover:text-accent hover:bg-gray-200 focus:outline-none lg:hidden transition" data-target="filterSidebar">
+                        <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
 
@@ -318,8 +321,13 @@
             <button onclick="closeModal()" class="absolute top-4 right-4 bg-gray-100 p-2 rounded-full text-primtext hover:text-accent hover:bg-gray-200 transition z-10 focus:outline-none">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div class="w-full md:w-1/2 bg-gray-900 min-h-[300px] flex items-center justify-center p-8 relative">
-                <span class="text-white text-sm">Image Placeholder</span>
+            <div class="w-full md:w-1/2 bg-gray-900 min-h-[300px] flex items-center justify-center relative overflow-hidden">
+                <img id="modalImage" src="" alt="" class="w-full h-full object-cover absolute inset-0"
+                     onerror="this.style.display='none'; document.getElementById('modalImgFallback').style.display='flex'">
+                <div id="modalImgFallback" class="absolute inset-0 items-center justify-center flex-col gap-2" style="display:none">
+                    <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span class="text-gray-500 text-sm">Foto tidak tersedia</span>
+                </div>
             </div>
             <div class="w-full md:w-1/2 p-8 overflow-y-auto flex flex-col">
                 <span id="modalStock" class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded w-max mb-4">Stok Tersedia</span>
@@ -371,7 +379,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Brand Info -->
                 <div class="space-y-4">
-                    <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto bg-white p-1 rounded" onerror="this.src='https://via.placeholder.com/150x40?text=New+Raya+Motor'">
+                    <img src="GambarIndex/LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto bg-white p-1 rounded" onerror="this.src='https://via.placeholder.com/150x40?text=New+Raya+Motor'">
                     <p class="text-sm leading-relaxed">
                         Pusat penyedia sparepart dan aksesoris mobil terlengkap di Surabaya. Kami menjamin keaslian dan kualitas produk untuk kendaraan kesayangan Anda.
                     </p>
@@ -418,31 +426,31 @@
     <script>
         // === PASTE DATA PRODUK MILIK ANDA SEPENUHNYA DI DALAM VARIABEL INI ===
         const products = [
-            { id: "PRD-001", title: "Headlamp Reflektor Kanan", specs: "Part No: 81110-BZ000", price: 650000, isHot: true, tags: ["lampu depan", "headlamp", "reflektor"], mainCategory: "01 Eksterior & Bodi", subCategory: "Lampu", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2011 }, { brand: "Daihatsu", model: "Xenia", yearStart: 2004, yearEnd: 2011 }] },
-            { id: "PRD-002", title: "Stoplamp LED Assy Kiri", specs: "Part No: 81560-0K100", price: 1200000, isHot: false, tags: ["lampu belakang", "stoplamp", "led"], mainCategory: "01 Eksterior & Bodi", subCategory: "Lampu", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }] },
-            { id: "PRD-003", title: "Spion Retract Assembly Set", specs: "Part No: 87910-BZ000", price: 1500000, isHot: true, tags: ["spion", "retract", "kaca spion"], mainCategory: "01 Eksterior & Bodi", subCategory: "Spion & Aksesoris Spion", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Yaris", yearStart: 2014, yearEnd: 2020 }] },
-            { id: "PRD-004", title: "Cover Spion Chrome", specs: "Part No: CV-SP-004", price: 150000, isHot: false, tags: ["cover spion", "chrome", "aksesoris eksterior"], mainCategory: "01 Eksterior & Bodi", subCategory: "Spion & Aksesoris Spion", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Terios", yearStart: 2018, yearEnd: 2026 }, { brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
-            { id: "PRD-005", title: "Grille Depan TRD Sportivo", specs: "Part No: GR-TRD-01", price: 850000, isHot: true, tags: ["grille", "trd", "gril depan"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
-            { id: "PRD-006", title: "Front Bumper Guard Besi", specs: "Part No: BUM-ISZ-01", price: 2100000, isHot: false, tags: ["bumper", "guard", "tanduk depan"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "MU-X Euro 4", yearStart: 2022, yearEnd: 2026 }] },
-            { id: "PRD-007", title: "Rear Bumper Step Cover", specs: "Part No: RBS-IN-01", price: 350000, isHot: false, tags: ["bumper belakang", "step cover", "pelindung"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2016, yearEnd: 2022 }] },
-            { id: "PRD-008", title: "Karet Pintu Bagian Depan (Set)", specs: "Part No: KP-TY-01", price: 250000, isHot: false, tags: ["karet pintu", "weatherstrip", "peredam bocor"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2012, yearEnd: 2021 }] },
-            { id: "PRD-009", title: "Wiper Blade Frameless 24/16 Inch", specs: "Part No: WB-FRM-2416", price: 120000, isHot: true, tags: ["wiper", "kaca depan", "frameless"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: true, compatibility: [] },
-            { id: "PRD-010", title: "Karet Kaca Belakang", specs: "Part No: KKB-PT-01", price: 180000, isHot: false, tags: ["karet kaca", "seal kaca", "panther"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
-            { id: "PRD-011", title: "Center Console Box Armrest", specs: "Part No: CC-AR-01", price: 450000, isHot: true, tags: ["console box", "armrest", "sandaran tangan"], mainCategory: "02 Interior & Aksesoris", subCategory: "Console Box & Kompartemen", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Agya", yearStart: 2013, yearEnd: 2023 }, { brand: "Daihatsu", model: "Ayla", yearStart: 2013, yearEnd: 2023 }] },
-            { id: "PRD-012", title: "Laci Dashboard (Glove Box)", specs: "Part No: GB-TY-02", price: 320000, isHot: false, tags: ["laci", "glove box", "dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Console Box & Kompartemen", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Vios", yearStart: 2007, yearEnd: 2013 }] },
-            { id: "PRD-013", title: "Sarung Jok Kulit Sintetis (Set)", specs: "Part No: SJ-KS-01", price: 1200000, isHot: true, tags: ["sarung jok", "cover jok", "kulit"], mainCategory: "02 Interior & Aksesoris", subCategory: "Kursi & Jok", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Sigra", yearStart: 2016, yearEnd: 2026 }] },
-            { id: "PRD-014", title: "Busa Jok Depan Original", specs: "Part No: BJ-OR-01", price: 600000, isHot: false, tags: ["busa jok", "kursi depan", "jok ori"], mainCategory: "02 Interior & Aksesoris", subCategory: "Kursi & Jok", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2004, yearEnd: 2015 }] },
-            { id: "PRD-015", title: "Panel Dashboard Wood Grain", specs: "Part No: PD-WD-01", price: 850000, isHot: false, tags: ["panel kayu", "wood panel", "dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Camry", yearStart: 2006, yearEnd: 2012 }] },
-            { id: "PRD-016", title: "Ring AC Kisi-Kisi AC Chrome", specs: "Part No: RAC-CH-01", price: 85000, isHot: false, tags: ["kisi ac", "ring ac", "aksesoris dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2012, yearEnd: 2021 }] },
-            { id: "PRD-017", title: "Karpet Mie Bihun Presisi 3 Baris", specs: "Part No: KRT-MB-01", price: 550000, isHot: true, tags: ["karpet mobil", "karpet mie", "karpet lantai"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Zenix", yearStart: 2023, yearEnd: 2026 }] },
-            { id: "PRD-018", title: "Karpet Karet Lembaran Standar", specs: "Part No: KRT-KR-02", price: 250000, isHot: false, tags: ["karpet karet", "alas kaki", "karpet dasar"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: true, compatibility: [] },
-            { id: "PRD-019", title: "Peredam Suara Pintu Aspal (Per Lembar)", specs: "Part No: PRD-AS-01", price: 85000, isHot: true, tags: ["peredam suara", "peredam aspal", "audio"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: true, compatibility: [] },
-            { id: "PRD-020", title: "Plafon Atap Original", specs: "Part No: PLF-ISZ-01", price: 950000, isHot: false, tags: ["plafon", "atap dalam", "interior atas"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
-            { id: "PRD-021", title: "Sensor Parkir 4 Titik Bunyi Cerdas", specs: "Part No: SP-4T-01", price: 150000, isHot: true, tags: ["sensor parkir", "mundur", "sensor alarm"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sensor Parkir & Kamera", isUniversal: true, compatibility: [] },
-            { id: "PRD-022", title: "Kamera Mundur Night Vision AHD", specs: "Part No: KM-AHD-01", price: 250000, isHot: true, tags: ["kamera mundur", "rear camera", "parkir"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sensor Parkir & Kamera", isUniversal: true, compatibility: [] },
-            { id: "PRD-023", title: "Alarm System Keyless Entry", specs: "Part No: ALM-KL-01", price: 850000, isHot: false, tags: ["alarm mobil", "keyless", "keamanan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sistem Keamanan & Safety", isUniversal: true, compatibility: [] },
-            { id: "PRD-024", title: "Modul Immobilizer", specs: "Part No: IMMO-TY-01", price: 1500000, isHot: false, tags: ["immobilizer", "modul kunci", "keamanan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sistem Keamanan & Safety", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }] },
-            { id: "PRD-025", title: "Motor Power Window Kanan Depan", specs: "Part No: MPW-RH-01", price: 450000, isHot: true, tags: ["power window", "motor kaca", "dinamo kaca"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Modul & Motor Otomatis", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2011 }] },
+            { id: "PRD-001", title: "Headlamp Reflektor Kanan", image: "GambarProduk/HeadlampReflektorKanan.jpeg", specs: "Part No: 81110-BZ000", price: 650000, isHot: true, tags: ["lampu depan", "headlamp", "reflektor"], mainCategory: "01 Eksterior & Bodi", subCategory: "Lampu", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2011 }, { brand: "Daihatsu", model: "Xenia", yearStart: 2004, yearEnd: 2011 }] },
+            { id: "PRD-002", title: "Stoplamp LED Assy Kiri", image: "GambarProduk/StopLampLEDAssyKiri.jpg", specs: "Part No: 81560-0K100", price: 1200000, isHot: false, tags: ["lampu belakang", "stoplamp", "led"], mainCategory: "01 Eksterior & Bodi", subCategory: "Lampu", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }] },
+            { id: "PRD-003", title: "Spion Retract Assembly Set", image: "GambarProduk/SpionRetractAssemblySet.jpg", specs: "Part No: 87910-BZ000", price: 1500000, isHot: true, tags: ["spion", "retract", "kaca spion"], mainCategory: "01 Eksterior & Bodi", subCategory: "Spion & Aksesoris Spion", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Yaris", yearStart: 2014, yearEnd: 2020 }] },
+            { id: "PRD-004", title: "Cover Spion Chrome", image: "GambarProduk/CoverSpionChrome.jpeg", specs: "Part No: CV-SP-004", price: 150000, isHot: false, tags: ["cover spion", "chrome", "aksesoris eksterior"], mainCategory: "01 Eksterior & Bodi", subCategory: "Spion & Aksesoris Spion", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Terios", yearStart: 2018, yearEnd: 2026 }, { brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
+            { id: "PRD-005", title: "Grille Depan TRD Sportivo", image: "GambarProduk/GrilleDepanTRDSportivo.jpeg", specs: "Part No: GR-TRD-01", price: 850000, isHot: true, tags: ["grille", "trd", "gril depan"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Rush", yearStart: 2018, yearEnd: 2026 }] },
+            { id: "PRD-006", title: "Front Bumper Guard Besi", image: "GambarProduk/FrontBumperGuardBesi.jpeg", specs: "Part No: BUM-ISZ-01", price: 2100000, isHot: false, tags: ["bumper", "guard", "tanduk depan"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "MU-X Euro 4", yearStart: 2022, yearEnd: 2026 }] },
+            { id: "PRD-007", title: "Rear Bumper Step Cover", image: "GambarProduk/RearBumperStepCover.jpg", specs: "Part No: RBS-IN-01", price: 350000, isHot: false, tags: ["bumper belakang", "step cover", "pelindung"], mainCategory: "01 Eksterior & Bodi", subCategory: "Grille, Bumper, & Guard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2016, yearEnd: 2022 }] },
+            { id: "PRD-008", title: "Karet Pintu Bagian Depan (Set)", image: "GambarProduk/KaretPintuBagianDepan(Set).jpeg", specs: "Part No: KP-TY-01", price: 250000, isHot: false, tags: ["karet pintu", "weatherstrip", "peredam bocor"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2012, yearEnd: 2021 }] },
+            { id: "PRD-009", title: "Wiper Blade Frameless 24/16 Inch", image: "GambarProduk/WiperBladeFrameless.jpeg", specs: "Part No: WB-FRM-2416", price: 120000, isHot: true, tags: ["wiper", "kaca depan", "frameless"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: true, compatibility: [] },
+            { id: "PRD-010", title: "Karet Kaca Belakang", image: "GambarProduk/KaretKacaBelakang.jpeg", specs: "Part No: KKB-PT-01", price: 180000, isHot: false, tags: ["karet kaca", "seal kaca", "panther"], mainCategory: "01 Eksterior & Bodi", subCategory: "Karet Pintu & Wiper", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
+            { id: "PRD-011", title: "Center Console Box Armrest", image: "GambarProduk/CenterConsoleBoxArmrest.jpeg",  specs: "Part No: CC-AR-01", price: 450000, isHot: true, tags: ["console box", "armrest", "sandaran tangan"], mainCategory: "02 Interior & Aksesoris", subCategory: "Console Box & Kompartemen", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Agya", yearStart: 2013, yearEnd: 2023 }, { brand: "Daihatsu", model: "Ayla", yearStart: 2013, yearEnd: 2023 }] },
+            { id: "PRD-012", title: "Laci Dashboard (Glove Box)", image: "GambarProduk/LaciDashboard(GloveBox).jpg", specs: "Part No: GB-TY-02", price: 320000, isHot: false, tags: ["laci", "glove box", "dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Console Box & Kompartemen", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Vios", yearStart: 2007, yearEnd: 2013 }] },
+            { id: "PRD-013", title: "Sarung Jok Kulit Sintetis (Set)", image: "GambarProduk/SarungJokKulitSintetis(Set).jpeg", specs: "Part No: SJ-KS-01", price: 1200000, isHot: true, tags: ["sarung jok", "cover jok", "kulit"], mainCategory: "02 Interior & Aksesoris", subCategory: "Kursi & Jok", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Sigra", yearStart: 2016, yearEnd: 2026 }] },
+            { id: "PRD-014", title: "Busa Jok Depan Original", image: "GambarProduk/BusaJokDepanOriginal.jpeg", specs: "Part No: BJ-OR-01", price: 600000, isHot: false, tags: ["busa jok", "kursi depan", "jok ori"], mainCategory: "02 Interior & Aksesoris", subCategory: "Kursi & Jok", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Innova", yearStart: 2004, yearEnd: 2015 }] },
+            { id: "PRD-015", title: "Panel Dashboard Wood Grain", image: "GambarProduk/PanelDashboardWoodGrain.jpeg", specs: "Part No: PD-WD-01", price: 850000, isHot: false, tags: ["panel kayu", "wood panel", "dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Camry", yearStart: 2006, yearEnd: 2012 }] },
+            { id: "PRD-016", title: "Ring AC Kisi-Kisi AC Chrome", image: "GambarProduk/RingACKisi-KisiACChrome.jpeg", specs: "Part No: RAC-CH-01", price: 85000, isHot: false, tags: ["kisi ac", "ring ac", "aksesoris dashboard"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2012, yearEnd: 2021 }] },
+            { id: "PRD-017", title: "Karpet Mie Bihun Presisi 3 Baris", image: "GambarProduk/KarpetMieBihunPresisi3Baris.jpeg",  specs: "Part No: KRT-MB-01", price: 550000, isHot: true, tags: ["karpet mobil", "karpet mie", "karpet lantai"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Zenix", yearStart: 2023, yearEnd: 2026 }] },
+            { id: "PRD-018", title: "Karpet Karet Lembaran Standar", image: "GambarProduk/KarpetKaretLembaranStandar.jpeg", specs: "Part No: KRT-KR-02", price: 250000, isHot: false, tags: ["karpet karet", "alas kaki", "karpet dasar"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: true, compatibility: [] },
+            { id: "PRD-019", title: "Peredam Suara Pintu Aspal (Per Lembar)", image: "GambarProduk/PeredamSuaraPintuAspal(PerLembar).jpeg", specs: "Part No: PRD-AS-01", price: 85000, isHot: true, tags: ["peredam suara", "peredam aspal", "audio"], mainCategory: "02 Interior & Aksesoris", subCategory: "Karpet & Peredam", isUniversal: true, compatibility: [] },
+            { id: "PRD-020", title: "Plafon Atap Original", image: "GambarProduk/PlafonAtapOriginal.jpeg", specs: "Part No: PLF-ISZ-01", price: 950000, isHot: false, tags: ["plafon", "atap dalam", "interior atas"], mainCategory: "02 Interior & Aksesoris", subCategory: "Panel & Ornamen Dashboard", isUniversal: false, compatibility: [{ brand: "Isuzu", model: "Panther", yearStart: 2000, yearEnd: 2021 }] },
+            { id: "PRD-021", title: "Sensor Parkir 4 Titik Bunyi Cerdas", image: "GambarProduk/SensorParkir4TitikBunyiCerdas.jpeg", specs: "Part No: SP-4T-01", price: 150000, isHot: true, tags: ["sensor parkir", "mundur", "sensor alarm"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sensor Parkir & Kamera", isUniversal: true, compatibility: [] },
+            { id: "PRD-022", title: "Kamera Mundur Night Vision AHD", image: "GambarProduk/KameraMundurNightVisionAHD.jpeg", specs: "Part No: KM-AHD-01", price: 250000, isHot: true, tags: ["kamera mundur", "rear camera", "parkir"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sensor Parkir & Kamera", isUniversal: true, compatibility: [] },
+            { id: "PRD-023", title: "Alarm System Keyless Entry", image: "GambarProduk/AlarmSystemKeylessEntry.jpeg", specs: "Part No: ALM-KL-01", price: 850000, isHot: false, tags: ["alarm mobil", "keyless", "keamanan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sistem Keamanan & Safety", isUniversal: true, compatibility: [] },
+            { id: "PRD-024", title: "Modul Immobilizer", image: "GambarProduk/ModulImmobilizer.jpeg", specs: "Part No: IMMO-TY-01", price: 1500000, isHot: false, tags: ["immobilizer", "modul kunci", "keamanan"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Sistem Keamanan & Safety", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Fortuner", yearStart: 2016, yearEnd: 2026 }] },
+            { id: "PRD-025", title: "Motor Power Window Kanan Depan", image: "GambarProduk/MotorPowerWindowKananDepan.jpeg", specs: "Part No: MPW-RH-01", price: 450000, isHot: true, tags: ["power window", "motor kaca", "dinamo kaca"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Modul & Motor Otomatis", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Avanza", yearStart: 2004, yearEnd: 2011 }] },
             { id: "PRD-026", title: "Dinamo Extra Fan Radiator", specs: "Part No: DEF-DH-01", price: 350000, isHot: false, tags: ["extra fan", "dinamo kipas", "kipas radiator"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Modul & Motor Otomatis", isUniversal: false, compatibility: [{ brand: "Daihatsu", model: "Sirion", yearStart: 2007, yearEnd: 2026 }] },
             { id: "PRD-027", title: "Aki Kering MF 45Ah 12V", specs: "Part No: AKI-MF-45", price: 850000, isHot: true, tags: ["aki mobil", "accu", "baterai kering"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Aki, Sekring, & Kabel", isUniversal: true, compatibility: [] },
             { id: "PRD-028", title: "Kabel Busi Racing Set", specs: "Part No: KBS-RC-01", price: 300000, isHot: false, tags: ["kabel busi", "pengapian", "kabel racing"], mainCategory: "03 Kelistrikan & Sensor", subCategory: "Aki, Sekring, & Kabel", isUniversal: false, compatibility: [{ brand: "Toyota", model: "Vios", yearStart: 2003, yearEnd: 2006 }] },
@@ -624,12 +632,26 @@
         }
 
         // --- MODAL PRODUK ---
-        function openModal(title, price, specs, compat) {
+        function openModal(title, price, specs, compat, image) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalPrice').textContent = price;
             document.getElementById('modalSpecs').textContent = specs;
             document.getElementById('modalDesc').textContent = `Suku cadang ${title} ini berkualitas tinggi dengan durabilitas maksimal. Pastikan suku cadang dengan spesifikasi ${specs} ini sesuai dengan kebutuhan kendaraan Anda.`;
             document.getElementById('modalCompat').textContent = compat || "Universal";
+
+            // Tampilkan foto produk di modal
+            const modalImg = document.getElementById('modalImage');
+            const modalFallback = document.getElementById('modalImgFallback');
+            if (image) {
+                modalImg.src = image;
+                modalImg.alt = title;
+                modalImg.style.display = 'block';
+                modalFallback.style.display = 'none';
+            } else {
+                modalImg.style.display = 'none';
+                modalFallback.style.display = 'flex';
+            }
+
             document.getElementById('productModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
@@ -683,6 +705,7 @@
                 const pos = sidebar.getAttribute('data-position');
                 if (pos === 'left') sidebar.classList.add('-translate-x-full');
                 if (pos === 'right') sidebar.classList.add('translate-x-full');
+                if (pos === 'bottom') sidebar.classList.add('translate-y-full');
             });
             if(overlay) {
                 overlay.classList.add('hidden');
@@ -709,6 +732,7 @@
                 
                 if (pos === 'left') targetEl.classList.remove('-translate-x-full');
                 if (pos === 'right') targetEl.classList.remove('translate-x-full');
+                if (pos === 'bottom') targetEl.classList.remove('translate-y-full');
                 
                 if(overlay) {
                     overlay.classList.remove('hidden');
@@ -815,13 +839,19 @@
                     const encodedTitle = prod.title.replace(/'/g, "\\'");
                     const encodedPrice = priceStr.replace(/'/g, "\\'");
                     const encodedSpecs = prod.specs.replace(/'/g, "\\'");
-                    const encodedCompat = fullCompat.replace(/'/g, "\\'"); 
+                    const encodedCompat = fullCompat.replace(/'/g, "\\'");
+                    const encodedImage = (prod.image || '').replace(/'/g, "\\'");
 
                     const cardHTML = `
-                    <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition cursor-pointer flex flex-col bg-white" onclick="openModal('${encodedTitle}', '${encodedPrice}', '${encodedSpecs}', '${encodedCompat}')">
-                        <div class="w-full h-48 bg-[#1a1a1a] flex items-center justify-center relative">
+                    <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition cursor-pointer flex flex-col bg-white" onclick="openModal('${encodedTitle}', '${encodedPrice}', '${encodedSpecs}', '${encodedCompat}', '${encodedImage}')">
+                        <div class="w-full h-48 bg-[#1a1a1a] flex items-center justify-center relative overflow-hidden">
                             ${hotBadge}
-                            <span class="text-gray-600 text-xs">Image</span>
+                            <img 
+                                src="${prod.image}" 
+                                alt="${prod.title}" 
+                                class="w-full h-full object-cover"
+                                onerror="this.src='GambarProduk/no-image.jpg'"
+                            >
                         </div>
                         <div class="p-4 flex flex-col flex-1">
                             <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">${prod.mainCategory}</span>
@@ -1046,47 +1076,35 @@
             initGlobalFilter(); 
         });
 
-        // Fungsi Checkout menuju WhatsApp
+                        // UPDATED: CHECKOUT VIA WHATSAPP API WITH AUTO CLEAR LOGIC (UI/UX TESTING)
         function checkoutWA() {
-            // 1. Ambil data keranjang dari local storage
-            let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
+            // Baca snapshot dari localStorage hanya untuk dikirim ke WA (tidak menimpa variabel global)
+            const cartSnapshot = JSON.parse(localStorage.getItem('rayaCart')) || [];
             
-            // 2. Cek apakah keranjang kosong
-            if (cartData.length === 0) {
+            if (cartSnapshot.length === 0) {
                 alert("Keranjang belanja Anda masih kosong. Silakan tambah produk terlebih dahulu!");
                 return;
             }
 
-            // 3. Masukkan nomor WhatsApp admin (pastikan pakai 62 bukan 0)
-            const phoneNumber = "6281331728569"; // <--- GANTI DENGAN NOMOR WA ADMIN
+            let baseUrl = "https://api.whatsapp.com/send/?phone=628987582288&type=phone_number&app_absent=0";
             
-            // 4. Buat salam pembuka pesan
-            let message = "Halo New Raya Motor, saya ingin memesan suku cadang berikut:%0A%0A";
-            
+            let textMessage = "Halo New Raya Motor, saya ingin memesan suku cadang berikut:\n\n";
             let totalBiaya = 0;
             
-            // 5. Susun daftar barang dari keranjang
-            cartData.forEach((item, index) => {
-                let subtotal = item.price * item.quantity;
+            cartSnapshot.forEach((item, index) => {
+                let subtotal = item.numPrice * item.qty;
                 totalBiaya += subtotal;
-                
-                let hargaFormatted = item.price.toLocaleString('id-ID');
-                let subtotalFormatted = subtotal.toLocaleString('id-ID');
-                
-                // %0A adalah kode URL untuk Enter / Baris Baru
-                message += `${index + 1}. *${item.name}*%0A`;
-                message += `   - Jumlah: ${item.quantity} x Rp ${hargaFormatted}%0A`;
-                message += `   - Subtotal: Rp ${subtotalFormatted}%0A%0A`;
+                textMessage += `${index + 1}. ${item.title} (Qty: ${item.qty}) - Subtotal: Rp ${(subtotal).toLocaleString('id-ID')}\n`;
             });
+            textMessage += `\nTotal Belanja: Rp ${totalBiaya.toLocaleString('id-ID')}`;
             
-            // 6. Total Akhir dan penutup
-            let totalFormatted = totalBiaya.toLocaleString('id-ID');
-            message += `*Total Belanja: Rp ${totalFormatted}*%0A%0A`;
-            message += "Mohon konfirmasi mengenai ongkos kirim dan ketersediaan barang. Terima kasih.";
-            
-            // 7. Buka link WhatsApp tab baru
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            let whatsappUrl = `${baseUrl}&text=${encodeURIComponent(textMessage)}`;
             window.open(whatsappUrl, '_blank');
+
+            // Reset variabel global cartData (bukan window.cartData) agar sinkron dengan saveAndRenderCart
+            localStorage.removeItem('rayaCart');
+            cartData = [];
+            saveAndRenderCart(); 
         }
 
     </script>

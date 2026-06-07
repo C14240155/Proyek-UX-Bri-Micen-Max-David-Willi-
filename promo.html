@@ -42,14 +42,12 @@
 </head>
 <body class="bg-mainbg text-primtext font-sans overflow-x-hidden flex flex-col min-h-screen">
 
-    <!-- Top Promo Bar -->
     <div class="bg-accent text-white text-sm py-2 overflow-hidden relative z-50 h-[40px] flex items-center">
         <div class="marquee-content font-medium tracking-wide">
             🔥 Promo Spesial Bundling Suku Cadang Original! Hemat lebih banyak dengan paket perawatan dari New Raya Motor Surabaya. Penawaran terbatas! 🔥
         </div>
     </div>
 
-    <!-- Navigation -->
     <nav class="sticky top-0 bg-mainbg shadow-sm z-40 border-b border-gray-200 h-[80px] px-4 sm:px-6 lg:px-8 w-full flex items-center">
         <div class="max-w-6xl mx-auto flex items-center justify-between w-full">
             
@@ -58,7 +56,7 @@
                     <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
                 <a href="index.html" class="flex items-center">
-                    <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/150x40?text=New+Raya+Motor'">
+                    <img src="GambarIndex/LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/150x40?text=New+Raya+Motor'">
                 </a>
             </div>
 
@@ -106,7 +104,7 @@
                                 <span class="text-sm font-bold text-primtext">Total:</span>
                                 <span id="cartTotal" class="text-sm font-bold text-accent">Rp 0</span>
                             </div>
-                            <button onclick="checkoutWA()" class="w-full bg-[#25D366] text-white font-bold py-2.5 rounded-lg hover:bg-[#128C7E] transition flex items-center justify-center gap-2 shadow-sm">
+                            <button onclick="checkoutWA()" class="w-full bg-[#25D366] text-white font-bold py-2.5 rounded-lg hover:bg-[#128C7E] transition flex items-center justify-center gap-2 shadow-sm text-sm">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 0 0 1.333 4.993L2 22l5.233-1.237a9.994 9.994 0 0 0 4.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-2.669-1.037-5.176-2.922-7.062A9.935 9.935 0 0 0 12.012 2zm0 16.972c-1.664 0-3.298-.448-4.73-1.296l-.34-.199-3.523.832.853-3.415-.22-.352a8.452 8.452 0 0 1-1.3-4.524c0-4.664 3.798-8.46 8.465-8.46 2.262 0 4.385.88 5.98 2.48a8.414 8.414 0 0 1 2.473 5.975c-.001 4.665-3.799 8.46-8.465 8.46zm4.64-6.338c-.254-.127-1.503-.742-1.736-.827-.233-.085-.403-.127-.573.127-.17.254-.658.827-.806.996-.15.17-.298.191-.552.064-.254-.127-1.074-.396-2.046-1.264-.756-.677-1.266-1.515-1.416-1.77-.15-.254-.016-.391.11-.518.115-.115.254-.296.381-.444.127-.15.17-.254.254-.423.085-.17.042-.318-.021-.444-.064-.127-.573-1.378-.785-1.886-.208-.495-.418-.427-.573-.435l-.488-.008c-.17 0-.446.064-.68.318-.233.254-.891.871-.891 2.122 0 1.252.913 2.46 1.04 2.63.127.17 1.794 2.736 4.346 3.836 2.552 1.101 2.552.742 3.018.699.467-.042 1.503-.615 1.715-1.209.212-.594.212-1.101.148-1.209-.064-.106-.233-.17-.487-.296z"/>
                                 </svg>
@@ -121,7 +119,6 @@
 
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity duration-300"></div>
 
-    <!-- Left Sidebar Menu -->
     <div id="leftSidebar" class="sidebar-panel fixed inset-y-0 left-0 w-64 bg-mainbg shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out" data-position="left">
         <div class="p-6 border-b border-gray-100 flex justify-between items-center">
             <span class="font-bold text-2xl text-accent">Menu</span>
@@ -136,7 +133,6 @@
         </ul>
     </div>
 
-    <!-- Right Sidebar Filter -->
     <div id="rightSidebar" class="sidebar-panel fixed inset-y-0 right-0 w-80 bg-mainbg shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out" data-position="right">
         <div class="p-6 border-b border-gray-100 flex justify-between items-center">
             <span class="font-bold text-lg text-primtext">Pilih Kendaraan</span>
@@ -188,76 +184,99 @@
             <h1 class="text-[32px] font-extrabold text-primtext tracking-tight mb-6">PROMO BUNDLING SPESIAL</h1>
 
             <div class="relative w-full aspect-[21/9] bg-gray-900 rounded-2xl overflow-hidden group min-h-[350px]">
-                <div id="promoCarousel" class="w-full h-full relative">
-                    <div class="slide absolute inset-0 w-full h-full opacity-100 z-10 bg-gray-800 flex flex-col justify-start md:justify-center items-start p-6 md:p-20 overflow-y-auto custom-scrollbar">
-                        
-                        <div class="mt-4 md:mt-0 w-full"> <span class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 inline-block">Promo Terlaris</span>
-                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-2 leading-tight">Paket Ganti Oli Bensin Spesial</h2>
-                            
-                            <div class="bg-white/20 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 rounded mb-4 inline-flex items-center gap-2">
-                                <span>🚗</span> Kompatibel: Toyota (Avanza, Rush, Innova) & Daihatsu (Xenia, Terios)
-                            </div>
-
-                            <ul class="text-gray-300 list-disc list-inside mb-6 text-sm md:text-base">
-                                <li>Oli Mesin Bensin Full Synthetic 5W-30 4L</li>
-                                <li>Filter Oli Mesin Original</li>
-                                <li>Busi Iridium Tough (Set isi 4)</li>
-                            </ul>
-                            <div class="flex items-center gap-4 mb-6 md:mb-8">
-                                <span class="text-2xl sm:text-3xl font-bold text-accent">Rp 750.000</span>
-                                <span class="text-base sm:text-lg line-through text-gray-400">Rp 885.000</span>
-                            </div>
-                            <button onclick="addBundleToCart('BNDL-01')" class="bg-accent text-white font-bold px-6 py-3 md:px-8 rounded-lg hover:bg-red-700 transition shadow-lg text-sm md:text-base mb-4 md:mb-0">+ Tambah ke Keranjang</button>
+            <div id="promoCarousel" class="w-full h-full relative">
+                
+                <!-- Slide 1 -->
+                <div class="slide absolute inset-0 w-full h-full opacity-100 z-10 transition-opacity duration-500">
+                    <!-- Gambar Background -->
+                    <img src="GambarPromo/promoCarousel1.png" alt="Promo Ganti Oli" class="absolute inset-0 w-full h-full object-cover z-0">
+                    
+                    <!-- Overlay Gradasi Gelap agar teks mudah dibaca -->
+                    <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-transparent z-10"></div>
+                    
+                    <!-- Konten Teks -->
+                    <!-- px-8 md:px-20 lg:px-28 digunakan untuk menggeser teks lebih ke dalam agar tidak memojok -->
+                    <div class="relative z-20 flex flex-col justify-end md:justify-center h-full px-8 py-8 md:px-20 lg:px-28 w-full md:w-[85%] lg:w-[65%] overflow-y-auto custom-scrollbar"> 
+                        <div>
+                            <span class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">Promo Terlaris</span>
                         </div>
-                    </div>
-
-                    <div class="slide absolute inset-0 w-full h-full opacity-0 z-0 bg-gray-700 flex flex-col justify-start md:justify-center items-start p-6 md:p-20 overflow-y-auto custom-scrollbar">
+                        <h2 class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 md:mb-3 leading-tight drop-shadow-md">Paket Ganti Oli Bensin Spesial</h2>
                         
-                        <div class="mt-4 md:mt-0 w-full">
-                            <span class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 inline-block">Penting di Perjalanan</span>
-                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-2 leading-tight">Paket Keselamatan Darurat</h2>
-                            
-                            <div class="bg-white/20 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 rounded mb-4 inline-flex items-center gap-2">
-                                <span>🚗</span> Kompatibel: Universal (Semua Merek Mobil)
-                            </div>
+                        <div class="bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded mb-3 md:mb-4 inline-flex items-center gap-2 w-max max-w-full">
+                            <span>🚗</span> Kompatibel: Toyota & Daihatsu
+                        </div>
 
-                            <ul class="text-gray-300 list-disc list-inside mb-6 text-sm md:text-base">
-                                <li>Dongkrak Buaya 2 Ton</li>
-                                <li>Kabel Jumper Aki 500 Ampere</li>
-                                <li>Segitiga Pengaman Reflektif (Set 2 Pcs)</li>
-                            </ul>
-                            <div class="flex items-center gap-4 mb-6 md:mb-8">
-                                <span class="text-2xl sm:text-3xl font-bold text-accent">Rp 399.000</span>
-                                <span class="text-base sm:text-lg line-through text-gray-400">Rp 465.000</span>
-                            </div>
-                            <button onclick="addBundleToCart('BNDL-02')" class="bg-accent text-white font-bold px-6 py-3 md:px-8 rounded-lg hover:bg-red-700 transition shadow-lg text-sm md:text-base mb-4 md:mb-0">+ Tambah ke Keranjang</button>
+                        <ul class="text-gray-200 list-disc list-inside mb-4 md:mb-5 text-xs md:text-sm drop-shadow-sm space-y-1">
+                            <li>Oli Mesin Bensin Full Synthetic 5W-30 4L</li>
+                            <li>Filter Oli Mesin Original</li>
+                            <li>Busi Iridium Tough (Set isi 4)</li>
+                        </ul>
+                        <div class="flex items-center gap-4 mb-5 md:mb-6">
+                            <span class="text-2xl md:text-3xl lg:text-4xl font-bold text-accent drop-shadow-md">Rp 750.000</span>
+                            <span class="text-sm md:text-base line-through text-gray-300">Rp 885.000</span>
+                        </div>
+                        <div>
+                            <button onclick="addBundleToCart('BNDL-01')" class="bg-accent text-white font-bold px-6 py-2.5 md:py-3 rounded-lg hover:bg-red-700 transition shadow-lg text-sm md:text-base">+ Tambah ke Keranjang</button>
                         </div>
                     </div>
                 </div>
-                
-                <button id="prevPromoSlide" class="absolute left-3 md:left-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 md:p-3 rounded-full z-30 hover:bg-opacity-80 hover:text-primtext text-white transition duration-300 focus:outline-none hidden md:block">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                <button id="nextPromoSlide" class="absolute right-3 md:right-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 md:p-3 rounded-full z-30 hover:bg-opacity-80 hover:text-primtext text-white transition duration-300 focus:outline-none hidden md:block">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
+
+                <!-- Slide 2 -->
+                <div class="slide absolute inset-0 w-full h-full opacity-0 z-0 transition-opacity duration-500">
+                    <!-- Gambar Background -->
+                    <img src="GambarPromo/promoCarousel2.png" alt="Paket Darurat" class="absolute inset-0 w-full h-full object-cover z-0">
+                    
+                    <!-- Overlay Gradasi Gelap agar teks mudah dibaca -->
+                    <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-transparent z-10"></div>
+                    
+                    <!-- Konten Teks -->
+                    <div class="relative z-20 flex flex-col justify-end md:justify-center h-full px-8 py-8 md:px-20 lg:px-28 w-full md:w-[85%] lg:w-[65%] overflow-y-auto custom-scrollbar">
+                        <div>
+                            <span class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">Penting di Perjalanan</span>
+                        </div>
+                        <h2 class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 md:mb-3 leading-tight drop-shadow-md">Paket Keselamatan Darurat</h2>
+                        
+                        <div class="bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded mb-3 md:mb-4 inline-flex items-center gap-2 w-max max-w-full">
+                            <span>🚗</span> Kompatibel: Universal (Semua Merek)
+                        </div>
+
+                        <ul class="text-gray-200 list-disc list-inside mb-4 md:mb-5 text-xs md:text-sm drop-shadow-sm space-y-1">
+                            <li>Dongkrak Buaya 2 Ton</li>
+                            <li>Kabel Jumper Aki 500 Ampere</li>
+                            <li>Segitiga Pengaman Reflektif (Set 2 Pcs)</li>
+                        </ul>
+                        <div class="flex items-center gap-4 mb-5 md:mb-6">
+                            <span class="text-2xl md:text-3xl lg:text-4xl font-bold text-accent drop-shadow-md">Rp 399.000</span>
+                            <span class="text-sm md:text-base line-through text-gray-300">Rp 465.000</span>
+                        </div>
+                        <div>
+                            <button onclick="addBundleToCart('BNDL-02')" class="bg-accent text-white font-bold px-6 py-2.5 md:py-3 rounded-lg hover:bg-red-700 transition shadow-lg text-sm md:text-base">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Tombol Navigasi -->
+            <button id="prevPromoSlide" class="absolute left-3 md:left-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 md:p-3 rounded-full z-30 hover:bg-opacity-80 hover:text-primtext text-white transition duration-300 focus:outline-none">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button id="nextPromoSlide" class="absolute right-3 md:right-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 md:p-3 rounded-full z-30 hover:bg-opacity-80 hover:text-primtext text-white transition duration-300 focus:outline-none">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        </div>
         </section>
 
-        <!-- Grid Promo Lainnya -->
         <section>
             <div class="flex items-center justify-between mb-6 border-b border-gray-200 pb-2">
                 <h2 class="text-2xl font-bold text-primtext">Paket Hemat Lainnya</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Promo Grid 1 -->
                 <div class="bg-cardbg rounded-xl border border-gray-100 p-6 flex flex-col justify-between hover:shadow-lg transition">
                     <div>
                         <span class="bg-accent text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-3 inline-block">Hemat Rp 80.000</span>
                         <h3 class="font-bold text-lg text-primtext mb-2 leading-tight">Paket Kaki-Kaki Avanza / Xenia</h3>
                         
-                        <!-- Info Kompatibilitas -->
                         <div class="text-[11px] text-accent font-semibold bg-red-50 px-2 py-1 rounded mb-3">
                             🚗 Khusus Toyota Avanza & Daihatsu Xenia
                         </div>
@@ -276,13 +295,11 @@
                     </div>
                 </div>
 
-                <!-- Promo Grid 2 -->
                 <div class="bg-cardbg rounded-xl border border-gray-100 p-6 flex flex-col justify-between hover:shadow-lg transition">
                     <div>
                         <span class="bg-accent text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-3 inline-block">Hemat Rp 25.000</span>
                         <h3 class="font-bold text-lg text-primtext mb-2 leading-tight">Paket Visibilitas Optimal</h3>
                         
-                        <!-- Info Kompatibilitas -->
                         <div class="text-[11px] text-accent font-semibold bg-red-50 px-2 py-1 rounded mb-3">
                             🚗 Universal (Pastikan ukuran wiper 24" & 16")
                         </div>
@@ -301,13 +318,11 @@
                     </div>
                 </div>
 
-                <!-- Promo Grid 3 -->
                 <div class="bg-cardbg rounded-xl border border-gray-100 p-6 flex flex-col justify-between hover:shadow-lg transition">
                     <div>
                         <span class="bg-accent text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-3 inline-block">Hemat Rp 75.000</span>
                         <h3 class="font-bold text-lg text-primtext mb-2 leading-tight">Paket Perawatan Mesin Diesel</h3>
                         
-                        <!-- Info Kompatibilitas -->
                         <div class="text-[11px] text-accent font-semibold bg-red-50 px-2 py-1 rounded mb-3">
                             🚗 Toyota Fortuner, Innova Diesel, Isuzu Panther
                         </div>
@@ -326,13 +341,11 @@
                     </div>
                 </div>
 
-                <!-- Promo Grid 4 -->
                 <div class="bg-cardbg rounded-xl border border-gray-100 p-6 flex flex-col justify-between hover:shadow-lg transition">
                     <div>
                         <span class="bg-accent text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-3 inline-block">Hemat Rp 35.000</span>
                         <h3 class="font-bold text-lg text-primtext mb-2 leading-tight">Paket Pendingin Mesin</h3>
                         
-                        <!-- Info Kompatibilitas -->
                         <div class="text-[11px] text-accent font-semibold bg-red-50 px-2 py-1 rounded mb-3">
                             🚗 Universal (Cocok untuk Toyota, Daihatsu, Isuzu)
                         </div>
@@ -356,19 +369,16 @@
 
     </main>
 
-    <!-- FOOTER SECTION -->
     <footer class="bg-gray-900 text-gray-300 py-12 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Brand Info -->
                 <div class="space-y-4">
-                    <img src="LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto bg-white p-1 rounded" onerror="this.src='https://via.placeholder.com/150x40?text=New+Raya+Motor'">
+                    <img src="GambarIndex/LogoNewRaya.png" alt="New Raya Motor Logo" class="h-10 w-auto bg-white p-1 rounded" onerror="this.src='https://via.placeholder.com/150x40?text=New+Raya+Motor'">
                     <p class="text-sm leading-relaxed">
                         Pusat penyedia sparepart dan aksesoris mobil terlengkap di Surabaya. Kami menjamin keaslian dan kualitas produk untuk kendaraan kesayangan Anda.
                     </p>
                 </div>
                 
-                <!-- Quick Links -->
                 <div>
                     <h3 class="text-white font-bold text-lg mb-4">Tautan Cepat</h3>
                     <ul class="space-y-2 text-sm">
@@ -380,7 +390,6 @@
                     </ul>
                 </div>
 
-                <!-- Contact Info -->
                 <div>
                     <h3 class="text-white font-bold text-lg mb-4">Hubungi Kami</h3>
                     <ul class="space-y-3 text-sm">
@@ -406,7 +415,6 @@
         </div>
     </footer>
 
-    <!-- Dialog Konfirmasi Kosongkan Keranjang -->
     <div id="customDialog" class="fixed inset-0 bg-black/50 z-[999] hidden items-center justify-center px-4">
         <div class="bg-mainbg rounded-2xl shadow-2xl w-full max-w-sm p-6 transform transition-all">
             <div class="flex items-center gap-3 mb-3">
@@ -425,7 +433,6 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-6 right-6 z-[9999] transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
         <div class="bg-primtext text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3">
             <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
@@ -438,7 +445,6 @@
     </div>
 
     <script>
-
         const resetFilterBtn = document.getElementById('resetFilterBtn');
         // --- DATA BUNDLE PROMO ---
         const promoBundles = {
@@ -658,8 +664,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             saveAndRenderCart();
-            
-            // Mengatur Flex Layout Body agar Footer tetap di bawah
             document.body.classList.add('flex', 'flex-col', 'min-h-screen');
 
             // Data Kendaraan Select Options Logic
@@ -700,8 +704,6 @@
                             applyFilterBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
                             applyFilterBtn.classList.add('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
                         }
-
-                            // Menampilkan tombol Hapus Filter
                         if (resetFilterBtn) {
                             resetFilterBtn.classList.remove('hidden');
                         }
@@ -750,10 +752,7 @@
 
             if (resetFilterBtn) {
                 resetFilterBtn.addEventListener('click', function() {
-                    // 1. Hapus data filter dari Local Storage
                     localStorage.removeItem('vehicleFilter');
-                    
-                    // 2. Reset semua pilihan dropdown kembali ke awal
                     document.getElementById('carBrand').value = "";
                     
                     const carModel = document.getElementById('carModel');
@@ -764,7 +763,6 @@
                     carYear.innerHTML = '<option value="">Pilih Tahun</option>';
                     carYear.disabled = true;
 
-                    // 3. Matikan (disable) kembali tombol Terapkan
                     if (applyFilterBtn) {
                         applyFilterBtn.disabled = true;
                         applyFilterBtn.classList.remove('bg-accent', 'text-white', 'hover:bg-red-700', 'cursor-pointer');
@@ -772,7 +770,6 @@
                     }
                 });
             }
-            
         });
 
         window.addEventListener('focus', () => {
@@ -780,48 +777,37 @@
             saveAndRenderCart();
         });
 
-        // Fungsi Checkout menuju WhatsApp
+                        // UPDATED: CHECKOUT VIA WHATSAPP API WITH AUTO CLEAR LOGIC (UI/UX TESTING)
         function checkoutWA() {
-            // 1. Ambil data keranjang dari local storage
-            let cartData = JSON.parse(localStorage.getItem('rayaCart')) || [];
+            // Baca snapshot dari localStorage hanya untuk dikirim ke WA (tidak menimpa variabel global)
+            const cartSnapshot = JSON.parse(localStorage.getItem('rayaCart')) || [];
             
-            // 2. Cek apakah keranjang kosong
-            if (cartData.length === 0) {
+            if (cartSnapshot.length === 0) {
                 alert("Keranjang belanja Anda masih kosong. Silakan tambah produk terlebih dahulu!");
                 return;
             }
 
-            // 3. Masukkan nomor WhatsApp admin (pastikan pakai 62 bukan 0)
-            const phoneNumber = "6281331728569"; // <--- GANTI DENGAN NOMOR WA ADMIN
+            let baseUrl = "https://api.whatsapp.com/send/?phone=628987582288&type=phone_number&app_absent=0";
             
-            // 4. Buat salam pembuka pesan
-            let message = "Halo New Raya Motor, saya ingin memesan suku cadang berikut:%0A%0A";
-            
+            let textMessage = "Halo New Raya Motor, saya ingin memesan suku cadang berikut:\n\n";
             let totalBiaya = 0;
             
-            // 5. Susun daftar barang dari keranjang
-            cartData.forEach((item, index) => {
-                let subtotal = item.price * item.quantity;
+            cartSnapshot.forEach((item, index) => {
+                let subtotal = item.numPrice * item.qty;
                 totalBiaya += subtotal;
-                
-                let hargaFormatted = item.price.toLocaleString('id-ID');
-                let subtotalFormatted = subtotal.toLocaleString('id-ID');
-                
-                // %0A adalah kode URL untuk Enter / Baris Baru
-                message += `${index + 1}. *${item.name}*%0A`;
-                message += `   - Jumlah: ${item.quantity} x Rp ${hargaFormatted}%0A`;
-                message += `   - Subtotal: Rp ${subtotalFormatted}%0A%0A`;
+                textMessage += `${index + 1}. ${item.title} (Qty: ${item.qty}) - Subtotal: Rp ${(subtotal).toLocaleString('id-ID')}\n`;
             });
+            textMessage += `\nTotal Belanja: Rp ${totalBiaya.toLocaleString('id-ID')}`;
             
-            // 6. Total Akhir dan penutup
-            let totalFormatted = totalBiaya.toLocaleString('id-ID');
-            message += `*Total Belanja: Rp ${totalFormatted}*%0A%0A`;
-            message += "Mohon konfirmasi mengenai ongkos kirim dan ketersediaan barang. Terima kasih.";
-            
-            // 7. Buka link WhatsApp tab baru
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            let whatsappUrl = `${baseUrl}&text=${encodeURIComponent(textMessage)}`;
             window.open(whatsappUrl, '_blank');
+
+            // Reset variabel global cartData (bukan window.cartData) agar sinkron dengan saveAndRenderCart
+            localStorage.removeItem('rayaCart');
+            cartData = [];
+            saveAndRenderCart(); 
         }
+
     </script>
 </body>
 </html>
